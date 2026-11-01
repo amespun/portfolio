@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Header and footer options · Aïda Martínez Espún</title>
 <meta name="robots" content="noindex">
 <meta name="description" content="Senior Product Designer in the Netherlands with 9+ years designing B2B and B2C SaaS, marketplaces and green-tech products.">
@@ -112,6 +112,51 @@
   .h3bar nav a:not(.cta){padding:8px 8px;font-size:14px}
 }
 
+
+/* ---------- Mobile: identity on top, navigation in a thumb-reach dock ---------- */
+html{-webkit-tap-highlight-color:transparent}
+a,button{touch-action:manipulation}
+button,.dock a,.pill a{-webkit-user-select:none;user-select:none}
+.iconbtn{display:none;width:44px;height:44px;border-radius:50%;border:0;align-items:center;justify-content:center;cursor:pointer;background:var(--ink);color:#fff;transition:transform .12s var(--ease-out)}
+.iconbtn:active{transform:scale(.94)}
+.iconbtn svg{width:20px;height:20px}
+.dock{display:none}
+@media (max-width:640px){
+  /* Top bars: solid, compact, never cramped */
+  .h1bar,.h3bar{background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+  .h1bar .wrap,.h3bar .wrap{display:flex;justify-content:space-between;padding:calc(10px + env(safe-area-inset-top,0px)) 0 10px}
+  .h1bar .right,.h3bar nav,.h2bar .full nav,.h2bar .island{display:none}
+  .h2bar{height:auto}
+  .h2bar .full{position:static;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+  .h2bar .full .wrap{padding:calc(10px + env(safe-area-inset-top,0px)) 0 10px}
+  .h2bar .full .me span{display:inline}
+  .h2bar.scrolled .full{opacity:1;transform:none;pointer-events:auto}
+  .h1bar .me img,.h2bar .full .me img{width:36px;height:36px}
+  .iconbtn{display:inline-flex}
+  .h3bar .iconbtn{background:var(--accent);color:var(--accent-ink)}
+
+  /* Dock: fixed at the bottom, inside the safe area */
+  .dock{display:flex;position:fixed;z-index:60;left:50%;bottom:calc(14px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);gap:2px;padding:5px;border-radius:999px;box-shadow:0 10px 30px -10px rgba(26,26,26,.35),0 0 0 1px rgba(26,26,26,.06)}
+  .dock a{min-height:44px;display:flex;align-items:center;padding:0 16px;border-radius:999px;text-decoration:none;font-size:15px;font-weight:600;transition:background .2s ease,color .2s ease}
+  .dock a:active{transform:scale(.96)}
+  .dock-1{background:rgba(255,255,255,.88);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4)}
+  .dock-1 a{color:var(--ink-2)}
+  .dock-1 a[aria-current]{background:var(--ink);color:#fff}
+  .dock-2{background:rgba(26,26,26,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
+  .dock-2 a{color:rgba(255,255,255,.7)}
+  .dock-2 a[aria-current]{background:#fff;color:var(--ink)}
+  .dock-3{background:var(--accent)}
+  .dock-3 a{color:var(--accent-ink)}
+  .dock-3 a[aria-current]{background:#fff}
+  body{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  /* preview only: keep the dock clear of the option switcher */
+  body:has(.proto-picker) .dock{bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+  body:has(.proto-picker){padding-bottom:calc(140px + env(safe-area-inset-bottom,0px))}
+  .f1 .cols,.f2 .cols{grid-template-columns:1fr 1fr}
+  .f3 .word{font-size:22vw}
+}
+@media (prefers-reduced-motion:reduce){.dock a,.iconbtn{transition:none}}
+
 /* Picker: harness chrome, verbatim spec */
 .proto-picker{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:2147483647;display:flex;align-items:center;gap:2px;padding:4px;border-radius:999px;background:rgba(10,10,10,.82);-webkit-backdrop-filter:blur(12px) saturate(1.4);backdrop-filter:blur(12px) saturate(1.4);box-shadow:0 0 0 1px rgba(255,255,255,.08) inset,0 8px 24px rgba(0,0,0,.24),0 2px 6px rgba(0,0,0,.12);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;line-height:1;-webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none}
 .proto-picker-highlight{position:absolute;top:4px;left:0;height:28px;border-radius:999px;background:rgba(255,255,255,.12);will-change:transform}
@@ -126,18 +171,20 @@
   <a class="me" href="#"><img src="https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/c452157e-0501-4f67-b013-13ce41e854d4/Ellipse+26_.png?format=300w" alt=""><span><b>Aïda Martínez Espún</b><small>Senior Product Designer</small></span></a>
   <nav class="pill" aria-label="Main"><a href="#work" aria-current="page">Work</a><a href="#about">About</a><a href="#">Studio</a><a href="#">Contact</a></nav>
   <div class="right"><span class="clock"><i></i><span data-clock>Netherlands</span></span><button class="mini" type="button" data-copy>Copy email</button></div>
-</div></header></div>
+  <button class="iconbtn" type="button" data-copy aria-label="Copy email address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></button>
+</div></header><nav class="dock dock-1" aria-label="Sections"><a href="#work" data-spy="work">Work</a><a href="#about" data-spy="about">About</a><a href="#beyond" data-spy="beyond">Studio</a><a href="#contact" data-spy="contact">Contact</a></nav></div>
 
 <div class="hf hf-2"><header class="h2bar" data-island>
   <div class="full"><div class="wrap"><a class="me" href="#"><img src="https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/c452157e-0501-4f67-b013-13ce41e854d4/Ellipse+26_.png?format=300w" alt=""><span>Aïda Martínez Espún</span></a>
-    <nav aria-label="Main"><a href="#work">Work</a><a href="#about">About</a><a href="#">Studio</a><a href="#">Contact</a></nav></div></div>
+    <nav aria-label="Main"><a href="#work">Work</a><a href="#about">About</a><a href="#">Studio</a><a href="#">Contact</a></nav><button class="iconbtn" type="button" data-copy aria-label="Copy email address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></button></div></div>
   <nav class="island" aria-label="Quick navigation"><img src="https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/c452157e-0501-4f67-b013-13ce41e854d4/Ellipse+26_.png?format=300w" alt=""><a href="#work">Work</a><a href="#about">About</a><a href="#">Studio</a><button type="button" data-copy>Copy email</button></nav>
-</header></div>
+</header><nav class="dock dock-2" aria-label="Sections"><a href="#work" data-spy="work">Work</a><a href="#about" data-spy="about">About</a><a href="#beyond" data-spy="beyond">Studio</a><a href="#contact" data-spy="contact">Contact</a></nav></div>
 
 <div class="hf hf-3"><header class="h3bar"><div class="wrap">
   <a class="mark" href="#">ämespun<span>.</span></a>
   <nav aria-label="Main"><a href="#work">Work</a><a href="#about">About</a><a href="#">Studio</a><a class="cta" href="#">Let’s talk</a></nav>
-</div></header></div>
+  <button class="iconbtn" type="button" data-copy aria-label="Copy email address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg></button>
+</div></header><nav class="dock dock-3" aria-label="Sections"><a href="#work" data-spy="work">Work</a><a href="#about" data-spy="about">About</a><a href="#beyond" data-spy="beyond">Studio</a><a href="#contact" data-spy="contact">Contact</a></nav></div>
 <main class="wrap main-slot" id="main">
   <section class="hero">
     <div>
@@ -299,6 +346,14 @@ if (greet && !reduce) setInterval(() => {
   greet.classList.add('out');
   setTimeout(() => { gi = (gi + 1) % words.length; greet.textContent = words[gi]; greet.classList.remove('out'); }, 250);
 }, 2200);
+
+
+// Highlight the section you're in, in the mobile dock
+const spyTargets = [...document.querySelectorAll('[id="work"],[id="about"],[id="beyond"],[id="contact"]')];
+const spyIO = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) document.querySelectorAll('[data-spy]').forEach(a => a.dataset.spy === e.target.id ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current')); });
+}, { rootMargin: '-45% 0px -50% 0px' });
+spyTargets.forEach(s => spyIO.observe(s));
 
 // Picker
 const picker = document.querySelector('.proto-picker');
