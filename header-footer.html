@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Header and footer options · Aïda Martínez Espún</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Senior Product Designer in the Netherlands with 9+ years designing B2B and B2C SaaS, marketplaces and green-tech products.">
+<meta name="theme-color" content="#ffffff">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body data-hf="1">
+
+<style>
+[data-hf] .hf{display:none}
+[data-hf="1"] .hf-1,[data-hf="2"] .hf-2,[data-hf="3"] .hf-3{display:contents}
+.main-slot > .contact,.main-slot > .foot{display:none}
+
+/* 1 · Status bar */
+.h1bar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.h1bar .wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;padding:12px 0}
+.h1bar .me{display:flex;align-items:center;gap:12px;text-decoration:none}
+.h1bar .me img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.h1bar .me b{display:block;font-family:var(--display);font-weight:700;font-size:16px;line-height:1.2}
+.h1bar .me small{display:block;color:var(--ink-2);font-size:13px}
+.h1bar .right{display:flex;justify-content:flex-end;align-items:center;gap:14px;font-size:14px;color:var(--ink-2)}
+.h1bar .clock{font-variant-numeric:tabular-nums;white-space:nowrap}
+.h1bar .clock i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#2fa36b;margin-right:8px;vertical-align:1px}
+.mini{display:inline-flex;align-items:center;padding:9px 14px;border-radius:999px;border:0;background:var(--ink);color:#fff;font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:transform .16s var(--ease-out)}
+.mini:active{transform:scale(.97)}
+
+/* 2 · Island: full bar at the top, collapses into a floating island on scroll */
+.h2bar{position:sticky;top:0;z-index:50;height:76px}
+.h2bar .full{position:absolute;inset:0;display:flex;align-items:center;transition:opacity .2s ease,transform .3s var(--ease-out)}
+.h2bar .full .wrap{display:flex;justify-content:space-between;align-items:center}
+.h2bar .full .me{display:flex;align-items:center;gap:12px;text-decoration:none;font-family:var(--display);font-weight:700}
+.h2bar .full .me img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.h2bar .full nav{display:flex;gap:28px;font-weight:500;font-size:15px}
+.h2bar .full nav a{text-decoration:none;color:var(--ink-2)}
+.h2bar .island{position:absolute;left:50%;top:14px;display:flex;align-items:center;gap:4px;padding:6px;border-radius:999px;background:rgba(26,26,26,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:#fff;box-shadow:0 12px 32px -12px rgba(26,26,26,.45);transform:translate(-50%,-140%) scale(.96);opacity:0;transition:transform .45s var(--ease-out),opacity .2s ease;pointer-events:none}
+.h2bar .island img{width:32px;height:32px;border-radius:50%;object-fit:cover;margin-right:6px}
+.h2bar .island a,.h2bar .island button{padding:8px 13px;border-radius:999px;color:rgba(255,255,255,.75);text-decoration:none;font:inherit;font-size:14px;font-weight:500;background:none;border:0;cursor:pointer}
+.h2bar .island button{background:#fff;color:var(--ink);font-weight:600;margin-left:4px}
+.h2bar.scrolled .full{opacity:0;transform:translateY(-12px);pointer-events:none}
+.h2bar.scrolled .island{transform:translate(-50%,0) scale(1);opacity:1;pointer-events:auto}
+@media (hover:hover) and (pointer:fine){.h2bar .island a:hover{color:#fff}.h2bar .full nav a:hover{color:var(--ink)}}
+
+/* 3 · Signature: wordmark header */
+.h3bar{position:sticky;top:0;z-index:50;background:linear-gradient(var(--bg) 55%,rgba(255,255,255,0))}
+.h3bar .wrap{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+.h3bar .mark{font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:-.04em;text-decoration:none}
+.h3bar .mark span{color:var(--accent-ink)}
+.h3bar nav{display:flex;align-items:center;gap:6px}
+.h3bar nav a{padding:8px 12px;text-decoration:none;font-size:15px;font-weight:500;color:var(--ink-2);border-radius:999px}
+.h3bar nav a.cta{background:var(--accent);color:var(--accent-ink);font-weight:600;padding:9px 16px}
+@media (hover:hover) and (pointer:fine){.h3bar nav a:not(.cta):hover{color:var(--ink)}}
+
+/* Footers */
+.f1,.f2,.f3{margin-top:clamp(88px,10vw,120px)}
+/* 1 · Sign-off */
+.f1 .card-dark{background:var(--night);color:#fff;border-radius:28px;padding:clamp(32px,6vw,72px) clamp(28px,5vw,64px) 32px}
+.f1 h2{font-family:var(--display);font-weight:800;font-size:clamp(2.2rem,5vw,4.2rem);line-height:1;letter-spacing:-.035em;max-width:14ch}
+.f1 .mail{margin-top:32px;display:inline-flex;align-items:center;gap:14px;padding:0;border:0;background:none;color:#fff;font-family:var(--display);font-size:clamp(1.3rem,2.6vw,2rem);font-weight:500;cursor:pointer;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px;text-decoration-color:rgba(255,255,255,.35)}
+.f1 .mail em{font-style:normal;font-family:var(--body);font-size:13px;font-weight:600;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.12);text-decoration:none}
+.f1 .cols{margin-top:clamp(48px,7vw,88px);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;border-top:1px solid rgba(255,255,255,.14);padding-top:28px;font-size:15px}
+.f1 .cols h3{font-family:var(--body);font-size:13px;font-weight:500;color:rgba(255,255,255,.55);margin-bottom:12px}
+.f1 .cols li{margin-bottom:8px;color:rgba(255,255,255,.85)}
+.f1 .cols a{text-decoration:none}
+@media (hover:hover) and (pointer:fine){.f1 .cols a:hover{color:#fff;text-decoration:underline}}
+.f1 .colophon{margin-top:40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:rgba(255,255,255,.5)}
+/* 2 · Index footer with greetings */
+.f2 .top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:24px;padding-bottom:32px;border-bottom:1px solid var(--ink)}
+.f2 .greet{font-family:var(--display);font-weight:800;font-size:clamp(2.4rem,6vw,5rem);letter-spacing:-.04em;line-height:1}
+.f2 .greet span{display:inline-block;color:var(--accent-ink);transition:opacity .25s ease,transform .35s var(--ease-out),filter .25s ease}
+.f2 .greet span.out{opacity:0;transform:translateY(8px);filter:blur(4px)}
+.f2 .top p{color:var(--ink-2);max-width:36ch;margin-top:12px}
+.f2 .actions{display:flex;gap:10px;flex-wrap:wrap}
+.f2 .btn.dark{background:var(--ink);color:#fff}
+.f2 .btn.line{background:transparent;color:var(--ink);box-shadow:0 0 0 1px var(--line) inset}
+.f2 .cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px;padding:28px 0;font-size:15px}
+.f2 .cols h3{font-family:var(--body);font-size:13px;font-weight:500;color:var(--ink-2);margin-bottom:12px}
+.f2 .cols li{margin-bottom:8px}
+.f2 .cols a{text-decoration:none}
+@media (hover:hover) and (pointer:fine){.f2 .cols a:hover{color:var(--accent-ink);text-decoration:underline}}
+.f2 .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding:20px 0 40px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-2)}
+/* 3 · Signature wordmark footer */
+.f3 .band{background:var(--tile);border-radius:28px;padding:clamp(32px,5vw,56px) clamp(28px,5vw,56px) 0;overflow:hidden}
+.f3 .row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:32px}
+.f3 h2{font-family:var(--display);font-weight:700;font-size:clamp(1.8rem,3vw,2.6rem);letter-spacing:-.03em;line-height:1.05;max-width:16ch}
+.f3 .actions{display:flex;gap:10px;flex-wrap:wrap;align-items:start}
+.f3 .btn.dark{background:var(--ink);color:#fff}
+.f3 .btn.line{background:#fff;color:var(--ink)}
+.f3 ul.links{margin-top:40px;display:flex;flex-wrap:wrap;gap:8px 24px;font-size:15px;color:var(--ink-2)}
+.f3 ul.links a{text-decoration:none}
+.f3 .word{margin-top:40px;font-family:var(--display);font-weight:800;font-size:clamp(3rem,12.4vw,11.5rem);letter-spacing:-.05em;line-height:.8;white-space:nowrap;color:var(--ink);transform:translateY(12%)}
+.f3 .word span{color:var(--accent-ink)}
+.f3 .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding:20px 0 40px;font-size:13px;color:var(--ink-2)}
+
+@media (max-width:900px){
+  .h1bar .wrap{grid-template-columns:1fr auto}
+  .h1bar .pill{display:none}
+  .f1 .cols,.f2 .cols{grid-template-columns:1fr 1fr}
+}
+@media (max-width:600px){
+  .h1bar .clock{display:none}
+  .h2bar .full nav{gap:16px;font-size:14px}
+  .h2bar .full .me span{display:none}
+  .h2bar .island a{padding:8px 9px}
+  .h3bar nav a:not(.cta){padding:8px 8px;font-size:14px}
+}
+
+/* Picker: harness chrome, verbatim spec */
+.proto-picker{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:2147483647;display:flex;align-items:center;gap:2px;padding:4px;border-radius:999px;background:rgba(10,10,10,.82);-webkit-backdrop-filter:blur(12px) saturate(1.4);backdrop-filter:blur(12px) saturate(1.4);box-shadow:0 0 0 1px rgba(255,255,255,.08) inset,0 8px 24px rgba(0,0,0,.24),0 2px 6px rgba(0,0,0,.12);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:13px;line-height:1;-webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none}
+.proto-picker-highlight{position:absolute;top:4px;left:0;height:28px;border-radius:999px;background:rgba(255,255,255,.12);will-change:transform}
+.proto-picker[data-ready] .proto-picker-highlight{transition:transform 250ms cubic-bezier(.23,1,.32,1),width 250ms cubic-bezier(.23,1,.32,1)}
+.proto-picker-item{white-space:nowrap;position:relative;display:flex;align-items:center;height:28px;padding:0 12px;border:0;border-radius:999px;background:transparent;color:rgba(255,255,255,.55);font:inherit;cursor:pointer;transition:color 150ms ease-out}
+.proto-picker-item:hover{color:rgba(255,255,255,.85)}
+.proto-picker-item:active{transform:scale(.97)}
+.proto-picker-item[data-active]{color:#fff}
+</style>
+
+<div class="hf hf-1"><header class="h1bar"><div class="wrap">
+  <a class="me" href="#"><img src="https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/c452157e-0501-4f67-b013-13ce41e854d4/Ellipse+26_.png?format=300w" alt=""><span><b>Aïda Martínez Espún</b><small>Senior Product Designer</small></span></a>
+  <nav class="pill" aria-label="Main"><a href="#work" aria-current="page">Work</a><a href="#about">About</a><a href="#">Studio</a><a href="#">Contact</a></nav>
+  <div class="right"><span class="clock"><i></i><span data-clock>Netherlands</span></span><button class="mini" type="button" data-copy>Copy email</button></div>
+</div></header></div>
+
+<div class="hf hf-2"><header class="h2bar" data-island>
+  <div class="full"><div class="wrap"><a class="me" href="#"><img src="https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/c452157e-0501-4f67-b013-13ce41e854d4/Ellipse+26_.png?format=300w" alt=""><span>Aïda Martínez Espún</span></a>
+    <nav aria-label="Main"><a href="#work">Work</a><a href="#about">About</a><a href="#">Studio</a><a href="#">Contact</a></nav></div></div>
+  <nav class="island" aria-label="Quick navigation"><img src="https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/c452157e-0501-4f67-b013-13ce41e854d4/Ellipse+26_.png?format=300w" alt=""><a href="#work">Work</a><a href="#about">About</a><a href="#">Studio</a><button type="button" data-copy>Copy email</button></nav>
+</header></div>
+
+<div class="hf hf-3"><header class="h3bar"><div class="wrap">
+  <a class="mark" href="#">ämespun<span>.</span></a>
+  <nav aria-label="Main"><a href="#work">Work</a><a href="#about">About</a><a href="#">Studio</a><a class="cta" href="#">Let’s talk</a></nav>
+</div></header></div>
+<main class="wrap main-slot" id="main">
+  <section class="hero">
+    <div>
+      <h1>I design B2B and B2C products people stick with.</h1>
+      <p class="lede">Senior Product Designer with 9+ years in SaaS, marketplaces and green tech. I connect research, business goals and craft, and measure what changed.</p>
+      <span class="status"><i></i>Senior Product Designer at Skydreams · Netherlands</span>
+    </div>
+    <div class="art"><img src="https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/3df60a90-7ab0-4d16-8395-9a4751061c20/Group+112596.png?format=1500w" alt="Product screens from recent projects"></div>
+  </section>
+  <ul class="chips" aria-label="Companies I’ve worked with"><li>EVPassport</li><li>Haufe Group</li><li>Badi</li><li>Papaya Dash</li><li>Fluendo</li><li>Tekman Education</li></ul>
+
+  <section class="section" id="work">
+    <div class="section-head"><h2>Selected work</h2><a href="work/">All projects →</a></div>
+    <div class="grid"><a class="card" href="https://www.amespun.com/work/b2b-saas-ev-charging">
+  <div class="media"><img src="https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/cb837a2f-3f01-4432-8367-4f5210a82400/Mockup+%281%29.jpg?format=1500w" alt="EV charging dashboard on a laptop" loading="lazy"></div>
+  <div class="tags"><span>B2B SaaS</span><span>Web dashboard</span><span>2024–25</span></div>
+  <h3>An EV charging dashboard property managers can run on their own <span class="who">· EVPassport</span></h3>
+  <p class="role">Sole product designer</p>
+  <div class="kpis"><div class="kpi"><strong>−39.8%</strong>support tickets</div><div class="kpi"><strong>+23.4%</strong>engagement</div><div class="kpi"><strong>+14%</strong>new business owners</div></div>
+</a><a class="card" href="https://www.amespun.com/work/saas-team-development">
+  <div class="media"><img src="https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/fe678532-a447-40b7-8aed-36c0a5a38845/Mockup+%283%29.jpg?format=1500w" alt="Teampact team health dashboard on a laptop" loading="lazy"></div>
+  <div class="tags"><span>B2B SaaS</span><span>Web app</span><span>2021–24</span></div>
+  <h3>Teampact: team retrospectives people actually finish <span class="who">· Haufe Group</span></h3>
+  <p class="role">Senior product designer</p>
+  <div class="kpis"><div class="kpi"><strong>7→3 min</strong>onboarding</div><div class="kpi"><strong>60→80%</strong>survey completion</div><div class="kpi"><strong>45→60</strong>NPS</div></div>
+</a><a class="card" href="https://www.amespun.com/work/b2c-ev-charging">
+  <div class="media"><img src="https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/1739547286663-5W8VCLEAGWGAXLAXQ0AJ/close-up-electric-car-france_%281%29.jpg?format=1500w" alt="Electric car charging" loading="lazy"></div>
+  <div class="tags"><span>B2C</span><span>iOS · Android · App Clip</span><span>2024–25</span></div>
+  <h3>Charging an EV without downloading an app <span class="who">· EVPassport</span></h3>
+  <p class="role">Sole product designer</p>
+  <div class="kpis"><div class="kpi"><strong>+46.6%</strong>engagement</div><div class="kpi"><strong>+30.3%</strong>sessions</div><div class="kpi"><strong>+7.4%</strong>new users</div></div>
+</a><a class="card" href="https://www.amespun.com/work/marketplace-growth">
+  <div class="media"><img src="https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/1741965609552-E2KLJCQYO2M889UQQM8W/Mockup+%282%29.jpg?format=1500w" alt="Badi rental marketplace app screens" loading="lazy"></div>
+  <div class="tags"><span>B2C marketplace</span><span>iOS · Android · Web</span><span>2019–20</span></div>
+  <h3>Growth experiments and a design system for a rental marketplace <span class="who">· Badi</span></h3>
+  <p class="role">Product designer, growth team</p>
+  <div class="kpis notes"><div class="kpi"><strong>A/B tests</strong>on onboarding and search</div><div class="kpi"><strong>Habitat</strong>design system</div></div>
+</a></div>
+  </section>
+
+  <section class="section">
+    <div class="section-head"><h2>Earlier and exploratory</h2></div>
+    <div class="earlier"><a class="small" href="https://www.amespun.com/work/ai-fleet-manager">
+  <div class="media"><img src="https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/b6360d8e-ed74-455e-b96f-69a1f3dede55/amespun_Close-up_photorealistic_MacBook_Pro_mockup_screen_filli_22854080-d1da-4904-8233-ccfdfb577dc2.jpg?format=1000w" alt="AI fleet manager dashboard on a laptop" loading="lazy"></div>
+  <b>AI copilot for EV and fleet operators</b><span>Papaya Dash · B2B SaaS · 2025</span>
+</a><a class="small" href="https://www.amespun.com/work/videogame-platform">
+  <div class="media"><img src="https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/1741980242783-N1VOKR3LIJB409AKAYLM/Mockup+%285%29.jpg?format=1000w" alt="Gaming social network app screens" loading="lazy"></div>
+  <b>A social network for gamers</b><span>Fluendo · B2C</span>
+</a><a class="small" href="https://www.amespun.com/work/uxui-kids-learning">
+  <div class="media"><img src="https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/1731074386961-1X8UOKNI6FFH53YT1KES/WNW.jpg?format=1000w" alt="Kids learning platform screens" loading="lazy"></div>
+  <b>Learning platform for kids</b><span>Tekman Education · B2B2C</span>
+</a></div>
+  </section>
+
+  <section class="section beyond" id="beyond">
+    <div class="intro"><h2 class="h2">Beyond the day job</h2><p>What I design when nobody asks me to.</p></div>
+    <ul><li><b>Illustration</b><p>Hand-printed illustrations of Barcelona architecture, sold through a shop in Barcelona.</p></li><li><b>ämespun studio</b><p>Branding and fast no-code websites for small businesses, in four languages.</p><a href="https://www.amespun.com/designstudio">See studio work</a></li><li><b>Mentoring</b><p>Mentor on ADPList for designers at every stage.</p><a href="https://adplist.org/mentors/aida-martinez-espun">Book a session</a></li><li><b>Writing</b><p>Case studies and process notes on Medium and Prototypr.</p><a href="https://medium.com/@amespun">Read on Medium</a></li></ul>
+  </section>
+
+  <section class="section about" id="about">
+    <figure><img src="https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/414dfdcf-4e3c-4d4b-b59a-3cc3c60f750d/IMG_5346.jpeg?format=1000w" alt="Aïda Martínez Espún" loading="lazy"></figure>
+    <div>
+      <h2 class="h2">Hi, I’m Aïda.</h2>
+      <p>I’ve spent 9+ years designing B2B and B2C products for startups and scale-ups in Spain, Germany, the UK, the US and the Netherlands. I like the messy part: aligning product, engineering and sales on what to build, then proving it with research and numbers.</p>
+      <p>I started in graphic design, and 14+ years in design later I still care about the last pixel.</p>
+      <blockquote>
+        <p>“It’s hard to find people as proactive and decisive as Aïda. She’s been a key member of the UX/UI team ever since her arrival. She’s a natural leader and a team player.”</p>
+        <footer>Mercè Delgado · CEO, Fluendo</footer>
+      </blockquote>
+    </div>
+  </section>
+<section class="section contact" id="contact">
+  <h2>Let’s get in touch.</h2>
+  <div class="actions">
+    <button class="btn light" type="button" id="copy" data-email="amespun@gmail.com">Copy email</button>
+    <a class="btn ghost" href="https://www.linkedin.com/in/amespun/">LinkedIn</a>
+  </div>
+  <small id="copy-status" aria-live="polite">amespun@gmail.com</small>
+</section>
+<footer class="foot">
+  <span>© 2026 Aïda Martínez Espún</span>
+  <ul>
+    <li><a href="https://www.linkedin.com/in/amespun/">LinkedIn</a></li>
+    <li><a href="https://www.behance.net/amespun">Behance</a></li>
+    <li><a href="https://dribbble.com/amespun">Dribbble</a></li>
+    <li><a href="https://medium.com/@amespun">Medium</a></li>
+    <li><a href="https://adplist.org/mentors/aida-martinez-espun">ADPList</a></li>
+  </ul>
+</footer>
+
+
+<div class="hf hf-1"><footer class="f1" id="contact"><div class="card-dark">
+  <h2>Let’s build products people stick with.</h2>
+  <button class="mail" type="button" data-copy>amespun@gmail.com <em data-copy-label>Copy</em></button>
+  <div class="cols">
+    <div><h3>Pages</h3><ul><li><a href="work/">Work</a></li><li><a href="#about">About</a></li><li><a href="https://www.amespun.com/designstudio">Studio</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    <div><h3>Selected work</h3><ul><li><a href="https://www.amespun.com/work/b2b-saas-ev-charging">EV charging dashboard</a></li><li><a href="https://www.amespun.com/work/saas-team-development">Teampact</a></li><li><a href="https://www.amespun.com/work/b2c-ev-charging">App-free EV charging</a></li><li><a href="https://www.amespun.com/work/marketplace-growth">Badi growth</a></li></ul></div>
+    <div><h3>Elsewhere</h3><ul><li><a href="https://www.linkedin.com/in/amespun/">LinkedIn</a></li><li><a href="https://www.behance.net/amespun">Behance</a></li><li><a href="https://dribbble.com/amespun">Dribbble</a></li><li><a href="https://medium.com/@amespun">Medium</a></li><li><a href="https://adplist.org/mentors/aida-martinez-espun">ADPList</a></li></ul></div>
+    <div><h3>Based in</h3><ul><li>The Netherlands</li><li data-clock>Local time</li><li>EN · ES · CA · FR, learning NL</li></ul></div>
+  </div>
+  <div class="colophon"><span>© 2026 Aïda Martínez Espún</span><span>Designed and built by me. Set in Bricolage Grotesque and Hanken Grotesk.</span></div>
+</div></footer></div>
+
+<div class="hf hf-2"><footer class="f2" id="contact">
+  <div class="top">
+    <div><p class="greet"><span data-greet>Hola</span>, let’s talk.</p><p>Spanish, Catalan, English and French at work. Dutch in progress.</p></div>
+    <div class="actions"><button class="btn dark" type="button" data-copy>Copy email</button><a class="btn line" href="https://www.linkedin.com/in/amespun/">LinkedIn</a></div>
+  </div>
+  <div class="cols">
+    <div><h3>Pages</h3><ul><li><a href="work/">Work</a></li><li><a href="#about">About</a></li><li><a href="https://www.amespun.com/designstudio">Studio</a></li><li><a href="#contact">Contact</a></li></ul></div>
+    <div><h3>Selected work</h3><ul><li><a href="https://www.amespun.com/work/b2b-saas-ev-charging">EV charging dashboard</a></li><li><a href="https://www.amespun.com/work/saas-team-development">Teampact</a></li><li><a href="https://www.amespun.com/work/b2c-ev-charging">App-free EV charging</a></li><li><a href="https://www.amespun.com/work/marketplace-growth">Badi growth</a></li></ul></div>
+    <div><h3>Elsewhere</h3><ul><li><a href="https://www.linkedin.com/in/amespun/">LinkedIn</a></li><li><a href="https://www.behance.net/amespun">Behance</a></li><li><a href="https://dribbble.com/amespun">Dribbble</a></li><li><a href="https://medium.com/@amespun">Medium</a></li><li><a href="https://adplist.org/mentors/aida-martinez-espun">ADPList</a></li></ul></div>
+    <div><h3>Now</h3><ul><li>Senior Product Designer at Skydreams</li><li>Mentoring on ADPList</li><li data-clock>The Netherlands</li></ul></div>
+  </div>
+  <div class="bottom"><span>© 2026 Aïda Martínez Espún</span><span>Designed and built by me, from Barcelona to the Netherlands.</span></div>
+</footer></div>
+
+<div class="hf hf-3"><footer class="f3" id="contact"><div class="band">
+  <div class="row"><h2>Have a product people should love? Let’s talk.</h2>
+    <div class="actions"><button class="btn dark" type="button" data-copy>Copy email</button><a class="btn line" href="https://www.linkedin.com/in/amespun/">LinkedIn</a></div></div>
+  <ul class="links"><li><a href="work/">Work</a></li><li><a href="#about">About</a></li><li><a href="https://www.amespun.com/designstudio">Studio</a></li><li><a href="#contact">Contact</a></li><li><a href="https://www.linkedin.com/in/amespun/">LinkedIn</a></li><li><a href="https://www.behance.net/amespun">Behance</a></li><li><a href="https://dribbble.com/amespun">Dribbble</a></li><li><a href="https://medium.com/@amespun">Medium</a></li><li><a href="https://adplist.org/mentors/aida-martinez-espun">ADPList</a></li></ul>
+  <div class="word" aria-hidden="true">ämespun<span>.</span></div>
+</div>
+<div class="bottom"><span>© 2026 Aïda Martínez Espún</span><span data-clock>The Netherlands</span></div>
+</footer></div>
+</main>
+<nav class="proto-picker" aria-label="Header and footer options">
+  <span class="proto-picker-highlight" aria-hidden="true"></span>
+  <button class="proto-picker-item" data-active aria-current="true">1 · Status</button>
+  <button class="proto-picker-item">2 · Island</button>
+  <button class="proto-picker-item">3 · Signature</button>
+</nav>
+<script>
+// Local time in the Netherlands
+const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Amsterdam', hour: '2-digit', minute: '2-digit' });
+function tick() { document.querySelectorAll('[data-clock]').forEach(el => el.textContent = fmt.format(new Date()) + ' in the Netherlands'); }
+tick(); setInterval(tick, 30000);
+
+// Copy email everywhere
+document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+  const label = b.querySelector('[data-copy-label]') || b;
+  const before = label.textContent;
+  try { await navigator.clipboard.writeText('amespun@gmail.com'); label.textContent = 'Copied'; }
+  catch { label.textContent = 'amespun@gmail.com'; }
+  setTimeout(() => label.textContent = before, 1800);
+}));
+
+// Island header: collapse after the hero
+const island = document.querySelector('[data-island]');
+const onScroll = () => island && island.classList.toggle('scrolled', window.scrollY > 120);
+window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+// Greeting in her languages
+const words = ['Hola', 'Bon dia', 'Hello', 'Bonjour', 'Hallo'];
+const greet = document.querySelector('[data-greet]');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+let gi = 0;
+if (greet && !reduce) setInterval(() => {
+  greet.classList.add('out');
+  setTimeout(() => { gi = (gi + 1) % words.length; greet.textContent = words[gi]; greet.classList.remove('out'); }, 250);
+}, 2200);
+
+// Picker
+const picker = document.querySelector('.proto-picker');
+const hl = picker.querySelector('.proto-picker-highlight');
+const items = [...picker.querySelectorAll('.proto-picker-item')];
+let cur = 0;
+function move() { const el = items[cur]; hl.style.width = el.offsetWidth + 'px'; hl.style.transform = `translateX(${el.offsetLeft}px)`; }
+function set(i) {
+  cur = i; document.body.dataset.hf = i + 1;
+  items.forEach((el, j) => { el.toggleAttribute('data-active', j === i); j === i ? el.setAttribute('aria-current', 'true') : el.removeAttribute('aria-current'); });
+  move(); const u = new URL(location); u.searchParams.set('v', i + 1); history.replaceState(null, '', u); onScroll();
+}
+items.forEach((el, i) => el.addEventListener('click', () => set(i)));
+document.addEventListener('keydown', e => {
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  const n = parseInt(e.key, 10);
+  if (n >= 1 && n <= 3) set(n - 1);
+  else if (e.key === 'ArrowRight') set((cur + 1) % 3);
+  else if (e.key === 'ArrowLeft') set((cur + 2) % 3);
+});
+window.addEventListener('resize', move); document.fonts.ready.then(move);
+set((parseInt(new URLSearchParams(location.search).get('v'), 10) || 1) - 1);
+requestAnimationFrame(() => requestAnimationFrame(() => picker.setAttribute('data-ready', '')));
+</script>
+</body>
+</html>
