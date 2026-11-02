@@ -517,3 +517,23 @@ p,li,figcaption,blockquote{text-wrap:pretty}
   .cs-points{grid-template-columns:1fr}
 }
 .cs-points li:last-child:nth-child(odd){grid-column:1/-1}
+
+/* Challenge → Solution → Outcome */
+.cs-cso{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0}
+.cs-cso > div{background:var(--tile);border-radius:16px;padding:18px 18px 20px}
+.cs-cso dt{font-family:var(--display);font-weight:700;font-size:1rem;color:var(--ink);margin-bottom:8px}
+.cs-cso dd{margin:0}
+.cs-cso dd p,.cs-cso dd li{font-size:.95rem!important;line-height:1.5!important}
+.cs-cso dd ul{padding-left:1.1em;display:grid;gap:6px}
+.cs-cso dd > * + *{margin-top:8px}
+.cs-cso > .out{background:var(--accent)}
+.cs-cso > .out dt,.cs-cso > .out dd p,.cs-cso > .out dd li,.cs-cso > .out strong{color:var(--accent-ink)!important}
+.cs-cso > .out li::marker{color:var(--accent-ink)}
+/* Statement callout */
+.cs-callout{margin:0;padding:24px 26px;border-radius:20px;background:var(--tile)}
+.cs-callout p{font-family:var(--display);font-weight:700;font-size:clamp(1.25rem,2vw,1.6rem)!important;line-height:1.3!important;letter-spacing:-.015em;color:var(--ink)!important;text-wrap:balance!important}
+.cs-callout p em{font-style:normal}
+.cs-callout figcaption{margin-top:10px;font-size:14px;font-weight:600;color:var(--ink-2)}
+/* Text-only cards */
+.cs-points li.plain span{color:var(--ink);font-size:.98rem}
+@media (max-width:900px){.cs-cso{grid-template-columns:1fr}}

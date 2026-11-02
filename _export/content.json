@@ -5043,6 +5043,20 @@
      ]
     },
     {
+     "row": 999,
+     "col": 999,
+     "items": [
+      {
+       "t": "p",
+       "html": "<strong>CHALLENGE</strong>"
+      },
+      {
+       "t": "p",
+       "html": "25% of users dropped off during onboarding due to lengthy forms and unclear next steps."
+      }
+     ]
+    },
+    {
      "row": 13,
      "col": 3,
      "items": [
@@ -5190,26 +5204,22 @@
        ]
       }
      ]
-    },
-    {
-     "row": 999,
-     "col": 999,
-     "items": [
-      {
-       "t": "p",
-       "html": "<strong>CHALLENGE</strong>"
-      },
-      {
-       "t": "p",
-       "html": "25% of users dropped off during onboarding due to lengthy forms and unclear next steps."
-      }
-     ]
     }
    ]
   },
   {
    "t": "section",
    "blocks": [
+    {
+     "row": 5,
+     "col": 3,
+     "items": [
+      {
+       "t": "p",
+       "html": "O T H E R   U X   C H A L L E N G E S   I D E N T I F I E D"
+      }
+     ]
+    },
     {
      "row": 3,
      "col": 2,
@@ -5221,16 +5231,6 @@
       {
        "t": "p",
        "html": "The dashboard was cluttered with data, leaving users confused about what to prioritize and how to navigate effectively."
-      }
-     ]
-    },
-    {
-     "row": 5,
-     "col": 3,
-     "items": [
-      {
-       "t": "p",
-       "html": "O T H E R   U X   C H A L L E N G E S   I D E N T I F I E D"
       }
      ]
     },

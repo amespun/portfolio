@@ -523,6 +523,7 @@ def txt(h):
 
 
 def heading(h):
+    h = re.sub(r':\s*$', '', h.strip())
     h = re.sub(r'<br\s*/?>', ' ', h)
     h = re.sub(r'</?(strong|b|em|i)>', '', h)
     return re.sub(r'\s+', ' ', h).strip()
@@ -596,28 +597,112 @@ def as_point(html):
         return None
     t = heading(m.group('t')).strip(' –-:')
     d = m.group('d').strip()
-    if not t or len(txt(t)) > 90 or not txt(d) or txt(d) == txt(t):
+    e = (m.group('e1') or m.group('e2') or '').strip()
+    if not t or len(txt(t)) > 90 or txt(d) == txt(t):
         return None
-    return dict(e=(m.group('e1') or m.group('e2') or '').strip(), t=t, d=d)
+    if not txt(d) and not e:
+        return None
+    return dict(e=e, t=t, d=d)
 
 
 def points_html(pts, metric=False):
     cells = ''
     for p in pts:
         n = NUM.search(p['t']) if metric else None
+        nd = NUM.search(txt(p['d'])) if metric and not n else None
+        d = f'<span>{p["d"]}</span>' if txt(p['d']) else ''
         if n:
             label = (p['t'][:n.start()] + p['t'][n.end():]).strip(' –-:')
-            cells += f'<li class="metric"><strong class="n">{n.group(1)}</strong><b>{label}</b><span>{p["d"]}</span></li>'
+            cells += f'<li class="metric"><strong class="n">{n.group(1)}</strong><b>{label}</b>{d}</li>'
+        elif nd:
+            cells += f'<li class="metric"><strong class="n">{nd.group(1)}</strong><b>{p["t"]}</b>{d}</li>'
+        elif p.get('plain'):
+            cells += f'<li class="plain"><span>{p["d"]}</span></li>'
         else:
             e = f'<i aria-hidden="true">{p["e"]}</i>' if p['e'] else ''
-            cells += f'<li>{e}<b>{p["t"]}</b><span>{p["d"]}</span></li>'
+            cells += f'<li>{e}<b>{p["t"]}</b>{d}</li>'
     return f'<ul class="cs-points{" metrics" if metric else ""}">{cells}</ul>'
 
 
-def textrun(run, metric=False):
+CSO = ('challenge', 'problem', 'solution', 'approach', 'outcome', 'result', 'results', 'goal', 'impact')
+
+
+def is_label(it):
+    if it['t'] not in ('p', 'note'):
+        return False
+    t = txt(it['html'])
+    if is_spaced(it['html']):
+        return True
+    return bool(t) and t.upper() == t and any(ch.isalpha() for ch in t) and len(t.split()) <= 5 and len(t) < 48
+
+
+def label_text(it):
+    t = txt(it['html'])
+    return unspace(it['html']) if is_spaced(it['html']) else t.capitalize()
+
+
+def prepare(run, chname=''):
+    out, i = [], 0
+    while i < len(run):
+        it = run[i]
+        nxt = run[i + 1] if i + 1 < len(run) else None
+        # Challenge / Solution / Outcome blocks
+        if is_label(it) and txt(it['html']).lower() in CSO:
+            parts, j = [], i
+            while j < len(run) and is_label(run[j]) and txt(run[j]['html']).lower() in CSO:
+                lab, body, j = label_text(run[j]), [], j + 1
+                while j < len(run) and not is_label(run[j]) and run[j]['t'] in ('p', 'ul', 'ol'):
+                    body.append(run[j]); j += 1
+                parts.append((lab, body))
+            if len(parts) >= 2:
+                out.append({'t': 'cso', 'parts': parts}); i = j; continue
+            if len(parts) == 1 and parts[0][1]:
+                out.append({'t': 'h3', 'html': parts[0][0]}); out.extend(parts[0][1]); i = j; continue
+        # Label + statement -> callout
+        if is_label(it) and nxt and nxt['t'] in ('h3', 'h4') and len(txt(nxt['html'])) > 60:
+            out.append({'t': 'callout', 'html': heading(nxt['html']), 'cap': label_text(it)}); i += 2; continue
+        if is_label(it):
+            if nxt is None:
+                i += 1; continue
+            out.append({'t': 'h3', 'html': label_text(it)}); i += 1; continue
+        # Short subheading + one paragraph, repeated -> cards
+        if it['t'] in ('h3', 'h4') and len(txt(it['html'])) <= 60 and nxt and nxt['t'] == 'p' and len(txt(nxt['html'])) <= 420:
+            pairs, j = [], i
+            while j + 1 < len(run) and run[j]['t'] in ('h3', 'h4') and len(txt(run[j]['html'])) <= 60 and run[j + 1]['t'] == 'p' and len(txt(run[j + 1]['html'])) <= 420 and (j + 2 >= len(run) or run[j + 2]['t'] in ('h3', 'h4')):
+                pairs.append(dict(e='', t=heading(run[j]['html']), d=run[j + 1]['html'])); j += 2
+            if len(pairs) >= 2:
+                out.append({'t': 'pts', 'pts': pairs}); i = j; continue
+        # "#1 … #2 …" or one-line-per-goal paragraphs -> text cards
+        if it['t'] == 'p':
+            lines = [l.strip() for l in re.split(r'<br\s*/?>', it['html']) if txt(l)]
+            if len(lines) >= 3 and all(re.match(r'#\d', txt(l)) for l in lines):
+                out.append({'t': 'pts', 'pts': [dict(e='', t='', d=re.sub(r'^#\d+\s*', '', txt(l)), plain=True) for l in lines]}); i += 1; continue
+        # Plain lists in role / takeaway chapters -> text cards
+        if it['t'] == 'ul' and re.search(r'role|takeaway|learning|responsib', chname, re.I) and 2 <= len(it['items']) <= 10 and not all(as_point(x) for x in it['items']):
+            out.append({'t': 'pts', 'pts': [dict(e='', t='', d=x, plain=True) for x in it['items']]}); i += 1; continue
+        out.append(it); i += 1
+    return out
+
+
+def cso_html(parts):
+    cells = ''
+    for lab, body in parts:
+        inner = ''.join(f'<{b["t"]}>' + ''.join(f'<li>{x}</li>' for x in b['items']) + f'</{b["t"]}>' if b['t'] in ('ul', 'ol') else f'<p>{b["html"]}</p>' for b in body)
+        k = lab.lower()
+        cls = ' out' if k in ('outcome', 'result', 'results', 'impact') else ''
+        cells += f'<div class="{k}{cls}"><dt>{lab}</dt><dd>{inner}</dd></div>'
+    return f'<dl class="cs-cso">{cells}</dl>'
+
+
+def textrun(run, metric=False, chname=''):
+    run = prepare(run, chname)
     # Group runs of "Title – description" paragraphs (and lists of them) into scannable cards
     grouped, buf = [], []
     for it in run:
+        if it['t'] in ('pts', 'cso', 'callout'):
+            if buf:
+                grouped.append(('pts', buf)); buf = []
+            grouped.append(('it', it)); continue
         pt = as_point(it['html']) if it['t'] == 'p' else None
         if pt:
             buf.append(pt); continue
@@ -640,6 +725,10 @@ def textrun(run, metric=False):
             run.append(v)
     out = []
     for it in run:
+        if it['t'] == 'cso':
+            out.append(cso_html(it['parts'])); continue
+        if it['t'] == 'callout':
+            out.append(f'<figure class="cs-callout"><p>{it["html"]}</p><figcaption>{it["cap"]}</figcaption></figure>'); continue
         if it['t'] == 'pts':
             out.append(points_html(it['pts'], metric or all(NUM.match(p['t'].strip()) or NUM.search(p['t'][:12]) for p in it['pts'])))
             continue
@@ -667,8 +756,12 @@ def textrun(run, metric=False):
 
 def chapters(body):
     chs, cur = [], {'h': None, 'items': []}
+    big = sum(1 for it in body if it['t'] in ('h1', 'h2') and len(txt(it['html'])) < 60)
+    levels = ('h1', 'h2') if big >= 3 else ('h1', 'h2', 'h3', 'h4')
     for it in body:
-        if it['t'] in ('h1', 'h2') and len(txt(it['html'])) < 60:
+        if cur['h'] and DIVIDERS.search(cur['h']):
+            levels = ('h1', 'h2', 'h3', 'h4')
+        if it['t'] in levels and len(txt(it['html'])) < (60 if it['t'] in ('h1', 'h2') else 50) and not txt(it['html']).startswith('('):
             if cur['h'] or cur['items']:
                 chs.append(cur)
             cur = {'h': heading(it['html']), 'items': []}
@@ -677,6 +770,7 @@ def chapters(body):
     if cur['h'] or cur['items']:
         chs.append(cur)
     html = []
+    seen_div = False
     for ch in chs:
         rows, run, kind = [], [], None
         for it in ch['items'] + [None]:
@@ -693,16 +787,25 @@ def chapters(body):
             if k == 'img':
                 inner += f'<div class="cs-wide">{figure(r)}</div>'
             else:
-                inner += f'<div class="cs-text">{textrun(r, metric)}</div>'
+                inner += f'<div class="cs-text">{textrun(r, metric, ch["h"] or "")}</div>'
         cid = re.sub(r'[^a-z0-9]+', '-', (ch['h'] or '').lower()).strip('-')
         ch['id'] = cid
         if ch['h'] and DIVIDERS.search(ch['h']):
-            html.append(f'<section class="cs-ch cs-divider" id="{cid}"><h2>The full process</h2><p class="cs-sub">Research, decisions and iterations, step by step.</p>{inner}</section>')
+            short = len(rows) == 1 and rows[0][0] == 'txt' and len(rows[0][1]) <= 3
+            band = f'<section class="cs-ch cs-divider" id="{cid}"><h2>The full process</h2><p class="cs-sub">Research, decisions and iterations, step by step.</p>{inner if short else ""}</section>'
+            html.append(band if (short or not inner) else band + f'<section class="cs-ch no-h">{inner}</section>')
+            seen_div = True
             continue
         h = f'<h2>{ch["h"]}</h2>' if ch['h'] else ''
         html.append(f'<section class="cs-ch{"" if ch["h"] else " no-h"}"{f" id={chr(34)}{cid}{chr(34)}" if cid else ""}>{h}{inner}</section>')
     CHAPTERS.clear()
-    CHAPTERS.extend((('The full process' if DIVIDERS.search(c['h']) else c['h']), c['id']) for c in chs if c['h'])
+    for c in chs:
+        if not c['h']:
+            continue
+        if DIVIDERS.search(c['h']):
+            CHAPTERS.append(('The full process', c['id']))
+            break
+        CHAPTERS.append((c['h'], c['id']))
     return ''.join(html)
 
 
