@@ -570,3 +570,35 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 .tools li b{font-weight:600;font-size:15px}
 .tools li span{font-size:13.5px;color:var(--ink-2);text-align:right}
 @media (max-width:700px){.tools{grid-template-columns:1fr}.edu li{grid-template-columns:1fr;gap:4px}}
+
+/* About: more visual — logos, illustrations, alternating tile colours */
+.edu li{grid-template-columns:44px minmax(0,1fr) auto}
+.edu .emark{width:44px;height:44px;border-radius:12px;background:#fff;box-shadow:0 0 0 1px var(--line);display:grid;place-items:center;overflow:hidden;align-self:center}
+.edu .emark img{width:100%;height:100%;object-fit:contain}
+@media (max-width:700px){.edu li{grid-template-columns:44px minmax(0,1fr);gap:4px 14px}.edu li .yr{grid-column:2}}
+.tools li{justify-content:flex-start;align-items:center}
+.tools li span:last-child{margin-left:auto}
+.bi{display:inline-flex;flex:none}
+.bi img{width:28px;height:28px;border-radius:8px;background:#fff;box-shadow:0 0 0 1px oklch(0 0 0 / .08);object-fit:contain}
+.bi img + img{margin-left:-8px;box-shadow:0 0 0 2px #fff}
+.hobbies li{padding:0 0 22px;overflow:hidden}
+.hobbies li img{width:100%;height:auto;aspect-ratio:16/10;display:block;margin-bottom:8px}
+.hobbies li b,.hobbies li span{padding:0 20px}
+/* rotate the tile colour so long lists of cards don't all look the same */
+.langs li:nth-child(4n+1),.tools > div:nth-child(1) li,.hobbies li:nth-child(1),.quotes .q:nth-child(3n+1){background:#f4f2ee}
+.langs li:nth-child(4n+2),.tools > div:nth-child(2) li,.hobbies li:nth-child(2),.quotes .q:nth-child(3n+2){background:#efeafc}
+.langs li:nth-child(4n+3),.tools > div:nth-child(3) li,.hobbies li:nth-child(3),.quotes .q:nth-child(3n+3){background:#e8f1ec}
+.langs li:nth-child(4n+4),.tools > div:nth-child(4) li{background:#fcefe3}
+/* 404 */
+.nf{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(28px,5vw,64px);align-items:center;padding:clamp(40px,7vw,96px) 0 clamp(40px,6vw,72px)}
+.nf-art svg{width:100%;height:auto;display:block}
+.nf h1{font-size:clamp(2.2rem,4.6vw,3.6rem);letter-spacing:-.03em;line-height:1.05}
+.nf-copy p{margin-top:16px;font-size:1.15rem;color:var(--ink-2);max-width:40ch}
+.nf .nf-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.cur{transform-box:fill-box}
+.cur.a{transform:translate(150px,250px);animation:cur-a 7s cubic-bezier(.45,0,.2,1) infinite}
+.cur.b{transform:translate(330px,120px);animation:cur-b 8s cubic-bezier(.45,0,.2,1) infinite}
+@keyframes cur-a{0%,100%{transform:translate(150px,250px)}35%{transform:translate(220px,150px)}70%{transform:translate(330px,268px)}}
+@keyframes cur-b{0%,100%{transform:translate(330px,120px)}40%{transform:translate(380px,230px)}75%{transform:translate(250px,110px)}}
+@media (prefers-reduced-motion:reduce){.cur.a,.cur.b{animation:none}}
+@media (max-width:800px){.nf{grid-template-columns:1fr}.nf-art{order:2}}

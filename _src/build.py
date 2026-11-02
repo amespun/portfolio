@@ -90,7 +90,7 @@ PHOTOS = dict(
     hike=img('2a2f48c6-6e38-4c9f-9a1f-aba8a4749d2a/IMG_2681.jpeg', 1000),
     beach=img('04701f9a-d4c3-4908-8bf6-2297f7e1483e/IMG_0186.jpg', 1000),
 )
-FACTS = [('10+', 'years in product design'), ('15+', 'years in design'), ('4', 'languages, Dutch in progress'), ('BCN → NL', 'from Barcelona to the Netherlands')]
+FACTS = [('10+', 'years in product design'), ('15+', 'years in design'), ('4', 'languages, Dutch at A2'), ('BCN → NL', 'from Barcelona to the Netherlands')]
 EXPERIENCE = [
     ('Skydreams', '', 'B2B2C marketplace', 'Senior Product Designer', '2026 – now', 'nl'),
     ('Papaya Dash', 'UK company', 'B2B2C SaaS · Green tech', 'Senior Product Designer', '2025', 'bcn'),
@@ -126,11 +126,22 @@ def flag(code):
 
 
 EDUCATION = [
-    ('BA in Design, Graphic and Interior Design', 'Elisava School of Design and Engineering', 'Barcelona', '2012 – 2016'),
-    ('BA in Design', 'University of Winchester', 'United Kingdom', '2012 – 2016'),
-    ('UX Design Bootcamp, full time', 'Ironhack', 'Barcelona', '2018 – 2019'),
-    ('Interaction Design courses', 'The Interaction Design Foundation (IxDF)', 'Online', '2019 – 2020'),
+    ('BA in Design, Graphic and Interior Design', 'Elisava School of Design and Engineering', 'Barcelona', '2012 – 2016', 'elisava.png'),
+    ('BA in Design', 'University of Winchester', 'United Kingdom', '2012 – 2016', 'winchester.svg'),
+    ('UX Design Bootcamp, full time', 'Ironhack', 'Barcelona', '2018 – 2019', 'ironhack.png'),
+    ('Interaction Design courses', 'The Interaction Design Foundation (IxDF)', 'Online', '2019 – 2020', 'ixdf.png'),
 ]
+TOOL_ICON = {'Figma': 'figma', 'Storybook': 'storybook', 'Zeroheight': 'zeroheight', 'Framer': 'framer',
+             'Claude + Figma': ('claude', 'figma'), 'Figma AI': 'figma', 'Claude': 'claude', 'ChatGPT': 'chatgpt', 'Midjourney': 'midjourney',
+             'Jira & Confluence': 'atlassian', 'Linear': 'linear', 'Miro': 'miro', 'Mobbin': 'mobbin', 'Dribbble': 'dribbble'}
+def brand(n, base='../'):
+    k = TOOL_ICON.get(n)
+    if not k: return ''
+    ks = k if isinstance(k, tuple) else (k,)
+    return '<span class="bi">' + ''.join(f'<img src="{base}assets/brands/{x}.png" alt="" width="28" height="28" loading="lazy">' for x in ks) + '</span>'
+HOBBIES = [('Ice skating', 'My favourite way to switch off. I’m on the rink whenever I can.', 'skating'),
+           ('Baking sourdough', 'Patience, testing and iterating, one loaf at a time. Not so different from design.', 'sourdough'),
+           ('Learning Dutch', 'Ik leer Nederlands. I’m at A2 and a little better every week.', 'dutch')]
 TOOLS = [
     ('Design', [('Figma', 'Design and prototyping'), ('Storybook', 'Design systems'), ('Zeroheight', 'Design system documentation'), ('Framer', 'Web design')]),
     ('Designing with AI', [('Claude + Figma', 'Agents, skills and connectors that edit my Figma files and design system'), ('Figma AI', 'AI features inside Figma'), ('Claude', 'Brainstorming, research, and building this site on GitHub'), ('ChatGPT', 'Ideation, UI and brand exploration'), ('Midjourney', 'Brand assets')]),
@@ -139,7 +150,7 @@ TOOLS = [
 ]
 
 
-LANGUAGES = [('Hola', 'Spanish', 'Native'), ('Bon dia', 'Catalan', 'Native'), ('Hello', 'English', 'Full professional'), ('Bonjour', 'French', 'C1'), ('Hallo', 'Dutch', 'A1, learning')]
+LANGUAGES = [('Hola', 'Spanish', 'Native'), ('Bon dia', 'Catalan', 'Native'), ('Hello', 'English', 'Full professional'), ('Bonjour', 'French', 'C1'), ('Hallo', 'Dutch', 'A2, learning')]
 QUOTES = [
     ('It’s hard to find people as proactive and decisive as Aïda. She’s been a key member of the UX/UI team ever since her arrival. She’s a natural leader and a team player.', 'Mercè Delgado', 'CEO, Fluendo'),
     ('Aïda took on the challenge of redesigning the app, transforming it into a much more intuitive and user-friendly experience. Her collaborative approach and openness to iteration fostered a strong dynamic between product and design.', 'Margarida', 'Product Manager, EVPassport'),
@@ -318,7 +329,7 @@ def contact(base=''):
     li = lambda xs: ''.join(f'<li><a href="{h}">{n}</a></li>' for n, h in xs)
     return f'''<footer class="footer" id="contact"><div class="card-dark">
   <p class="greet"><span data-greet>Hola</span>, let’s talk.</p>
-  <p class="sub">Spanish, Catalan, English and French at work. Dutch in progress.</p>
+  <p class="sub">Spanish, Catalan, English and French at work. Dutch at A2.</p>
   <button class="mail" type="button" data-copy>amespun@gmail.com <em>{COPY_ICON}{labels("Copy")}</em></button>
   <div class="cols">
     <div><h2>Pages</h2><ul>{li(pages)}</ul></div>
@@ -482,7 +493,7 @@ def about():
 
   <section class="section split">
     <h2 class="h2">Education</h2>
-    <ol class="edu">{''.join(f'<li><div><b>{d}</b><span>{sch} · {loc}</span></div><span class="yr">{y}</span></li>' for d, sch, loc, y in EDUCATION)}</ol>
+    <ol class="edu">{''.join(f'<li><span class="emark"><img src="../assets/brands/{lg}" alt="" width="44" height="44" loading="lazy"></span><div><b>{d}</b><span>{sch} · {loc}</span></div><span class="yr">{y}</span></li>' for d, sch, loc, y, lg in EDUCATION)}</ol>
   </section>
 
   <section class="section split">
@@ -492,7 +503,7 @@ def about():
 
   <section class="section split">
     <h2 class="h2">Tools I use</h2>
-    <div class="tools">{''.join(f'<div><p>{g}</p><ul>' + ''.join(f'<li><b>{n}</b><span>{d}</span></li>' for n, d in items) + '</ul></div>' for g, items in TOOLS)}</div>
+    <div class="tools">{''.join(f'<div><p>{g}</p><ul>' + ''.join(f'<li>{brand(n)}<b>{n}</b><span>{d}</span></li>' for n, d in items) + '</ul></div>' for g, items in TOOLS)}</div>
   </section>
 
   <section class="section split">
@@ -502,11 +513,7 @@ def about():
 
   <section class="section split">
     <h2 class="h2">Outside work</h2>
-    <ul class="hobbies">
-      <li><b>Ice skating</b><span>My favourite way to switch off. I’m on the rink whenever I can.</span></li>
-      <li><b>Baking sourdough</b><span>Patience, testing and iterating, one loaf at a time. Not so different from design.</span></li>
-      <li><b>Learning Dutch</b><span>Ik leer Nederlands. A little better every week.</span></li>
-    </ul>
+    <ul class="hobbies">{''.join(f'<li><img src="../assets/hobbies/{im}.svg" alt="" width="320" height="200" loading="lazy"><b>{t}</b><span>{d}</span></li>' for t, d, im in HOBBIES)}</ul>
   </section>
 
   <section class="section">
@@ -1018,12 +1025,33 @@ ALL = ['', 'work/', 'about/', 'studio/'] + [f'work/{p["slug"]}/' for p in PROJEC
 open(f'{ROOT}/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'  <url><loc>{SITE_URL}{u}</loc></url>\n' for u in ALL) + '</urlset>\n')
 open(f'{ROOT}/robots.txt', 'w').write(f'User-agent: *\nAllow: /\nDisallow: /_export/\nSitemap: {SITE_URL}sitemap.xml\n')
 # 404: GitHub Pages serves it at any depth, so every link is absolute
+NF_ART = """<svg viewBox="0 0 520 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="1" y="1" width="518" height="378" rx="22" fill="#f4f2ee"/>
+  <g fill="#d9d5cd"><circle cx="40" cy="40" r="2"/><circle cx="80" cy="40" r="2"/><circle cx="120" cy="40" r="2"/><circle cx="160" cy="40" r="2"/><circle cx="200" cy="40" r="2"/><circle cx="240" cy="40" r="2"/><circle cx="280" cy="40" r="2"/><circle cx="320" cy="40" r="2"/><circle cx="360" cy="40" r="2"/><circle cx="400" cy="40" r="2"/><circle cx="440" cy="40" r="2"/><circle cx="480" cy="40" r="2"/>
+  <circle cx="40" cy="340" r="2"/><circle cx="80" cy="340" r="2"/><circle cx="120" cy="340" r="2"/><circle cx="160" cy="340" r="2"/><circle cx="200" cy="340" r="2"/><circle cx="240" cy="340" r="2"/><circle cx="280" cy="340" r="2"/><circle cx="320" cy="340" r="2"/><circle cx="360" cy="340" r="2"/><circle cx="400" cy="340" r="2"/><circle cx="440" cy="340" r="2"/><circle cx="480" cy="340" r="2"/></g>
+  <text x="120" y="88" font-family="Hanken Grotesk, sans-serif" font-size="13" fill="#62605c">Frame 404</text>
+  <rect x="120" y="98" width="280" height="190" rx="6" fill="#fff" stroke="#8b7ad6" stroke-width="2" stroke-dasharray="8 7"/>
+  <g fill="#fff" stroke="#8b7ad6" stroke-width="2"><rect x="114" y="92" width="12" height="12" rx="2"/><rect x="394" y="92" width="12" height="12" rx="2"/><rect x="114" y="282" width="12" height="12" rx="2"/><rect x="394" y="282" width="12" height="12" rx="2"/></g>
+  <text x="260" y="212" text-anchor="middle" font-family="Bricolage Grotesque, sans-serif" font-size="74" font-weight="800" fill="#ece8f8" letter-spacing="-2">404</text>
+  <text x="260" y="246" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="14" fill="#62605c">Nothing on this frame yet</text>
+  <g class="cur a">
+    <path d="M0 0 L0 26 L7 19 L12 30 L17 28 L12 17 L22 17 Z" fill="#1a1a1a" stroke="#fff" stroke-width="2" stroke-linejoin="round"/>
+    <rect x="18" y="26" width="48" height="24" rx="12" fill="#1a1a1a"/><text x="42" y="42" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="12.5" font-weight="600" fill="#fff">Aïda</text>
+  </g>
+  <g class="cur b">
+    <path d="M0 0 L0 26 L7 19 L12 30 L17 28 L12 17 L22 17 Z" fill="#cdbcf2" stroke="#3d2a8a" stroke-width="2" stroke-linejoin="round"/>
+    <rect x="18" y="26" width="88" height="24" rx="12" fill="#cdbcf2"/><text x="62" y="42" text-anchor="middle" font-family="Hanken Grotesk, sans-serif" font-size="12.5" font-weight="600" fill="#3d2a8a">✦ AI search</text>
+  </g>
+</svg>"""
 nf = head('Page not found · Aïda Martínez Espún', 'This page doesn’t exist.', SITE_URL) + nav(SITE_URL, None) + f'''
 <main class="wrap" id="main">
-  <section class="page-head" style="padding-bottom:40px">
-    <h1>This page doesn’t exist.</h1>
-    <p>It may have moved when the portfolio left Squarespace. Everything is still here:</p>
-    <p style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px"><a class="btn primary" href="{SITE_URL}work/">See all work {ARROW}</a><a class="btn" href="{SITE_URL}" style="background:var(--tile)">Go to the home page</a></p>
+  <section class="nf">
+    <div class="nf-art" aria-hidden="true">{NF_ART}</div>
+    <div class="nf-copy">
+      <h1>Oops, this page doesn’t exist.</h1>
+      <p>The link may be old or mistyped. Let’s get you back to something good.</p>
+      <p class="nf-actions"><a class="btn primary" href="{SITE_URL}work/">See my work {ARROW}</a><a class="btn" href="{SITE_URL}" style="background:var(--tile)">Go to the home page</a></p>
+    </div>
   </section>
 ''' + contact(SITE_URL) + foot()
 open(f'{ROOT}/404.html', 'w').write(localize(nf, SITE_URL).replace('@@URL@@', SITE_URL))

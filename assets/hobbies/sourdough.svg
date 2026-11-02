@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <rect width="320" height="200" fill="#f4e9da" stroke="none"/>
+  <!-- board -->
+  <path d="M40 156 H262 C270 156 276 162 276 170 H40 C34 170 32 162 40 156 Z" fill="#d9b98f"/>
+  <path d="M276 163 H300 C304 163 304 169 300 169 H276" fill="#d9b98f"/>
+  <!-- loaf -->
+  <path d="M70 154 C64 112 104 78 160 78 C216 78 256 112 250 154 Z" fill="#e3a868"/>
+  <!-- ear / scoring -->
+  <path d="M96 118 C126 98 170 92 214 104" stroke-width="3"/>
+  <path d="M110 132 C134 122 160 120 186 126" stroke="#a8692e" stroke-width="2"/>
+  <!-- flour dusting -->
+  <g fill="#fff" stroke="none"><circle cx="128" cy="100" r="2.4"/><circle cx="150" cy="92" r="2"/><circle cx="182" cy="96" r="2.4"/><circle cx="204" cy="112" r="2"/><circle cx="118" cy="140" r="2"/><circle cx="168" cy="140" r="2.4"/><circle cx="222" cy="136" r="2"/></g>
+  <!-- wheat -->
+  <path d="M268 140 C268 110 272 80 284 52" stroke="#3d2a8a" stroke-width="2"/>
+  <path d="M276 92 l-10 -8 M278 78 l-10 -8 M281 66 l-9 -8 M276 92 l10 -10 M279 78 l10 -10 M282 66 l9 -9" stroke="#3d2a8a" stroke-width="2"/>
+  <!-- steam -->
+  <path d="M140 66 c-6 -8 6 -14 0 -24 M168 62 c-6 -8 6 -14 0 -24" stroke="#a8692e" stroke-width="2"/>
+</svg>
