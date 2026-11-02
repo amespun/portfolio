@@ -63,7 +63,8 @@ EARLIER = [
          cover=img('1731074386961-1X8UOKNI6FFH53YT1KES/WNW.jpg', 1000), alt='Kids learning platform screens'),
 ]
 # Work page order: strongest and most recent first
-PROJECTS = FEATURED[:3] + [EARLIER[0]] + [FEATURED[3]] + EARLIER[1:]
+# Work page order: newest first
+PROJECTS = [EARLIER[0], FEATURED[0], FEATURED[1], FEATURED[2], FEATURED[3], EARLIER[1], EARLIER[2], EARLIER[3]]
 BEYOND = [
     ('Illustration', 'European-inspired illustrations and watercolour prints that I design and sell on Etsy.', ('Visit the Etsy shop', 'https://www.etsy.com/shop/amespunn')),
     ('ämespun studio', 'Branding and fast no-code websites for small businesses, in four languages.', ('See studio work', 'studio/')),
@@ -345,7 +346,7 @@ if (spy.length > 1) {
 
 
 def more_work(base=''):
-    rest = PROJECTS[2:]
+    rest = [p for p in PROJECTS if p not in FEATURED[:2]]
     thumbs = ''.join(f'<span style="--i:{n}">{pic(p["cover"], "", "96px")}</span>' for n, p in enumerate(rest[:5]))
     names = ' · '.join(p['short'] for p in rest[:3]) + ' and more'
     return f'''<a class="more-work" href="{base}work/">
