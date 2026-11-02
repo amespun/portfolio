@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-  <rect width="320" height="200" fill="#ece6fb" stroke="none"/>
+  <rect width="320" height="200" fill="#f4f2ee" stroke="none"/>
   <!-- canal -->
-  <path d="M0 168 H320 V200 H0Z" fill="#c9daf0" stroke="none"/>
-  <path d="M30 182 h40 M120 186 h50 M220 180 h44" stroke="#8aa7cc" stroke-width="2"/>
+  <path d="M0 168 H320 V200 H0Z" fill="#e9e4f7" stroke="none"/>
+  <path d="M30 182 h40 M120 186 h50 M220 180 h44" stroke="#b9addf" stroke-width="2"/>
   <!-- canal houses -->
   <path d="M40 168 V86 L58 62 L76 86 V168" fill="#fff"/>
   <path d="M76 168 V74 H84 V62 H100 V74 H108 V168" fill="#cdbcf2"/>

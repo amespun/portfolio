@@ -126,7 +126,7 @@ def flag(code):
 
 
 EDUCATION = [
-    ('BA in Design, Graphic and Interior Design', 'Elisava School of Design and Engineering', 'Barcelona', '2012 – 2016', 'elisava.png'),
+    ('BA in Design, Graphic and Interior Design', 'Elisava School of Design and Engineering', 'Barcelona', '2012 – 2016', 'elisava-wordmark.png'),
     ('BA in Design', 'University of Winchester', 'United Kingdom', '2012 – 2016', 'winchester.svg'),
     ('UX Design Bootcamp, full time', 'Ironhack', 'Barcelona', '2018 – 2019', 'ironhack.png'),
     ('Interaction Design courses', 'The Interaction Design Foundation (IxDF)', 'Online', '2019 – 2020', 'ixdf.png'),

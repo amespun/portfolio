@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200" fill="none" stroke="#1a1a1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-  <rect width="320" height="200" fill="#e3ecf7" stroke="none"/>
+  <rect width="320" height="200" fill="#f4f2ee" stroke="none"/>
   <!-- rink ice with skate tracks -->
-  <path d="M0 150 C80 140 240 140 320 150 V200 H0Z" fill="#f7fafe" stroke="none"/>
-  <path d="M30 178 C90 150 150 196 210 166 S300 150 310 160" stroke="#9fb8d8" stroke-width="2"/>
-  <path d="M40 188 C100 162 160 204 220 176" stroke="#9fb8d8" stroke-width="2"/>
+  <path d="M0 150 C80 140 240 140 320 150 V200 H0Z" fill="#ffffff" stroke="none"/>
+  <path d="M30 178 C90 150 150 196 210 166 S300 150 310 160" stroke="#cfc8bb" stroke-width="2"/>
+  <path d="M40 188 C100 162 160 204 220 176" stroke="#cfc8bb" stroke-width="2"/>
   <!-- skate boot -->
   <path d="M118 52 L118 104 C118 112 124 118 132 118 L208 118 C214 118 218 114 216 108 C212 96 196 92 180 90 L164 86 L162 52 Z" fill="#fff"/>
   <path d="M118 52 H162" />
