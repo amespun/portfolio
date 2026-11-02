@@ -1,0 +1,21 @@
+name: Fetch Nido assets
+on:
+  push:
+    branches: [nido-assets]
+    paths: ['.github/workflows/nido.yml']
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          mkdir -p nido
+          B=https://nidoinnova.my.canva.site/_assets
+          for f in images/2d0b56e7e51cf11036ad8734bdb67e2d.png images/e53c4bd8da5e491d9ab09e7cf0daf874.png images/725b756a69a7d4c235070e51acd85560.png media/b7c5f6e5f62ead4f9a6a355577bcaea0.jpg media/aa824d052e5948c8f6fe29555e7c7c3d.png media/df6e538df21a715fb994738a9e912eeb.png media/5cad6f0ff7fa0e06c4d3f658bc2b6dac.png video/97dfe0e9639ca3ec1d8a7444f9e1dcf8.jpg video/0a4b286d22b9dfdb60be19dabba69e04.mp4; do
+            curl -sSLf -A "Mozilla/5.0" "$B/$f" -o "nido/$(echo $f | tr / _)" || echo "fail $f"
+          done
+          ls -la nido
+          git config user.name github-actions; git config user.email actions@github.com
+          git add nido && git commit -m "Nido assets" && git push
