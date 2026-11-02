@@ -10,32 +10,43 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Fetch page JSON
+      - name: Fetch HTML and images
         run: |
-          set -x
-          mkdir -p _export
-          UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"
-          for c in work designstudio about; do
-            curl -sSL -A "$UA" "https://www.amespun.com/$c?format=json" -o "_export/$c.json" || true
-          done
           python3 - <<'PY'
-          import json, subprocess, os
+          import json, os, re, subprocess, glob, urllib.parse
           UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"
+          os.makedirs('_export/html', exist_ok=True); os.makedirs('assets/sq', exist_ok=True)
+          pages=['/', '/work', '/designstudio', '/about', '/contact']
           for c in ['work','designstudio']:
-              try: d=json.load(open(f'_export/{c}.json'))
-              except Exception as e: print(c, e); continue
-              for it in d.get('items',[]):
-                  u=it.get('fullUrl'); 
-                  if not u: continue
-                  slug=u.strip('/').replace('/','__')
-                  subprocess.run(['curl','-sSL','-A',UA,f'https://www.amespun.com{u}?format=json','-o',f'_export/{slug}.json'])
-                  print('got',u)
+              d=json.load(open(f'_export/{c}.json'))
+              pages += [it['fullUrl'] for it in d.get('items',[]) if it.get('fullUrl')]
+          ids=set()
+          for p in pages:
+              name=(p.strip('/').replace('/','__') or 'home')+'.html'
+              subprocess.run(['curl','-sSL','-A',UA,'https://www.amespun.com'+p,'-o','_export/html/'+name])
+              t=open('_export/html/'+name,encoding='utf-8',errors='ignore').read()
+              ids |= set(re.findall(r'content/v1/6702bf4ad824953000041187/([^"\'?\s)&]+)', t))
+          for f in glob.glob('_export/*.json'):
+              ids |= set(re.findall(r'content/v1/6702bf4ad824953000041187/([^"\'?\s)&\\\\]+)', open(f).read()))
+          mp={}
+          for i in sorted(ids):
+              seg=i.split('/')[0]
+              ext=os.path.splitext(urllib.parse.unquote(i))[1].lower() or '.jpg'
+              if ext not in ('.jpg','.jpeg','.png','.gif','.webp','.svg','.mp4'): ext='.jpg'
+              out=f'assets/sq/{seg}{ext}'
+              url='https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/'+i
+              if ext in ('.jpg','.jpeg','.png','.webp'): url+='?format=2500w'
+              r=subprocess.run(['curl','-sSLf','-A',UA,url,'-o',out])
+              if r.returncode==0: mp[i]=out
+              else: print('fail',i)
+          json.dump(mp,open('_export/images.json','w'),indent=1)
+          print(len(mp),'images')
           PY
-          ls -la _export
+          du -sh assets/sq
       - name: Commit
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add _export
-          git commit -m "Export Squarespace content" || echo nothing
+          git add _export assets/sq
+          git commit -m "Export Squarespace HTML and images" || echo nothing
           git push
