@@ -555,3 +555,18 @@ p,li,figcaption,blockquote{text-wrap:pretty}
   .more-work .stack span{width:64px;height:48px;margin-left:-22px}
   .footer .cols a{padding:10px 0}
 }
+/* Education + tools */
+.edu{list-style:none;padding:0;margin:0}
+.edu li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line)}
+.edu li:first-child{padding-top:0}
+.edu li:last-child{border-bottom:0}
+.edu b{display:block;font-family:var(--display);font-weight:700;font-size:1.1rem;letter-spacing:-.01em;text-wrap:balance}
+.edu span{color:var(--ink-2);font-size:15px}
+.edu .yr{font-size:14px;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.tools{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 16px}
+.tools p{font-size:14px;font-weight:600;color:var(--ink-2);margin-bottom:10px}
+.tools ul{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.tools li{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:12px 14px;border-radius:12px;background:var(--tile)}
+.tools li b{font-weight:600;font-size:15px}
+.tools li span{font-size:13.5px;color:var(--ink-2);text-align:right}
+@media (max-width:700px){.tools{grid-template-columns:1fr}.edu li{grid-template-columns:1fr;gap:4px}}

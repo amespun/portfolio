@@ -125,6 +125,20 @@ def flag(code):
     return f'<svg class="flag" viewBox="0 0 30 20" width="24" height="16" aria-hidden="true">{FLAGS[code]}</svg>'
 
 
+EDUCATION = [
+    ('BA in Design, Graphic and Interior Design', 'Elisava School of Design and Engineering', 'Barcelona', '2012 – 2016'),
+    ('BA in Design', 'University of Winchester', 'United Kingdom', '2012 – 2016'),
+    ('UX Design Bootcamp, full time', 'Ironhack', 'Barcelona', '2018 – 2019'),
+    ('Interaction Design courses', 'The Interaction Design Foundation (IxDF)', 'Online', '2019 – 2020'),
+]
+TOOLS = [
+    ('Design', [('Figma', 'Design and prototyping'), ('Storybook', 'Design systems'), ('Framer', 'Web design')]),
+    ('Product & collaboration', [('Jira & Confluence', 'Planning and documentation'), ('Linear', 'Planning'), ('Miro', 'Workshops and brainstorming')]),
+    ('AI', [('Claude', 'Ideation, prototyping, research'), ('ChatGPT', 'Ideation, UI and brand exploration'), ('Midjourney', 'Brand assets')]),
+    ('Research & inspiration', [('Mobbin', 'UI patterns'), ('Dribbble', 'Visual inspiration')]),
+]
+
+
 LANGUAGES = [('Hola', 'Spanish', 'Native'), ('Bon dia', 'Catalan', 'Native'), ('Hello', 'English', 'Full professional'), ('Bonjour', 'French', 'C1'), ('Hallo', 'Dutch', 'A1, learning')]
 QUOTES = [
     ('It’s hard to find people as proactive and decisive as Aïda. She’s been a key member of the UX/UI team ever since her arrival. She’s a natural leader and a team player.', 'Mercè Delgado', 'CEO, Fluendo'),
@@ -467,8 +481,18 @@ def about():
   </section>
 
   <section class="section split">
+    <h2 class="h2">Education</h2>
+    <ol class="edu">{''.join(f'<li><div><b>{d}</b><span>{sch} · {loc}</span></div><span class="yr">{y}</span></li>' for d, sch, loc, y in EDUCATION)}</ol>
+  </section>
+
+  <section class="section split">
     <h2 class="h2">What I bring</h2>
     <ul class="chips">{''.join(f'<li>{e}</li>' for e in EXPERTISE)}</ul>
+  </section>
+
+  <section class="section split">
+    <h2 class="h2">Tools I use</h2>
+    <div class="tools">{''.join(f'<div><p>{g}</p><ul>' + ''.join(f'<li><b>{n}</b><span>{d}</span></li>' for n, d in items) + '</ul></div>' for g, items in TOOLS)}</div>
   </section>
 
   <section class="section split">
