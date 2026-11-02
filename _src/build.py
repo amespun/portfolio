@@ -133,7 +133,7 @@ EDUCATION = [
 ]
 TOOLS = [
     ('Design', [('Figma', 'Design and prototyping'), ('Storybook', 'Design systems'), ('Zeroheight', 'Design system documentation'), ('Framer', 'Web design')]),
-    ('Designing with AI', [('Figma AI & Claude Design', 'AI-assisted UI design in Figma'), ('Lovable & Base44', 'Working prototypes from designs'), ('Claude', 'Ideation, prototyping, research'), ('ChatGPT', 'Ideation, UI and brand exploration'), ('Midjourney', 'Brand assets')]),
+    ('Designing with AI', [('Claude + Figma', 'Agents, skills and connectors that edit my Figma files and design system'), ('Figma AI', 'AI features inside Figma'), ('Claude', 'Brainstorming, research, and building this site on GitHub'), ('ChatGPT', 'Ideation, UI and brand exploration'), ('Midjourney', 'Brand assets')]),
     ('Product & collaboration', [('Jira & Confluence', 'Planning and documentation'), ('Linear', 'Planning'), ('Miro', 'Workshops and brainstorming')]),
     ('Research & inspiration', [('Mobbin', 'UI patterns'), ('Dribbble', 'Visual inspiration')]),
 ]
