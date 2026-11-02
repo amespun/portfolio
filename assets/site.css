@@ -280,3 +280,79 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 @media (prefers-reduced-motion:reduce){
   .swap svg,.labels>span,.more-work .stack span,[data-copy],.swap .i-check path{transition:none}
 }
+
+/* ---------- Calmer hero ---------- */
+.hero{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:64px;padding:clamp(40px,6vw,88px) 0 clamp(48px,6vw,80px)}
+.hero h1{font-size:clamp(2.4rem,4.6vw,3.9rem);line-height:1.02;max-width:14ch}
+.hero .lede{max-width:44ch}
+.hero .art{max-width:500px;justify-self:end}
+.worked{display:flex;flex-wrap:wrap;align-items:center;gap:16px 32px;padding-top:28px;border-top:1px solid var(--line)}
+.worked > p{font-size:14px;color:var(--ink-2);font-weight:500}
+
+/* ---------- About: photo collage + facts ---------- */
+.about-home{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(40px,7vw,96px);align-items:center}
+.about-copy > p{font-size:1.1rem;line-height:1.6;color:var(--ink-2);margin-top:16px;max-width:52ch}
+.about-copy .more-link{margin-top:28px;font-weight:600}
+.collage{position:relative;aspect-ratio:1/1.05;max-width:480px;width:100%}
+.collage .ph{position:absolute;border-radius:20px;overflow:hidden;background:var(--tile);box-shadow:0 0 0 6px #fff,0 24px 48px -24px rgba(26,26,26,.35);transition:transform .5s var(--ease-out)}
+.collage .ph img{width:100%;height:100%;object-fit:cover}
+.collage .a{left:0;top:0;width:68%;aspect-ratio:4/5;transform:rotate(-3deg);z-index:1}
+.collage .b{right:0;bottom:0;width:52%;aspect-ratio:4/5;transform:rotate(4deg);z-index:2}
+@media (hover:hover) and (pointer:fine){
+  .collage:hover .a{transform:rotate(-5deg) translate(-6px,-4px)}
+  .collage:hover .b{transform:rotate(6deg) translate(6px,4px)}
+}
+.facts{margin-top:28px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.facts li{padding:16px 18px;border-radius:16px;background:var(--tile)}
+.facts strong{display:block;font-family:var(--display);font-size:1.6rem;font-weight:800;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.facts span{font-size:14px;color:var(--ink-2)}
+.q{margin:28px 0 0}
+.q p{font-family:var(--display);font-size:1.2rem;line-height:1.4;font-weight:500;letter-spacing:-.01em;color:var(--ink)}
+.q footer{margin-top:10px;font-size:14px;color:var(--ink-2)}
+.q footer b{color:var(--ink);font-weight:600}
+
+/* ---------- About page ---------- */
+.about-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(40px,6vw,88px);align-items:center;padding:clamp(40px,6vw,80px) 0 0}
+.about-hero h1{font-weight:800;font-size:clamp(2.4rem,4.6vw,3.9rem);line-height:1.02;letter-spacing:-.035em;max-width:13ch}
+.about-hero .lede{margin-top:20px;font-size:1.1rem;line-height:1.6;color:var(--ink-2);max-width:54ch}
+.about-hero .collage{justify-self:end}
+.split{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.6fr);gap:32px;align-items:start;border-top:1px solid var(--line);padding-top:32px}
+.split .h2{font-size:clamp(1.5rem,2.2vw,1.9rem)}
+.timeline li{display:grid;grid-template-columns:120px minmax(0,1fr) minmax(0,.8fr);gap:20px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.timeline li:first-child{padding-top:0}
+.timeline .yr{font-size:14px;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.timeline b{font-family:var(--display);font-size:1.15rem;font-weight:700;letter-spacing:-.01em}
+.timeline b em{font-style:normal;font-family:var(--body);font-size:12px;font-weight:600;color:var(--ink-2);padding:2px 6px;border-radius:6px;background:var(--tile);margin-left:6px;vertical-align:2px}
+.timeline div span{display:block;color:var(--ink-2);font-size:15px;margin-top:2px}
+.timeline .kind{font-size:14px;color:var(--ink-2);text-align:right}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips li{padding:9px 14px;border-radius:999px;background:var(--tile);font-weight:500;font-size:15px}
+.langs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.langs li{padding:16px 18px;border-radius:16px;background:var(--tile)}
+.langs b{display:block;font-family:var(--display);font-weight:700;font-size:1.1rem}
+.langs span{font-size:14px;color:var(--ink-2)}
+.quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.quotes .q{margin:0;padding:28px;border-radius:20px;background:var(--tile);display:flex;flex-direction:column;justify-content:space-between;gap:20px}
+.quotes .q p{font-size:1.1rem}
+
+/* ---------- Studio page ---------- */
+.services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.services > div{padding:24px;border-radius:20px;background:var(--tile)}
+.services b{display:block;font-family:var(--display);font-size:1.2rem;font-weight:700;margin-bottom:8px}
+.services p{color:var(--ink-2);font-size:15.5px;line-height:1.5}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:32px}
+  .hero .art{justify-self:start}
+  .about-home,.about-hero{grid-template-columns:1fr}
+  .about-hero .collage{justify-self:start}
+  .split{grid-template-columns:1fr;gap:20px}
+  .quotes,.services{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .timeline li{grid-template-columns:1fr;gap:4px}
+  .timeline .kind{text-align:left}
+  .collage{max-width:340px}
+  .worked{gap:12px 24px}
+}
+@media (prefers-reduced-motion:reduce){.collage .ph{transition:none}}
