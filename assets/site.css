@@ -49,7 +49,7 @@ h1,h2,h3{font-family:var(--display);text-wrap:balance}
 .tags span:first-child{background:var(--accent);color:var(--accent-ink)}
 
 /* Project cards */
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:56px 32px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:64px 32px}
 .card{text-decoration:none;display:grid;gap:16px;align-content:start}
 .card .media{border-radius:18px;overflow:hidden;background:var(--tile);aspect-ratio:4/3}
 .card .media img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-out)}
@@ -163,3 +163,69 @@ button,.dock a,.island a{-webkit-user-select:none;user-select:none}
 }
 @media (max-width:400px){.dock a{padding:0 12px;font-size:14px}}
 @media (prefers-reduced-motion:reduce){.greet span,.island,.topbar .full{transition:none}}
+
+/* ---------- Polish: actions, cues, icons, logos, page transitions ---------- */
+.ic{width:18px;height:18px;flex:none;transition:transform .2s var(--ease-out)}
+.ic.ext{width:15px;height:15px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;border-radius:999px;border:0;font:inherit;font-weight:600;font-size:16px;line-height:1.2;cursor:pointer;text-decoration:none;transition:transform .16s var(--ease-out),background .2s ease}
+.btn:active{transform:scale(.97)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:32px}
+.btn.primary{background:var(--ink);color:#fff}
+.btn.secondary{background:var(--tile);color:var(--ink)}
+.btn{-webkit-user-select:none;user-select:none}
+@media (hover:hover) and (pointer:fine){
+  .btn.primary:hover .ic{transform:translateY(3px)}
+  .btn.secondary:hover{background:#ebe8e2}
+  a:hover > .ic.ext,.btn:hover .ic.ext{transform:translate(2px,-2px)}
+  .card:hover .more .ic,.small:hover .ic{transform:translateX(4px)}
+}
+.hero .status{margin-top:20px}
+
+/* Mail icon turns into a check when copied */
+.swap{position:relative;display:inline-grid;width:20px;height:20px;flex:none}
+.swap svg{grid-area:1/1;width:20px;height:20px;transition:opacity .2s ease,transform .25s var(--ease-out),filter .2s ease}
+.swap .i-check{opacity:0;transform:scale(.6);filter:blur(2px)}
+.copied .swap .i-mail{opacity:0;transform:scale(.6);filter:blur(2px)}
+.copied .swap .i-check{opacity:1;transform:scale(1);filter:blur(0)}
+.footer .mail em{display:inline-flex;align-items:center;gap:6px}
+.footer .mail em .swap,.footer .mail em .swap svg{width:15px;height:15px}
+
+/* Card: explicit cue, lead layout */
+.card .body{display:grid;gap:14px;align-content:start}
+.card .more{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:15px;margin-top:4px}
+.small b{display:inline-flex;align-items:center;gap:6px}
+.small b .ic{width:16px;height:16px}
+.featured{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card.lead{grid-column:1/-1;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:40px;align-items:center}
+.card.lead h3{font-size:clamp(1.6rem,2.6vw,2.2rem);letter-spacing:-.03em}
+.card.lead .kpi strong{font-size:1.6rem}
+.featured .card.lead:last-child{grid-template-columns:minmax(0,1fr) minmax(0,1.35fr)}
+.featured .card.lead:last-child .media{order:2}
+.card img,.small img,.hero .art img{width:100%;height:100%;object-fit:cover}
+.hero .art img{height:auto}
+
+/* Logos: calm and uniform at rest, original colour on hover */
+.logos{display:flex;flex-wrap:wrap;align-items:center;gap:20px 44px;padding:8px 0}
+.logos li{height:36px;display:flex;align-items:center}
+.logos li.square{height:40px}
+.logos img{height:100%;width:auto;max-width:150px;object-fit:contain;filter:grayscale(1);mix-blend-mode:multiply;opacity:.7;transition:filter .3s ease,opacity .3s ease}
+@media (hover:hover) and (pointer:fine){.logos li:hover img{filter:none;opacity:1}}
+
+/* Smooth cross-page transitions where the browser supports them */
+@view-transition{navigation:auto}
+::view-transition-old(root),::view-transition-new(root){animation-duration:.28s;animation-timing-function:cubic-bezier(.23,1,.32,1)}
+
+@media (max-width:900px){
+  .card.lead,.featured .card.lead:last-child{grid-template-columns:1fr;gap:16px}
+  .featured .card.lead:last-child .media{order:0}
+  .featured{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .logos{gap:18px 28px}
+  .logos li{height:28px}.logos li.square{height:32px}
+  .hero-actions .btn{flex:1 1 auto;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  @view-transition{navigation:none}
+  .ic,.swap svg,.logos img{transition:none}
+}
