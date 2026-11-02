@@ -536,3 +536,8 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 /* Text-only cards */
 .cs-points li.plain span{color:var(--ink);font-size:.98rem}
 @media (max-width:900px){.cs-cso{grid-template-columns:1fr}}
+.hobbies{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.hobbies li{padding:20px 20px 22px;border-radius:16px;background:var(--tile);display:flex;flex-direction:column;gap:8px}
+.hobbies b{font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:-.01em}
+.hobbies span{font-size:15px;line-height:1.5;color:var(--ink-2);text-wrap:pretty}
+@media (max-width:700px){.hobbies{grid-template-columns:1fr}}

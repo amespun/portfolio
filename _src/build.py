@@ -155,7 +155,9 @@ def head(title, desc, base):
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <meta name="theme-color" content="#ffffff">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231a1a1a'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='38' fill='%23cdbcf2'%3E%C3%A4%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="{base}assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="{base}assets/favicon-64.png">
+<link rel="apple-touch-icon" href="{base}assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
@@ -282,9 +284,9 @@ def contact(base=''):
     <div><h2>Pages</h2><ul>{li(pages)}</ul></div>
     <div><h2>Selected work</h2><ul>{li(work)}</ul></div>
     <div><h2>Elsewhere</h2><ul>{li(social)}</ul></div>
-    <div><h2>Based in</h2><ul><li>The Netherlands</li><li data-clock>Local time</li><li>Senior Product Designer at Skydreams</li></ul></div>
+    <div><h2>Based in</h2><ul><li>The Netherlands</li><li>Senior Product Designer at Skydreams</li></ul></div>
   </div>
-  <div class="colophon"><span>© 2026 Aïda Martínez Espún</span><span>Designed and built by me. Set in Bricolage Grotesque and Hanken Grotesk.</span></div>
+  <div class="colophon"><span>© 2026 Aïda Martínez Espún</span><span>Designed and built by me.</span></div>
 </div></footer>
 '''
 
@@ -292,11 +294,6 @@ def contact(base=''):
 def foot():
     return '''</main>
 <script>
-// Local time in the Netherlands
-const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Amsterdam', hour: '2-digit', minute: '2-digit' });
-const tick = () => document.querySelectorAll('[data-clock]').forEach(el => el.textContent = fmt.format(new Date()) + ' local time');
-tick(); setInterval(tick, 30000);
-
 // Copy email: the mail icon cross-fades into a check that draws itself, the label slides to "Copied"
 document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
   const done = b.querySelector('[data-done]');
@@ -431,7 +428,7 @@ def about():
     <div>
       <h1>Senior Product Designer, specialised in Business UX Strategy, B2B2C SaaS</h1>
       <p class="lede"><strong>10+ years</strong> of experience in <strong>startups</strong> and <strong>scale-ups</strong>, and <strong>15+ years</strong> in the <strong>design</strong> field. I specialise in <strong>UX strategy</strong>, <strong>design systems</strong>, and aligning user experience with <strong>business impact</strong>, particularly in <strong>B2B2C SaaS</strong>.</p>
-      <p class="lede">I thrive on solving <strong>complex problems</strong>, <strong>strategic thinking</strong>, <strong>scaling</strong> design processes, and <strong>collaborating</strong> across <strong>product</strong>, <strong>engineering</strong> and <strong>leadership</strong> teams. I’ve also been a <strong>mentor</strong> on <strong>ADPList</strong>, supporting the next generation of designers.</p>
+      <p class="lede">I thrive on solving <strong>complex problems</strong>, <strong>strategic thinking</strong>, <strong>scaling</strong> design processes, and <strong>collaborating</strong> across <strong>product</strong>, <strong>engineering</strong> and <strong>leadership</strong> teams. I’ve also been a <strong>mentor</strong> on <strong>ADPList</strong>, supporting the next generation of designers. I’m a <strong>people person</strong>: I do my best work <strong>face to face</strong>, so I enjoy going to the office and working side by side with my team, not 100% remote.</p>
       <p class="lede">As a side project, I also create <strong>no-code websites</strong>, help <strong>small businesses scale</strong>, do <strong>branding</strong> and design <strong>European-inspired illustrations</strong> that I sell on <strong>Etsy</strong>, blending tech and creativity in hands-on projects.</p>
       {facts()}
     </div>
@@ -451,6 +448,15 @@ def about():
   <section class="section split">
     <h2 class="h2">Languages</h2>
     <ul class="langs">{langs}</ul>
+  </section>
+
+  <section class="section split">
+    <h2 class="h2">Outside work</h2>
+    <ul class="hobbies">
+      <li><b>Ice skating</b><span>My favourite way to switch off. I’m on the rink whenever I can.</span></li>
+      <li><b>Baking sourdough</b><span>Patience, testing and iterating, one loaf at a time. Not so different from design.</span></li>
+      <li><b>Learning Dutch</b><span>Ik leer Nederlands. A little better every week.</span></li>
+    </ul>
   </section>
 
   <section class="section">

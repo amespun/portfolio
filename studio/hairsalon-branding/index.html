@@ -6,7 +6,9 @@
 <title>Hair salon · Aïda Martínez Espún</title>
 <meta name="description" content="Hair salon">
 <meta name="theme-color" content="#ffffff">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231a1a1a'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='38' fill='%23cdbcf2'%3E%C3%A4%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="../../assets/favicon-64.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Hair salon · Aïda Martínez Espún">
 <meta property="og:description" content="Hair salon">
@@ -15,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../assets/site.css?v=3cb23bce">
+<link rel="stylesheet" href="../../assets/site.css?v=8bfa6bbd">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -54,17 +56,12 @@
     <div><h2>Pages</h2><ul><li><a href="../../work/">Work</a></li><li><a href="../../about/">About</a></li><li><a href="../../studio/">Studio</a></li></ul></div>
     <div><h2>Selected work</h2><ul><li><a href="../../work/b2b-saas-ev-charging/">EV charging dashboard</a></li><li><a href="../../work/b2c-ev-charging/">App-free EV charging</a></li><li><a href="../../work/saas-team-development/">Teampact</a></li><li><a href="../../work/marketplace-growth/">Badi marketplace growth</a></li></ul></div>
     <div><h2>Elsewhere</h2><ul><li><a href="https://www.linkedin.com/in/amespun/">LinkedIn</a></li><li><a href="https://www.behance.net/amespun">Behance</a></li><li><a href="https://dribbble.com/amespun">Dribbble</a></li><li><a href="https://medium.com/@amespun">Medium</a></li><li><a href="https://adplist.org/mentors/aida-martinez-espun">ADPList</a></li></ul></div>
-    <div><h2>Based in</h2><ul><li>The Netherlands</li><li data-clock>Local time</li><li>Senior Product Designer at Skydreams</li></ul></div>
+    <div><h2>Based in</h2><ul><li>The Netherlands</li><li>Senior Product Designer at Skydreams</li></ul></div>
   </div>
-  <div class="colophon"><span>© 2026 Aïda Martínez Espún</span><span>Designed and built by me. Set in Bricolage Grotesque and Hanken Grotesk.</span></div>
+  <div class="colophon"><span>© 2026 Aïda Martínez Espún</span><span>Designed and built by me.</span></div>
 </div></footer>
 </main>
 <script>
-// Local time in the Netherlands
-const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Amsterdam', hour: '2-digit', minute: '2-digit' });
-const tick = () => document.querySelectorAll('[data-clock]').forEach(el => el.textContent = fmt.format(new Date()) + ' local time');
-tick(); setInterval(tick, 30000);
-
 // Copy email: the mail icon cross-fades into a check that draws itself, the label slides to "Copied"
 document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click', async () => {
   const done = b.querySelector('[data-done]');
