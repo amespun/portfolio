@@ -318,13 +318,24 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 .about-hero .collage{justify-self:end}
 .split{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.6fr);gap:32px;align-items:start;border-top:1px solid var(--line);padding-top:32px}
 .split .h2{font-size:clamp(1.5rem,2.2vw,1.9rem)}
-.timeline li{display:grid;grid-template-columns:120px minmax(0,1fr) minmax(0,.8fr);gap:20px;padding:18px 0;border-bottom:1px solid var(--line);align-items:baseline}
-.timeline li:first-child{padding-top:0}
-.timeline .yr{font-size:14px;color:var(--ink-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.places{display:grid;gap:36px}
+.timeline{padding:0;margin:0;list-style:none}
+.where{display:flex;flex-direction:column;gap:4px;margin-bottom:8px}
+.where b{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.where span{font-size:15px;color:var(--ink-2);max-width:56ch;text-wrap:pretty}
+.timeline li{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:center}
+.timeline li:last-child{border-bottom:0}
+.timeline .logo{width:48px;height:48px;border-radius:12px;background:#fff;box-shadow:0 0 0 1px var(--line);display:grid;place-items:center;overflow:hidden}
+.timeline .logo img{width:100%;height:100%;object-fit:contain;padding:6px;filter:grayscale(1);mix-blend-mode:multiply;transition:filter .25s var(--ease-out)}
+.timeline .logo.mono{background:var(--accent);color:var(--accent-ink);box-shadow:none;font-family:var(--display);font-weight:800;font-size:1.2rem}
+@media (hover:hover) and (pointer:fine){.timeline li:hover .logo img{filter:none}}
 .timeline b{font-family:var(--display);font-size:1.15rem;font-weight:700;letter-spacing:-.01em}
-.timeline b em{font-style:normal;font-family:var(--body);font-size:12px;font-weight:600;color:var(--ink-2);padding:2px 6px;border-radius:6px;background:var(--tile);margin-left:6px;vertical-align:2px}
+.timeline b em{font-style:normal;font-family:var(--body);font-size:12px;font-weight:600;color:var(--ink-2);padding:2px 7px;border-radius:6px;background:var(--tile);margin-left:6px;vertical-align:2px;white-space:nowrap}
 .timeline div span{display:block;color:var(--ink-2);font-size:15px;margin-top:2px}
-.timeline .kind{font-size:14px;color:var(--ink-2);text-align:right}
+.timeline .meta{text-align:right}
+.timeline .meta span{margin:0}
+.timeline .meta .yr{font-size:14px;color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.timeline .meta .kind{font-size:13.5px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips li{padding:9px 14px;border-radius:999px;background:var(--tile);font-weight:500;font-size:15px}
 .langs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
@@ -350,8 +361,9 @@ p,li,figcaption,blockquote{text-wrap:pretty}
   .quotes,.services{grid-template-columns:1fr}
 }
 @media (max-width:600px){
-  .timeline li{grid-template-columns:1fr;gap:4px}
-  .timeline .kind{text-align:left}
+  .timeline li{grid-template-columns:44px minmax(0,1fr);gap:4px 14px;align-items:start}
+  .timeline .logo{width:44px;height:44px}
+  .timeline .meta{grid-column:2;text-align:left;display:flex;gap:4px 8px;flex-wrap:wrap}
   .collage{max-width:340px}
   .worked{gap:12px 24px}
 }
