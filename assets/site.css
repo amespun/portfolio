@@ -545,3 +545,13 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 .langs .hi{display:flex;align-items:center;gap:10px}
 .langs .flag{flex:none;width:24px;height:16px;border-radius:3px;box-shadow:0 0 0 1px oklch(0 0 0 / .1)}
 .langs .hi{font-size:1.4rem;white-space:nowrap}
+
+/* Comfortable tap targets for footer and inline action links */
+.footer .cols li{margin-bottom:2px}
+.footer .cols a{display:inline-block;padding:6px 0}
+.more-link,.ext-link{padding-block:6px}
+@media (max-width:420px){
+  .more-work .stack{padding-left:22px}
+  .more-work .stack span{width:64px;height:48px;margin-left:-22px}
+  .footer .cols a{padding:10px 0}
+}

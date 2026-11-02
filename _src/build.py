@@ -3,6 +3,8 @@
 import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Public address of the site. Change to 'https://www.amespun.com/' once the domain points here.
+SITE_URL = 'https://amespun.github.io/portfolio/'
 SQ = 'https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/'
 OLD = 'https://www.amespun.com/work/'
 
@@ -165,7 +167,7 @@ def quote_html(q):
     return f'<blockquote class="q"><p>“{q[0]}”</p><footer><b>{q[1]}</b> · {q[2]}</footer></blockquote>'
 
 
-def head(title, desc, base):
+def head(title, desc, base, og='assets/og/home.jpg'):
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -178,9 +180,14 @@ def head(title, desc, base):
 <link rel="icon" type="image/png" sizes="64x64" href="{base}assets/favicon-64.png">
 <link rel="apple-touch-icon" href="{base}assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Aïda Martínez Espún">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
-<meta property="og:image" content="{SQ}cb837a2f-3f01-4432-8367-4f5210a82400/Mockup+%281%29.jpg?format=1500w">
+<meta property="og:image" content="{SITE_URL}{og}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="@@URL@@">
+<link rel="canonical" href="@@URL@@">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -866,6 +873,18 @@ OVERRIDE = {
 }
 
 
+def og_for(u, slug):
+    from PIL import Image, ImageOps
+    out = f'assets/og/{slug}.jpg'
+    path = f'{ROOT}/{out}'
+    m = meta_of(u)
+    if m and not os.path.exists(path):
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        im = Image.open(f'{ROOT}/{m["src"]}').convert('RGB')
+        ImageOps.fit(im, (1200, 630), Image.LANCZOS).save(path, 'JPEG', quality=82, optimize=True)
+    return out
+
+
 def case_page(key, p, back, back_label, nxt, nxt_href, kind):
     items = items_of(key)
     title, intro, meta, body = split_hero(items)
@@ -887,7 +906,7 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
     index_html = ''
     if len(CHAPTERS) >= 4:
         index_html = '<nav class="cs-index" aria-label="In this case study"><p>In this case study</p><ol>' + ''.join(f'<li><a href="#{i}">{h}</a></li>' for h, i in CHAPTERS) + '</ol></nav>'
-    page = head(f'{title} · Aïda Martínez Espún', desc, '../../') + nav('../../', 'Work' if kind == 'project' else 'Studio')
+    page = head(f'{title} · Aïda Martínez Espún', desc, '../../', og_for(p['cover'], p['slug'])) + nav('../../', 'Work' if kind == 'project' else 'Studio')
     page += f'''
 <main class="wrap cs" id="main">
   <section class="cs-hero">
@@ -934,6 +953,7 @@ def localize(html, base):
 
 
 def write(rel, html, base):
+    html = html.replace('@@URL@@', SITE_URL + rel.replace('index.html', ''))
     path = f'{ROOT}/{rel}'
     os.makedirs(os.path.dirname(path), exist_ok=True)
     open(path, 'w').write(localize(html, base))
@@ -950,4 +970,18 @@ SI = studio_items()
 for i, p in enumerate(SI):
     nx = SI[(i + 1) % len(SI)]
     write(f'studio/{p["slug"]}/index.html', case_page('designstudio__' + p['slug'], p, '@@/studio/', 'All studio work', nx, f'@@/studio/{nx["slug"]}/', 'studio project'), '../../')
+og_for(FEATURED[0]['cover'], 'home')
+ALL = ['', 'work/', 'about/', 'studio/'] + [f'work/{p["slug"]}/' for p in PROJECTS] + [f'studio/{p["slug"]}/' for p in SI]
+open(f'{ROOT}/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'  <url><loc>{SITE_URL}{u}</loc></url>\n' for u in ALL) + '</urlset>\n')
+open(f'{ROOT}/robots.txt', 'w').write(f'User-agent: *\nAllow: /\nDisallow: /_export/\nSitemap: {SITE_URL}sitemap.xml\n')
+# 404: GitHub Pages serves it at any depth, so every link is absolute
+nf = head('Page not found · Aïda Martínez Espún', 'This page doesn’t exist.', SITE_URL) + nav(SITE_URL, None) + f'''
+<main class="wrap" id="main">
+  <section class="page-head" style="padding-bottom:40px">
+    <h1>This page doesn’t exist.</h1>
+    <p>It may have moved when the portfolio left Squarespace. Everything is still here:</p>
+    <p style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px"><a class="btn primary" href="{SITE_URL}work/">See all work {ARROW}</a><a class="btn" href="{SITE_URL}" style="background:var(--tile)">Go to the home page</a></p>
+  </section>
+''' + contact(SITE_URL) + foot()
+open(f'{ROOT}/404.html', 'w').write(localize(nf, SITE_URL).replace('@@URL@@', SITE_URL))
 print('built')

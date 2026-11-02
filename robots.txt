@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /_export/
+Sitemap: https://amespun.github.io/portfolio/sitemap.xml
