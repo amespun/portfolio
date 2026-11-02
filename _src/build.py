@@ -132,9 +132,9 @@ EDUCATION = [
     ('Interaction Design courses', 'The Interaction Design Foundation (IxDF)', 'Online', '2019 – 2020'),
 ]
 TOOLS = [
-    ('Design', [('Figma', 'Design and prototyping'), ('Storybook', 'Design systems'), ('Framer', 'Web design')]),
+    ('Design', [('Figma', 'Design and prototyping'), ('Storybook', 'Design systems'), ('Zeroheight', 'Design system documentation'), ('Framer', 'Web design')]),
+    ('Designing with AI', [('Figma AI & Claude Design', 'AI-assisted UI design in Figma'), ('Lovable & Base44', 'Working prototypes from designs'), ('Claude', 'Ideation, prototyping, research'), ('ChatGPT', 'Ideation, UI and brand exploration'), ('Midjourney', 'Brand assets')]),
     ('Product & collaboration', [('Jira & Confluence', 'Planning and documentation'), ('Linear', 'Planning'), ('Miro', 'Workshops and brainstorming')]),
-    ('AI', [('Claude', 'Ideation, prototyping, research'), ('ChatGPT', 'Ideation, UI and brand exploration'), ('Midjourney', 'Brand assets')]),
     ('Research & inspiration', [('Mobbin', 'UI patterns'), ('Dribbble', 'Visual inspiration')]),
 ]
 
