@@ -869,7 +869,9 @@ def overview(p):
 OVERRIDE = {
     'illustrations': dict(title='European-inspired illustrations',
                           intro='I create <strong>illustrations and watercolour prints</strong> inspired by the places, colours and little details of <strong>European life</strong>, and sell them in my <strong>Etsy shop</strong>. From Casa Batlló and Park Güell in Barcelona to the Alhambra, Valencia, Menorca and Ibiza.',
-                          cta=('Visit the Etsy shop', 'https://www.etsy.com/shop/amespunn')),
+                          cta=('Visit the Etsy shop', 'https://www.etsy.com/shop/amespunn'),
+                          images_only=True,
+                          lead_img={'t': 'img', 'src': 'assets/sq/a819001b-0dba-4886-a263-fb5b0d07d95a.jpeg', 'alt': 'My illustrations framed and displayed at a market stall', 'w': 0, 'h': 0, 'sec': 99}),
 }
 
 
@@ -891,6 +893,10 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
     title = title or p['title']
     ov = OVERRIDE.get(p['slug'], {})
     title, intro = ov.get('title', title), ov.get('intro', intro)
+    if ov.get('images_only'):
+        body = [it for it in body if it['t'] == 'img']
+    if ov.get('lead_img'):
+        body = [ov['lead_img']] + body
     k = ''
     if p.get('kpis') and not p.get('notes'):
         k = '<div class="kpis cs-kpis">' + ''.join(f'<div class="kpi"><strong>{v}</strong>{l}</div>' for v, l in p['kpis']) + '</div>'
@@ -971,6 +977,19 @@ for i, p in enumerate(SI):
     nx = SI[(i + 1) % len(SI)]
     write(f'studio/{p["slug"]}/index.html', case_page('designstudio__' + p['slug'], p, '@@/studio/', 'All studio work', nx, f'@@/studio/{nx["slug"]}/', 'studio project'), '../../')
 og_for(FEATURED[0]['cover'], 'home')
+
+
+def redirect(rel, target):
+    path = f'{ROOT}/{rel}'
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    open(path, 'w').write(f'<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>Moved</title><meta name="robots" content="noindex"><link rel="canonical" href="{SITE_URL}{target}"><meta http-equiv="refresh" content="0; url={SITE_URL}{target}"><script>location.replace("{SITE_URL}{target}" + location.hash)</script></head><body><a href="{SITE_URL}{target}">This page moved</a></body></html>')
+
+
+# Old Squarespace addresses keep working
+redirect('designstudio/index.html', 'studio/')
+for p in SI:
+    redirect(f'designstudio/{p["slug"]}/index.html', f'studio/{p["slug"]}/')
+redirect('contact/index.html', '#contact')
 ALL = ['', 'work/', 'about/', 'studio/'] + [f'work/{p["slug"]}/' for p in PROJECTS] + [f'studio/{p["slug"]}/' for p in SI]
 open(f'{ROOT}/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'  <url><loc>{SITE_URL}{u}</loc></url>\n' for u in ALL) + '</urlset>\n')
 open(f'{ROOT}/robots.txt', 'w').write(f'User-agent: *\nAllow: /\nDisallow: /_export/\nSitemap: {SITE_URL}sitemap.xml\n')
