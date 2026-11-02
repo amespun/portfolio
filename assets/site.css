@@ -608,3 +608,7 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 @keyframes cur-b{0%,100%{transform:translate(330px,120px)}40%{transform:translate(380px,230px)}75%{transform:translate(250px,110px)}}
 @media (prefers-reduced-motion:reduce){.cur.a,.cur.b{animation:none}}
 @media (max-width:800px){.nf{grid-template-columns:1fr}.nf-art{order:2}}
+/* About: bigger photos (the text column keeps its line length) */
+.about-hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,5vw,72px)}
+.about-hero .collage{max-width:clamp(520px,44vw,680px);justify-self:end}
+@media (max-width:900px){.about-hero{grid-template-columns:1fr}.about-hero .collage{justify-self:center;max-width:560px}}
