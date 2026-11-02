@@ -541,3 +541,6 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 .hobbies b{font-family:var(--display);font-weight:700;font-size:1.15rem;letter-spacing:-.01em}
 .hobbies span{font-size:15px;line-height:1.5;color:var(--ink-2);text-wrap:pretty}
 @media (max-width:700px){.hobbies{grid-template-columns:1fr}}
+.langs .hi{display:flex;align-items:center;gap:10px}
+.langs .flag{flex:none;width:24px;height:16px;border-radius:3px;box-shadow:0 0 0 1px oklch(0 0 0 / .1)}
+.langs .hi{font-size:1.4rem;white-space:nowrap}

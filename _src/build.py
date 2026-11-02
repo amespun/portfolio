@@ -104,6 +104,20 @@ PLACES = [
 EXPERTISE = ['Product vision & roadmapping', 'UX strategy', 'Design systems & style guides', 'End-to-end product design',
              'Growth metric analysis', 'Stakeholder alignment', 'Cross-functional leadership', 'Design operations',
              'Driving UX maturity', 'SaaS conceptualization', 'Research & testing', 'Art direction & branding', 'Mentoring']
+FLAGS = {
+    'es': '<rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/>',
+    'ca': '<rect width="30" height="20" fill="#FCDD09"/>' + ''.join(f'<rect y="{2.22 * (2 * i + 1):.2f}" width="30" height="2.22" fill="#DA121A"/>' for i in range(4)),
+    'en': '<rect width="30" height="20" fill="#012169"/><path d="M0 0L30 20M30 0L0 20" stroke="#fff" stroke-width="4"/><path d="M0 0L30 20M30 0L0 20" stroke="#C8102E" stroke-width="1.6"/><path d="M15 0V20M0 10H30" stroke="#fff" stroke-width="6"/><path d="M15 0V20M0 10H30" stroke="#C8102E" stroke-width="3.6"/>',
+    'fr': '<rect width="30" height="20" fill="#fff"/><rect width="10" height="20" fill="#002654"/><rect x="20" width="10" height="20" fill="#CE1126"/>',
+    'nl': '<rect width="30" height="20" fill="#21468B"/><rect width="30" height="13.33" fill="#fff"/><rect width="30" height="6.67" fill="#AE1C28"/>',
+}
+LANGCODE = {'Spanish': 'es', 'Catalan': 'ca', 'English': 'en', 'French': 'fr', 'Dutch': 'nl'}
+
+
+def flag(code):
+    return f'<svg class="flag" viewBox="0 0 30 20" width="24" height="16" aria-hidden="true">{FLAGS[code]}</svg>'
+
+
 LANGUAGES = [('Hola', 'Spanish', 'Native'), ('Bon dia', 'Catalan', 'Native'), ('Hello', 'English', 'Full professional'), ('Bonjour', 'French', 'C1'), ('Hallo', 'Dutch', 'A1, learning')]
 QUOTES = [
     ('It’s hard to find people as proactive and decisive as Aïda. She’s been a key member of the UX/UI team ever since her arrival. She’s a natural leader and a team player.', 'Mercè Delgado', 'CEO, Fluendo'),
@@ -420,7 +434,7 @@ def about():
         tag = f' <em>{cc}</em>' if cc else ''
         return f'''<li>{mark(c)}<div><b><a class="co" href="{SITES[c]}" target="_blank" rel="noopener">{c}<span class="sr"> (opens in a new tab)</span><i class="ext" aria-hidden="true">{EXT}</i></a>{tag}</b><span>{r}</span></div><div class="meta">{f'<span class="yr">{y}</span>' if y else ''}<span class="kind">{k}</span></div></li>'''
     exp = ''.join(f'''<div class="place"><p class="where"><b>{name}</b><span>{note}</span></p><ol class="timeline">{''.join(row(*e[:5]) for e in EXPERIENCE if e[5] == key)}</ol></div>''' for key, name, note in PLACES)
-    langs = ''.join(f'<li><span class="hi" lang="{ {"Spanish":"es","Catalan":"ca","English":"en","French":"fr","Dutch":"nl"}[n] }">{g}</span><b>{n}</b><span>{l}</span></li>' for g, n, l in LANGUAGES)
+    langs = ''.join(f'<li><span class="hi">{flag(LANGCODE[n])}<span lang="{LANGCODE[n]}">{g}</span></span><b>{n}</b><span>{l}</span></li>' for g, n, l in LANGUAGES)
     arts = ''.join(f'''<a class="small" href="{u}"><div class="media">{pic(im, "", "(max-width: 600px) 100vw, 380px", w=1600, h=1000)}</div><b>{tt} {EXT}</b><span>Prototypr · Medium</span></a>''' for tt, u, im in ARTICLES)
     return head('About · Aïda Martínez Espún', 'About Aïda Martínez Espún, Senior Product Designer in the Netherlands: experience, expertise, languages and recommendations.', '../') + nav('../', 'About') + f'''
 <main class="wrap" id="main">
@@ -907,6 +921,10 @@ def localize(html, base):
         return f'href="@@/{p}/"' if p else 'href="@@/"'
     html = re.sub(r'href="(?:https?://(?:www\.)?amespun\.com)?(/[^"#]*)"', link, html)
     html = html.replace('etsy.com/shop/amespunprints', 'etsy.com/shop/amespunn')
+    def ext(m):
+        tag = m.group(0)
+        return tag if 'target=' in tag else tag[:-1] + ' target="_blank" rel="noopener">'
+    html = re.sub(r'<a\s[^>]*href="https?://(?!amespun\.github\.io|(?:www\.)?amespun\.com)[^"]*"[^>]*>', ext, html)
     return html.replace('@@/', base)
 
 
