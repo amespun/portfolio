@@ -313,8 +313,10 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 
 /* ---------- About page ---------- */
 .about-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(40px,6vw,88px);align-items:center;padding:clamp(40px,6vw,80px) 0 0}
-.about-hero h1{font-weight:800;font-size:clamp(2.4rem,4.6vw,3.9rem);line-height:1.02;letter-spacing:-.035em;max-width:13ch}
-.about-hero .lede{margin-top:20px;font-size:1.1rem;line-height:1.6;color:var(--ink-2);max-width:54ch}
+.about-hero h1{font-weight:800;font-size:clamp(2rem,3.4vw,2.9rem);line-height:1.06;letter-spacing:-.03em;max-width:18ch;text-wrap:balance}
+.about-hero .lede{margin-top:18px;font-size:1.1rem;line-height:1.6;color:var(--ink-2);max-width:56ch;text-wrap:pretty}
+.about-hero .lede strong{color:var(--ink);font-weight:600}
+.about-hero .lede + .lede{margin-top:12px}
 .about-hero .collage{justify-self:end}
 .split{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.6fr);gap:32px;align-items:start;border-top:1px solid var(--line);padding-top:32px}
 .split .h2{font-size:clamp(1.5rem,2.2vw,1.9rem)}
@@ -323,13 +325,25 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 .where{display:flex;flex-direction:column;gap:4px;margin-bottom:8px}
 .where b{font-family:var(--display);font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
 .where span{font-size:15px;color:var(--ink-2);max-width:56ch;text-wrap:pretty}
-.timeline li{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:16px;padding:16px 0;border-bottom:1px solid var(--line);align-items:center}
+.timeline li{position:relative;display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:24px;padding:18px 0;border-bottom:1px solid var(--line);align-items:center}
 .timeline li:last-child{border-bottom:0}
-.timeline .logo{width:48px;height:48px;border-radius:12px;background:#fff;box-shadow:0 0 0 1px var(--line);display:grid;place-items:center;overflow:hidden}
-.timeline .logo img{width:100%;height:100%;object-fit:contain;padding:6px;filter:grayscale(1);mix-blend-mode:multiply;transition:filter .25s var(--ease-out)}
-.timeline .logo.wide img{padding:2px;transform:scale(1.25)}
-.timeline .logo.mono{background:var(--accent);color:var(--accent-ink);box-shadow:none;font-family:var(--display);font-weight:800;font-size:1.2rem}
-@media (hover:hover) and (pointer:fine){.timeline li:hover .logo img{filter:none}}
+.timeline .logo{height:44px;display:flex;align-items:center}
+.timeline .logo img{max-width:88px;max-height:28px;width:auto;height:auto;object-fit:contain;filter:grayscale(1);mix-blend-mode:multiply;opacity:.75;transition:filter .25s var(--ease-out),opacity .25s var(--ease-out)}
+.timeline .logo.square img{max-height:44px;max-width:44px}
+.timeline .logo.wide img{max-height:34px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.timeline .co{color:inherit;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.timeline .co::after{content:"";position:absolute;inset:0}
+.timeline .co:focus-visible{outline:none}
+.timeline li:has(.co:focus-visible){outline:2px solid var(--accent-ink);outline-offset:4px;border-radius:12px}
+.timeline .ext{display:inline-flex;opacity:0;scale:.25;filter:blur(4px);transition:opacity .3s cubic-bezier(.2,0,0,1),scale .3s cubic-bezier(.2,0,0,1),filter .3s cubic-bezier(.2,0,0,1)}
+.timeline .ext .ic{width:16px;height:16px}
+.timeline li:has(.co:focus-visible) .ext{opacity:1;scale:1;filter:blur(0)}
+@media (hover:hover) and (pointer:fine){
+  .timeline li:hover .logo img{filter:none;opacity:1}
+  .timeline li:hover .ext{opacity:1;scale:1;filter:blur(0)}
+  .timeline li:hover .co{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
+}
 .timeline b{font-family:var(--display);font-size:1.15rem;font-weight:700;letter-spacing:-.01em}
 .timeline b em{font-style:normal;font-family:var(--body);font-size:12px;font-weight:600;color:var(--ink-2);padding:2px 7px;border-radius:6px;background:var(--tile);margin-left:6px;vertical-align:2px;white-space:nowrap}
 .timeline div span{display:block;color:var(--ink-2);font-size:15px;margin-top:2px}
@@ -340,9 +354,11 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
 .chips li{padding:9px 14px;border-radius:999px;background:var(--tile);font-weight:500;font-size:15px}
 .langs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
-.langs li{padding:16px 18px;border-radius:16px;background:var(--tile)}
-.langs b{display:block;font-family:var(--display);font-weight:700;font-size:1.1rem}
-.langs span{font-size:14px;color:var(--ink-2)}
+.langs li{padding:18px 18px 16px;border-radius:16px;background:var(--tile);display:flex;flex-direction:column}
+.langs .hi{font-family:var(--display);font-weight:800;font-size:1.6rem;letter-spacing:-.02em;line-height:1.1;margin-bottom:14px}
+.langs li:nth-child(-n+2) .hi{color:var(--accent-ink)}
+.langs b{font-weight:600;font-size:15px}
+.langs li > span:last-child{font-size:14px;color:var(--ink-2)}
 .quotes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
 .quotes .q{margin:0;padding:28px;border-radius:20px;background:var(--tile);display:flex;flex-direction:column;justify-content:space-between;gap:20px}
 .quotes .q p{font-size:1.1rem}
@@ -362,8 +378,12 @@ p,li,figcaption,blockquote{text-wrap:pretty}
   .quotes,.services{grid-template-columns:1fr}
 }
 @media (max-width:600px){
-  .timeline li{grid-template-columns:44px minmax(0,1fr);gap:4px 14px;align-items:start}
-  .timeline .logo{width:44px;height:44px}
+  .timeline li{grid-template-columns:64px minmax(0,1fr);gap:4px 16px;align-items:start}
+  .timeline .logo{height:auto;min-height:28px;padding-top:2px}
+  .timeline .logo img{max-width:60px;max-height:22px}
+  .timeline .logo.square img{max-height:34px;max-width:34px}
+  .timeline .logo.wide img{max-height:26px}
+  .timeline .ext{opacity:1;scale:1;filter:none}
   .timeline .meta{grid-column:2;text-align:left;display:flex;gap:4px 8px;flex-wrap:wrap}
   .collage{max-width:340px}
   .worked{gap:12px 24px}
