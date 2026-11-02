@@ -1,0 +1,41 @@
+name: Export Squarespace content
+on:
+  push:
+    paths: ['.github/workflows/sq-export.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch page JSON
+        run: |
+          set -x
+          mkdir -p _export
+          UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"
+          for c in work designstudio about; do
+            curl -sSL -A "$UA" "https://www.amespun.com/$c?format=json" -o "_export/$c.json" || true
+          done
+          python3 - <<'PY'
+          import json, subprocess, os
+          UA="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130 Safari/537.36"
+          for c in ['work','designstudio']:
+              try: d=json.load(open(f'_export/{c}.json'))
+              except Exception as e: print(c, e); continue
+              for it in d.get('items',[]):
+                  u=it.get('fullUrl'); 
+                  if not u: continue
+                  slug=u.strip('/').replace('/','__')
+                  subprocess.run(['curl','-sSL','-A',UA,f'https://www.amespun.com{u}?format=json','-o',f'_export/{slug}.json'])
+                  print('got',u)
+          PY
+          ls -la _export
+      - name: Commit
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add _export
+          git commit -m "Export Squarespace content" || echo nothing
+          git push
