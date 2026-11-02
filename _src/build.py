@@ -4,7 +4,7 @@ import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Public address of the site. Change to 'https://www.amespun.com/' once the domain points here.
-SITE_URL = 'https://amespun.github.io/portfolio/'
+SITE_URL = 'https://www.amespun.com/'
 SQ = 'https://images.squarespace-cdn.com/content/v1/6702bf4ad824953000041187/'
 OLD = 'https://www.amespun.com/work/'
 
