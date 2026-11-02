@@ -65,7 +65,7 @@ EARLIER = [
 # Work page order: strongest and most recent first
 PROJECTS = FEATURED[:3] + [EARLIER[0]] + [FEATURED[3]] + EARLIER[1:]
 BEYOND = [
-    ('Illustration', 'Hand-printed illustrations of Barcelona architecture, sold through a shop in Barcelona.', None),
+    ('Illustration', 'Illustrations and wall art prints that I design and sell on Etsy.', ('Visit the Etsy shop', 'https://www.etsy.com/shop/amespunprints')),
     ('ämespun studio', 'Branding and fast no-code websites for small businesses, in four languages.', ('See studio work', 'studio/')),
     ('Mentoring', 'Mentor on ADPList for designers at every stage.', ('Book a session', 'https://adplist.org/mentors/aida-martinez-espun')),
     ('Writing', 'Case studies and process notes on Medium and Prototypr.', ('Read on Medium', 'https://medium.com/@amespun')),
@@ -119,7 +119,7 @@ STUDIO = [
     ('B2B healthcare SaaS', 'UX/UI design', 'b2b-healthcare-saas', 'bbaccdcc-a09f-4d52-b8c0-96a0bba35240/amespun_Close-up_photorealistic_MacBook_Pro_mockup_screen_filli_85d9a0fb-b70c-4cf1-9c21-20e454b06405.jpg'),
     ('Luxury Service Concierge', 'No-code website + branding', 'branding-concierge-luxury', '1739098746554-KHGPYQ6666L33A0MCK2N/Free+MacBook+Pro+on+Table+Mockup+%281%29.jpg'),
     ('Outweb Studio', 'No-code website + branding', 'outweb-studio', '1738665314506-T1FMS84ZFLT0N6U159LN/Mockup.jpg'),
-    ('Barcelona Born shop', 'Illustrations', 'illustrations', 'f3942949-4c22-41b3-8eee-a1b2b2a66ebe/il_1588xN.6003542903_2rbe.jpg'),
+    ('Illustrations on Etsy', 'Illustration · Etsy shop', 'illustrations', 'f3942949-4c22-41b3-8eee-a1b2b2a66ebe/il_1588xN.6003542903_2rbe.jpg'),
     ('Personal branding', 'Brand identity', 'personal-branding', '1737905645317-RYNOALK7FWQ63LGO9F4R/Free_Businness_Card_Mockup_1+%281%29.jpg'),
     ('Hair salon', 'Branding', 'hairsalon-branding', '1730817533283-W7SNPKZ16P2JUBRXK4UQ/fadfFrame+10.jpg'),
     ('Wedding stationery on Etsy', 'Print design', 'wedding-etsy', '1737394028120-KDPREP0KH25RNVYFR97F/blank-wedding-invitation-top-view.jpg'),
@@ -431,7 +431,7 @@ def about():
       <h1>Senior Product Designer, specialised in Business UX Strategy, B2B2C SaaS</h1>
       <p class="lede"><strong>10+ years</strong> of experience in <strong>startups</strong> and <strong>scale-ups</strong>, and <strong>15+ years</strong> in the <strong>design</strong> field. I specialise in <strong>UX strategy</strong>, <strong>design systems</strong>, and aligning user experience with <strong>business impact</strong>, particularly in <strong>B2B2C SaaS</strong>.</p>
       <p class="lede">I thrive on solving <strong>complex problems</strong>, <strong>strategic thinking</strong>, <strong>scaling</strong> design processes, and <strong>collaborating</strong> across <strong>product</strong>, <strong>engineering</strong> and <strong>leadership</strong> teams. I’ve also been a <strong>mentor</strong> on <strong>ADPList</strong>, supporting the next generation of designers.</p>
-      <p class="lede">As a side project, I also create <strong>no-code websites</strong>, help <strong>small businesses scale</strong> and do <strong>branding</strong>, blending tech and creativity in hands-on projects.</p>
+      <p class="lede">As a side project, I also create <strong>no-code websites</strong>, help <strong>small businesses scale</strong>, do <strong>branding</strong> and design <strong>illustrations</strong> that I sell on <strong>Etsy</strong>, blending tech and creativity in hands-on projects.</p>
       {facts()}
     </div>
     {collage(big=True)}
@@ -833,14 +833,25 @@ def overview(p):
     return f'<section class="cs-overview" aria-label="Overview"><dl>{cols}</dl></section>'
 
 
+OVERRIDE = {
+    'illustrations': dict(title='Illustrations on Etsy',
+                          intro='I design <strong>illustrations and wall art prints</strong> and sell them on <strong>Etsy</strong>. It started with Barcelona’s iconic buildings in a modern, Matisse-inspired line style, and keeps growing with new places and collections.',
+                          cta=('Visit the Etsy shop', 'https://www.etsy.com/shop/amespunprints')),
+}
+
+
 def case_page(key, p, back, back_label, nxt, nxt_href, kind):
     items = items_of(key)
     title, intro, meta, body = split_hero(items)
     title = title or p['title']
+    ov = OVERRIDE.get(p['slug'], {})
+    title, intro = ov.get('title', title), ov.get('intro', intro)
     k = ''
     if p.get('kpis') and not p.get('notes'):
         k = '<div class="kpis cs-kpis">' + ''.join(f'<div class="kpi"><strong>{v}</strong>{l}</div>' for v, l in p['kpis']) + '</div>'
     lede = f'<p class="lede">{intro}</p>' if intro else ''
+    if ov.get('cta'):
+        lede += f'<p><a class="btn primary" href="{ov["cta"][1]}" target="_blank" rel="noopener">{ov["cta"][0]} {EXT}</a></p>'
     cover = f'<figure class="cs-cover" style="view-transition-name:cover-{p["slug"]}">{pic(p["cover"], p.get("alt", ""), "(max-width: 1200px) 100vw, 1200px", eager=True)}</figure>'
     nxt_html = (f'<a class="cs-next" href="{nxt_href}">'
                 f'<span class="media">{pic(nxt["cover"], "", "(max-width: 900px) 100vw, 560px")}</span>'

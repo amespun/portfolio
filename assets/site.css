@@ -200,8 +200,8 @@ button,.dock a,.island a{-webkit-user-select:none;user-select:none}
 .logos{display:flex;flex-wrap:wrap;align-items:center;gap:20px 44px;padding:8px 0}
 .logos li{height:36px;display:flex;align-items:center}
 .logos li.square{height:48px}
-.logos img{height:100%;width:auto;max-width:150px;object-fit:contain;filter:grayscale(1);mix-blend-mode:multiply;opacity:.7;transition:filter .3s ease,opacity .3s ease}
-@media (hover:hover) and (pointer:fine){.logos li:hover img{filter:none;opacity:1}}
+.logos img{height:100%;width:auto;max-width:150px;object-fit:contain;mix-blend-mode:multiply}
+
 
 /* Smooth cross-page transitions where the browser supports them */
 @view-transition{navigation:auto}
@@ -328,7 +328,7 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 .timeline li{position:relative;display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:24px;padding:18px 0;border-bottom:1px solid var(--line);align-items:center}
 .timeline li:last-child{border-bottom:0}
 .timeline .logo{height:44px;display:flex;align-items:center}
-.timeline .logo img{max-width:88px;max-height:28px;width:auto;height:auto;object-fit:contain;filter:grayscale(1);mix-blend-mode:multiply;opacity:.75;transition:filter .25s var(--ease-out),opacity .25s var(--ease-out)}
+.timeline .logo img{max-width:88px;max-height:28px;width:auto;height:auto;object-fit:contain;mix-blend-mode:multiply}
 .timeline .logo.square img{max-height:44px;max-width:44px;scale:var(--z,1)}
 .timeline .logo.square{width:44px;justify-content:center}
 .timeline .logo.wide img{max-height:34px}
@@ -341,8 +341,7 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 .timeline .ext .ic{width:16px;height:16px}
 .timeline li:has(.co:focus-visible) .ext{opacity:1;scale:1;filter:blur(0)}
 @media (hover:hover) and (pointer:fine){
-  .timeline li:hover .logo img{filter:none;opacity:1}
-  .timeline li:hover .ext{opacity:1;scale:1;filter:blur(0)}
+    .timeline li:hover .ext{opacity:1;scale:1;filter:blur(0)}
   .timeline li:hover .co{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
 }
 .timeline b{font-family:var(--display);font-size:1.15rem;font-weight:700;letter-spacing:-.01em}
