@@ -207,7 +207,7 @@ button,.dock a,.island a{-webkit-user-select:none;user-select:none}
 /* Logos: calm and uniform at rest, original colour on hover */
 .logos{display:flex;flex-wrap:wrap;align-items:center;gap:20px 44px;padding:8px 0}
 .logos li{height:36px;display:flex;align-items:center}
-.logos li.square{height:40px}
+.logos li.square{height:48px}
 .logos img{height:100%;width:auto;max-width:150px;object-fit:contain;filter:grayscale(1);mix-blend-mode:multiply;opacity:.7;transition:filter .3s ease,opacity .3s ease}
 @media (hover:hover) and (pointer:fine){.logos li:hover img{filter:none;opacity:1}}
 
@@ -222,7 +222,7 @@ button,.dock a,.island a{-webkit-user-select:none;user-select:none}
 }
 @media (max-width:600px){
   .logos{gap:18px 28px}
-  .logos li{height:28px}.logos li.square{height:32px}
+  .logos li{height:28px}.logos li.square{height:38px}
   .hero-actions .btn{flex:1 1 auto;justify-content:center}
 }
 @media (prefers-reduced-motion:reduce){
