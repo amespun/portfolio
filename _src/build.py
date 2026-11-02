@@ -15,7 +15,12 @@ AVATAR = img('c452157e-0501-4f67-b013-13ce41e854d4/Ellipse+26_.png', 300)
 PORTRAIT = img('414dfdcf-4e3c-4d4b-b59a-3cc3c60f750d/IMG_5346.jpeg', 1000)
 DEVICES = img('3df60a90-7ab0-4d16-8395-9a4751061c20/Group+112596.png')
 COMPANIES = ['EVPassport', 'Haufe Group', 'Badi', 'Papaya Dash', 'Fluendo', 'Tekman Education']
+def logo_src(u):
+    return '@@/' + u if u.startswith('assets/') else f'{SQ}{u}?format=300w'
+
+
 LOGOS = [
+    ('Skydreams', 'assets/logos/skydreams.svg', 'wide'),
     ('EVPassport', '1738611996757-K1F3IY26948QJ2HIKGT3/evpassport-logo.jpg', 'square'),
     ('Haufe Group', '402bd146-9ffe-46b2-bf9f-a40b8e4dcc89/images.png', 'wide'),
     ('Badi', '1738685973446-Y3FZC2U0FR4BDMH98OIJ/Screenshot%252B2025-02-04%252Bat%252B17.17.43.jpg', 'square'),
@@ -147,8 +152,8 @@ STUDIO = [
 
 def collage(big=False):
     return f'''<div class="collage{' big' if big else ''}" aria-hidden="true">
-      <span class="ph a">{pic(PHOTOS["portrait"], "", "320px", w=1000, h=1250)}</span>
-      <span class="ph b">{pic(PHOTOS["hike"], "", "260px", w=1000, h=1250)}</span>
+      <span class="ph a">{pic(PHOTOS["portrait" if big else "smile"], "", "320px")}</span>
+      <span class="ph b">{pic(PHOTOS["hike" if big else "beach"], "", "260px")}</span>
     </div>'''
 
 
@@ -384,7 +389,7 @@ def home():
     </div>
     <div class="art">{pic(DEVICES, "Product screens from recent projects", "(max-width: 900px) 100vw, 520px", eager=True, w=1500, h=1060)}</div>
   </section>
-  <div class="worked"><p>Worked with</p><ul class="logos" aria-label="Companies I’ve worked with">{''.join(f'<li class="{k}"><img src="{SQ}{u}?format=300w" alt="{n}" loading="lazy" decoding="async"></li>' for n, u, k in LOGOS)}</ul></div>
+  <div class="worked"><p>Worked with</p><ul class="logos" aria-label="Companies I’ve worked with">{''.join(f'<li class="{k}"><img src="{logo_src(u)}" alt="{n}" loading="lazy" decoding="async"></li>' for n, u, k in LOGOS)}</ul></div>
 
   <section class="section" id="work">
     <div class="section-head"><h2>Selected work</h2><a class="more-link" href="work/">All {len(PROJECTS)} projects {ARROW}</a></div>
@@ -429,7 +434,7 @@ def about():
         u, k = logo_of.get(c, (None, ''))
         z = {'EVPassport': 2.0, 'Badi': 1.75, 'Airflye': 1.2}.get(c)
         st = f' style="--z:{z}"' if z else ''
-        return f'<span class="logo {k}" aria-hidden="true"><img src="{SQ}{u}?format=300w" alt="" loading="lazy" decoding="async"{st}></span>' if u else '<span class="logo" aria-hidden="true"></span>'
+        return f'<span class="logo {k}" aria-hidden="true"><img src="{logo_src(u)}" alt="" loading="lazy" decoding="async"{st}></span>' if u else '<span class="logo" aria-hidden="true"></span>'
     def row(c, cc, k, r, y):
         tag = f' <em>{cc}</em>' if cc else ''
         return f'''<li>{mark(c)}<div><b><a class="co" href="{SITES[c]}" target="_blank" rel="noopener">{c}<span class="sr"> (opens in a new tab)</span><i class="ext" aria-hidden="true">{EXT}</i></a>{tag}</b><span>{r}</span></div><div class="meta">{f'<span class="yr">{y}</span>' if y else ''}<span class="kind">{k}</span></div></li>'''
