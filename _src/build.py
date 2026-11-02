@@ -486,6 +486,33 @@ def studio():
 
 
 # ---------- Case studies and studio pages, rebuilt from the Squarespace export ----------
+# Three-line overview per case study, written from the case study's own text.
+SUMMARY = {
+    'b2b-saas-ev-charging': ('Operators and businesses had no central, reliable place to manage their EV charging networks, monitor stations and handle their users.',
+                             '<strong>Sole product designer.</strong> Led the UX strategy, built the first design system, ran research and aligned product, engineering, sales and support.',
+                             '<strong>39.8% fewer</strong> support tickets, <strong>23.4% more</strong> engagement, <strong>14% more</strong> new business owners and <strong>60% more</strong> role-management sessions.'),
+    'b2c-ev-charging': ('Drivers struggled with navigation and unclear charger screens across the web, the native app and the App Clip, so many ended up calling support.',
+                        '<strong>Sole product designer</strong> across iOS, Android and web: UX strategy, design system, research and roadmap with product and engineering.',
+                        '<strong>46.6% more</strong> engagement, <strong>7.4% more</strong> new users and <strong>39.8% fewer</strong> support tickets.'),
+    'saas-team-development': ('Teampact helps teams improve collaboration through performance metrics, but people found it too complex and time-consuming to use.',
+                              '<strong>Senior product designer.</strong> Defined the product strategy with PMs, led design end to end from research to usability testing, and mentored designers.',
+                              'Onboarding from <strong>7 to 3 minutes</strong>, survey completion from <strong>60% to 80%</strong>, NPS from <strong>45 to 60</strong>, <strong>+20%</strong> retention and <strong>+15%</strong> subscriptions.'),
+    'ai-fleet-manager': ('Fleet operators lose uptime and money because mechanical issues go undetected until something fails.',
+                         '<strong>Senior product designer</strong> in a small team: UX strategy, experimenting with AI and designing the platform from scratch.',
+                         'A <strong>6-month discovery</strong>: market and user research, the first MVP designs and a landing page.'),
+    'marketplace-growth': ('Make renting a room in a big city simple, and keep people coming back to the app, by understanding tenants’ and landlords’ pain points.',
+                           '<strong>Product designer on the growth team</strong>, with two PMs and two development teams: interviews, UX and visual decisions, fast iteration and data analysis.',
+                           'Growth experiments shaped by <strong>interviews, prototypes and data</strong>, shipped in fast iterations.'),
+    'design-system': ('Designers and developers at Badi needed one shared source of foundations, components and patterns.',
+                      '<strong>Product designer:</strong> research, naming, the Sketch library, documentation and the workflow with engineers.',
+                      '<strong>Habitat</strong>, Badi’s first design system, with a shared library and documentation for design and engineering.'),
+    'videogame-platform': ('Help gamers find other players to match with and discover new videogames.',
+                           '<strong>Product designer:</strong> competitive analysis, personas, user flows, prototypes, style guide, branding and logo.',
+                           'A social platform taken from <strong>research to build</strong> with engineering, with its own brand and style guide.'),
+}
+DIVIDERS = re.compile(r'more detailed explanation|full process', re.I)
+METRIC_CH = re.compile(r'impact|result|outcome', re.I)
+
 CONTENT = json.load(open(f'{ROOT}/_export/content.json'))
 LABELS = {'year', 'company', 'services', 'stack', 'client', 'role'}
 BACK = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>'
@@ -559,9 +586,63 @@ def figure(run):
     return '<div class="cs-gallery">' + ''.join(one(x) for x in run) + '</div>'
 
 
-def textrun(run):
+POINT = re.compile(r'^\s*(?P<e1>[^\w<\s&]{1,4}\s*)?<strong>\s*(?P<e2>[^\w<\s&]{1,4}\s*)?(?P<t>.+?)(?:<br\s*/?>)?\s*</strong>\s*(?:<br\s*/?>|[–—:-])?\s*(?P<d>.*)$', re.S)
+NUM = re.compile(r'([−+-]?\d[\d.,]*\s?%|\d+\s?(?:→|->|to)\s?\d+%?)')
+
+
+def as_point(html):
+    m = POINT.match(html)
+    if not m:
+        return None
+    t = heading(m.group('t')).strip(' –-:')
+    d = m.group('d').strip()
+    if not t or len(txt(t)) > 90 or not txt(d) or txt(d) == txt(t):
+        return None
+    return dict(e=(m.group('e1') or m.group('e2') or '').strip(), t=t, d=d)
+
+
+def points_html(pts, metric=False):
+    cells = ''
+    for p in pts:
+        n = NUM.search(p['t']) if metric else None
+        if n:
+            label = (p['t'][:n.start()] + p['t'][n.end():]).strip(' –-:')
+            cells += f'<li class="metric"><strong class="n">{n.group(1)}</strong><b>{label}</b><span>{p["d"]}</span></li>'
+        else:
+            e = f'<i aria-hidden="true">{p["e"]}</i>' if p['e'] else ''
+            cells += f'<li>{e}<b>{p["t"]}</b><span>{p["d"]}</span></li>'
+    return f'<ul class="cs-points{" metrics" if metric else ""}">{cells}</ul>'
+
+
+def textrun(run, metric=False):
+    # Group runs of "Title – description" paragraphs (and lists of them) into scannable cards
+    grouped, buf = [], []
+    for it in run:
+        pt = as_point(it['html']) if it['t'] == 'p' else None
+        if pt:
+            buf.append(pt); continue
+        if buf:
+            grouped.append(('pts', buf)); buf = []
+        if it['t'] == 'ul' and len(it['items']) >= 2:
+            lp = [as_point(x) for x in it['items']]
+            if all(lp):
+                grouped.append(('pts', lp)); continue
+        grouped.append(('it', it))
+    if buf:
+        grouped.append(('pts', buf))
+    run = []
+    for k, v in grouped:
+        if k == 'pts' and len(v) >= 2:
+            run.append({'t': 'pts', 'pts': v})
+        elif k == 'pts':
+            run.append({'t': 'p', 'html': f'<strong>{v[0]["e"]} {v[0]["t"]}</strong><br>{v[0]["d"]}'})
+        else:
+            run.append(v)
     out = []
     for it in run:
+        if it['t'] == 'pts':
+            out.append(points_html(it['pts'], metric or all(NUM.match(p['t'].strip()) or NUM.search(p['t'][:12]) for p in it['pts'])))
+            continue
         t = it['t']
         if t in ('ul', 'ol'):
             out.append(f'<{t}>' + ''.join(f'<li>{x}</li>' for x in it['items']) + f'</{t}>')
@@ -607,14 +688,25 @@ def chapters(body):
                 run.append(it)
                 kind = k
         inner = ''
+        metric = bool(ch['h'] and METRIC_CH.search(ch['h']))
         for k, r in rows:
             if k == 'img':
                 inner += f'<div class="cs-wide">{figure(r)}</div>'
             else:
-                inner += f'<div class="cs-text">{textrun(r)}</div>'
+                inner += f'<div class="cs-text">{textrun(r, metric)}</div>'
+        cid = re.sub(r'[^a-z0-9]+', '-', (ch['h'] or '').lower()).strip('-')
+        ch['id'] = cid
+        if ch['h'] and DIVIDERS.search(ch['h']):
+            html.append(f'<section class="cs-ch cs-divider" id="{cid}"><h2>The full process</h2><p class="cs-sub">Research, decisions and iterations, step by step.</p>{inner}</section>')
+            continue
         h = f'<h2>{ch["h"]}</h2>' if ch['h'] else ''
-        html.append(f'<section class="cs-ch{"" if ch["h"] else " no-h"}">{h}{inner}</section>')
+        html.append(f'<section class="cs-ch{"" if ch["h"] else " no-h"}"{f" id={chr(34)}{cid}{chr(34)}" if cid else ""}>{h}{inner}</section>')
+    CHAPTERS.clear()
+    CHAPTERS.extend((('The full process' if DIVIDERS.search(c['h']) else c['h']), c['id']) for c in chs if c['h'])
     return ''.join(html)
+
+
+CHAPTERS = []
 
 
 def meta_html(meta):
@@ -630,6 +722,14 @@ def meta_html(meta):
     return f'<dl class="cs-meta">{cells}</dl>'
 
 
+def overview(p):
+    sm = SUMMARY.get(p['slug'])
+    if not sm:
+        return ''
+    cols = ''.join(f'<div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in zip(('The challenge', 'My role', 'The outcome'), sm))
+    return f'<section class="cs-overview" aria-label="Overview"><dl>{cols}</dl></section>'
+
+
 def case_page(key, p, back, back_label, nxt, nxt_href, kind):
     items = items_of(key)
     title, intro, meta, body = split_hero(items)
@@ -643,6 +743,10 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
                 f'<span class="media">{pic(nxt["cover"], "", "(max-width: 900px) 100vw, 560px")}</span>'
                 f'<span class="t"><small>Next {kind}</small><b>{nxt["title"]}</b><span class="more">Open {ARROW}</span></span></a>')
     desc = txt(intro)[:155] if intro else p['title']
+    body_html = chapters(body)
+    index_html = ''
+    if len(CHAPTERS) >= 4:
+        index_html = '<nav class="cs-index" aria-label="In this case study"><p>In this case study</p><ol>' + ''.join(f'<li><a href="#{i}">{h}</a></li>' for h, i in CHAPTERS) + '</ol></nav>'
     page = head(f'{title} · Aïda Martínez Espún', desc, '../../') + nav('../../', 'Work' if kind == 'project' else 'Studio')
     page += f'''
 <main class="wrap cs" id="main">
@@ -655,7 +759,9 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
     {k}
   </section>
   {cover}
-  <article class="cs-body">{chapters(body)}</article>
+  {overview(p)}
+  {index_html}
+  <article class="cs-body">{body_html}</article>
   <nav class="cs-foot" aria-label="More work">
     {nxt_html}
     <a class="btn" href="{back}">{back_label} {ARROW}</a>

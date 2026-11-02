@@ -417,7 +417,7 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 .cs-body{margin-top:clamp(40px,6vw,88px)}
 .cs-ch{display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,1.6fr);column-gap:clamp(24px,5vw,72px);row-gap:32px;padding:clamp(36px,5vw,64px) 0;border-top:1px solid var(--line)}
 .cs-ch:first-child{border-top:0;padding-top:0}
-.cs-ch > h2{grid-column:1;grid-row:1;align-self:start;position:sticky;top:96px;font-weight:800;font-size:clamp(1.6rem,2.4vw,2.2rem);line-height:1.08;letter-spacing:-.025em;text-wrap:balance}
+.cs-ch > h2{grid-column:1;grid-row:1;align-self:start;font-weight:800;font-size:clamp(1.6rem,2.4vw,2.2rem);line-height:1.08;letter-spacing:-.025em;text-wrap:balance}
 .cs-text{grid-column:2;max-width:68ch}
 .cs-ch.no-h .cs-text{grid-column:2}
 .cs-wide{grid-column:1/-1}
@@ -461,7 +461,6 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 @media (max-width:900px){
   .cs-meta{grid-template-columns:repeat(2,minmax(0,1fr))}
   .cs-ch{grid-template-columns:1fr;row-gap:20px}
-  .cs-ch > h2{position:static}
   .cs-text,.cs-ch.no-h .cs-text{grid-column:1}
   .cs-next{grid-template-columns:1fr;gap:16px}
 }
@@ -472,3 +471,49 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 }
 ::view-transition-group(*){animation-duration:.45s;animation-timing-function:cubic-bezier(.23,1,.32,1)}
 @media (prefers-reduced-motion:reduce){::view-transition-group(*),::view-transition-old(*),::view-transition-new(*){animation:none}}
+
+/* ---------- Case study: scan layer ---------- */
+.cs-overview{margin-top:clamp(32px,4vw,56px)}
+.cs-overview dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0}
+.cs-overview dl > div{background:var(--tile);border-radius:20px;padding:24px 24px 26px}
+.cs-overview dt{font-family:var(--display);font-weight:700;font-size:1.05rem;margin-bottom:10px}
+.cs-overview dd{margin:0;font-size:1rem;line-height:1.55;color:var(--ink-2);text-wrap:pretty}
+.cs-overview dd strong{color:var(--ink);font-weight:600}
+.cs-overview dl > div:last-child{background:var(--accent)}
+.cs-overview dl > div:last-child dd,.cs-overview dl > div:last-child dd strong{color:var(--accent-ink)}
+
+.cs-index{margin-top:clamp(32px,4vw,48px);display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,1.6fr);column-gap:clamp(24px,5vw,72px);padding-top:24px;border-top:1px solid var(--line)}
+.cs-index p{font-weight:600;font-size:15px;color:var(--ink-2)}
+.cs-index ol{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0;counter-reset:ch}
+.cs-index a{display:inline-flex;align-items:center;min-height:36px;padding:6px 14px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);font-size:14.5px;font-weight:500;color:var(--ink);text-decoration:none;transition:background-color .15s ease,box-shadow .15s ease}
+@media (hover:hover) and (pointer:fine){.cs-index a:hover{background:var(--tile);box-shadow:inset 0 0 0 1px transparent}}
+.cs-index a:focus-visible{outline:2px solid var(--accent-ink);outline-offset:2px}
+.cs-ch{scroll-margin-top:88px}
+
+.cs-points{list-style:none;padding:0!important;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px!important}
+.cs-points li{background:var(--tile);border-radius:16px;padding:18px 18px 20px;display:flex;flex-direction:column;gap:6px;font-size:inherit}
+.cs-points li::marker{content:none}
+.cs-points i{font-style:normal;font-size:1.3rem;line-height:1;margin-bottom:6px}
+.cs-points b{font-family:var(--display);font-weight:700;font-size:1.02rem;line-height:1.3;color:var(--ink);text-wrap:balance}
+.cs-points span{font-size:.95rem;line-height:1.5;color:var(--ink-2);text-wrap:pretty}
+.cs-points.metrics li{background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+.cs-points .n{font-family:var(--display);font-weight:800;font-size:2.2rem;letter-spacing:-.03em;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.cs-points.metrics b{font-size:.98rem}
+.cs-text > .cs-points + *{margin-top:20px}
+
+.cs-divider{display:block;text-align:left;background:var(--night);color:#fff;border-radius:28px;border-top:0;padding:clamp(32px,5vw,56px)!important;margin:clamp(24px,4vw,48px) 0}
+.cs-divider > h2{font-weight:800;font-size:clamp(1.8rem,3.4vw,2.8rem);letter-spacing:-.03em;color:#fff}
+.cs-divider .cs-sub{margin-top:8px;color:rgba(255,255,255,.7);font-size:1.05rem}
+.cs-divider .cs-text{max-width:none;margin-top:28px}
+.cs-divider .cs-statement{color:#fff!important}
+.cs-divider .cs-note{color:rgba(255,255,255,.6)!important}
+.cs-divider + .cs-ch{border-top:0}
+
+@media (max-width:900px){
+  .cs-overview dl{grid-template-columns:1fr}
+  .cs-index{grid-template-columns:1fr;row-gap:12px}
+}
+@media (max-width:600px){
+  .cs-points{grid-template-columns:1fr}
+}
+.cs-points li:last-child:nth-child(odd){grid-column:1/-1}
