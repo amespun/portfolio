@@ -513,7 +513,7 @@ def about():
 
   <section class="section split">
     <h2 class="h2">Outside work</h2>
-    <ul class="hobbies">{''.join(f'<li><img src="../assets/hobbies/{im}.svg" alt="" width="320" height="200" loading="lazy"><b>{t}</b><span>{d}</span></li>' for t, d, im in HOBBIES)}</ul>
+    <ul class="hobbies">{''.join(f'<li><span class="obj"><img src="../assets/hobbies/{im}.webp" alt="" loading="lazy" decoding="async"></span><b>{t}</b><span>{d}</span></li>' for t, d, im in HOBBIES)}</ul>
   </section>
 
   <section class="section">

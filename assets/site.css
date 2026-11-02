@@ -582,9 +582,13 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 .bi{display:inline-flex;flex:none}
 .bi img{width:28px;height:28px;border-radius:8px;background:#fff;box-shadow:0 0 0 1px oklch(0 0 0 / .08);object-fit:contain}
 .bi img + img{margin-left:-8px;box-shadow:0 0 0 2px #fff}
-.hobbies li{padding:0 0 22px;overflow:hidden}
-.hobbies li img{width:100%;height:auto;aspect-ratio:16/10;display:block;margin-bottom:8px}
-.hobbies li b,.hobbies li span{padding:0 20px}
+.hobbies{margin-top:56px;row-gap:72px}
+.hobbies li{padding:0 22px 24px;overflow:visible;position:relative}
+.hobbies .obj{display:grid;place-items:end center;height:170px;margin:-64px 0 10px;padding:0!important}
+.hobbies .obj img{max-height:170px;max-width:78%;width:auto;height:auto;filter:drop-shadow(0 14px 18px rgb(60 40 120 / .16));transition:transform .5s var(--ease-out)}
+@media (hover:hover) and (pointer:fine){.hobbies li:hover .obj img{transform:translateY(-6px) rotate(-2deg)}}
+@media (prefers-reduced-motion:reduce){.hobbies .obj img{transition:none}}
+.hobbies li b,.hobbies li > span:not(.obj){padding:0}
 /* rotate the tile colour so long lists of cards don't all look the same */
 /* colour rotation only on the tools groups; languages, hobbies and quotes stay calm */
 .tools > div:nth-child(1) li{background:#f4f2ee}
