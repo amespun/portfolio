@@ -618,3 +618,7 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 .cs-cover.small{aspect-ratio:auto;max-width:var(--cw);margin-inline:0}
 .cs-cover.small img{height:auto}
 @media (max-width:900px){.cs-cover{aspect-ratio:4/3}.cs-cover.small{aspect-ratio:auto}}
+
+/* No outline on photos and screenshots */
+.card .media img,.small .media img,.about figure img,.more-work .stack img,.cs-cover img,.cs-fig img{outline:none}
+.card .media::after,.small .media::after{content:none}
