@@ -284,10 +284,10 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 }
 
 /* ---------- Calmer hero ---------- */
-.hero{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:64px;padding:clamp(40px,6vw,88px) 0 clamp(48px,6vw,80px)}
-.hero h1{font-size:clamp(2.4rem,4.6vw,3.9rem);line-height:1.02;max-width:14ch}
-.hero .lede{max-width:44ch}
-.hero .art{max-width:clamp(500px,38vw,600px);justify-self:end}
+.hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,4vw,72px);padding:clamp(40px,5vw,80px) 0 clamp(48px,6vw,80px);min-height:min(78vh,820px)}
+.hero h1{font-size:clamp(2.6rem,4.8vw,5.2rem);line-height:1;max-width:14ch}
+.hero .lede{max-width:46ch;font-size:clamp(1.1rem,1.2vw,1.25rem)}
+.hero .art{width:100%;max-width:760px;justify-self:center}
 .worked{display:flex;flex-wrap:wrap;align-items:center;gap:16px 32px;padding-top:28px;border-top:1px solid var(--line)}
 .worked > p{font-size:14px;color:var(--ink-2);font-weight:500}
 
