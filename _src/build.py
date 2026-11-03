@@ -324,7 +324,7 @@ def contact(base=''):
     pages = [('Work', f'{base}work/'), ('About', f'{base}about/'), ('Studio', f'{base}studio/')]
     work = [(p['short'], f'{base}work/' + p['slug'] + '/') for p in FEATURED]
     social = [('LinkedIn', 'https://www.linkedin.com/in/amespun/'), ('Behance', 'https://www.behance.net/amespun'),
-              ('Dribbble', 'https://dribbble.com/amespun'), ('Medium', 'https://medium.com/@amespun'),
+              ('GitHub', 'https://github.com/amespun'), ('Dribbble', 'https://dribbble.com/amespun'), ('Medium', 'https://medium.com/@amespun'),
               ('ADPList', 'https://adplist.org/mentors/aida-martinez-espun')]
     li = lambda xs: ''.join(f'<li><a href="{h}">{n}</a></li>' for n, h in xs)
     return f'''<footer class="footer" id="contact"><div class="card-dark">
