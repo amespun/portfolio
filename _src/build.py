@@ -525,7 +525,7 @@ def about():
 
 
 def studio():
-    items = ''.join(f'''<a class="small" href="@@/studio/{s}/"><div class="media">{pic(SQ + u, "", "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px", w=1600, h=1000)}</div><b>{n} {ARROW}</b><span>{k}</span></a>''' for n, k, s, u in STUDIO)
+    items = ''.join(f'''<a class="small" href="@@/studio/{s}/"><div class="media">{pic(SQ + u, "", "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px", w=1600, h=1000)}</div><b>{n} {ARROW}</b><span>{k}</span></a>''' for n, k, s, u in STUDIO if s not in HIDDEN_STUDIO)
     return head('Studio · Aïda Martínez Espún', 'ämespun studio: freelance UX/UI, no-code websites, branding and illustration by Aïda Martínez Espún.', '../') + nav('../', 'Studio') + f'''
 <main class="wrap" id="main">
   <section class="page-head">
@@ -574,7 +574,11 @@ DIVIDERS = re.compile(r'more detailed explanation|full process', re.I)
 METRIC_CH = re.compile(r'impact|result|outcome', re.I)
 
 CONTENT = json.load(open(f'{ROOT}/_export/content.json'))
-LABELS = {'year', 'company', 'services', 'stack', 'client', 'role'}
+LABELS = {'year', 'company', 'services', 'stack', 'client', 'role', 'work done'}
+BANNER = re.compile(r'Need a UX|Let.s be in touch', re.I)
+BANNER_IMG = '633357c5'
+HERO_LINKS = []
+HIDDEN_STUDIO = {'b2b-healthcare-saas'}  # Squarespace page only said 'Coming soon'
 BACK = '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>'
 
 
@@ -625,11 +629,15 @@ def split_hero(items):
             meta.append((txt(it['html']).capitalize(), items[i + 1]['html']))
             i += 2
             continue
+        if t == 'button' and (it.get('href') or '').startswith('http'):
+            HERO_LINKS.append((re.sub(r'\s*[→›»>]+\s*$', '', txt(it['html'])), it['href']))
+            i += 1
+            continue
         if t == 'h1' and title is None:
             title = heading(it['html'])
         elif t == 'p' and is_spaced(it['html']):
             body.append(dict(it, t='note'))
-        elif t == 'p' and title is not None and intro is None:
+        elif t == 'p' and intro is None:
             intro = it['html']
         else:
             body.append(it)
@@ -808,7 +816,9 @@ def textrun(run, metric=False, chname=''):
             src = it['src'] if it['src'].startswith('http') else 'https:' + it['src']
             out.append(f'<div class="cs-embed"><iframe src="{src}" loading="lazy" allowfullscreen title="Video"></iframe></div>')
         elif t == 'button':
-            out.append(f'<p><a class="btn" href="{it["href"]}">{it["html"]} {ARROW}</a></p>')
+            label = re.sub(r'\s*[→›»>]+\s*$', '', txt(it['html']))
+            ext = (it.get('href') or '').startswith('http')
+            out.append(f'<p><a class="btn" href="{it["href"]}"{" target=" + chr(34) + "_blank" + chr(34) + " rel=" + chr(34) + "noopener" + chr(34) if ext else ""}>{label} {EXT if ext else ARROW}</a></p>')
         elif t in ('p', 'h1', 'h2'):
             out.append(f'<p>{it["html"]}</p>')
     return ''.join(out)
@@ -894,6 +904,11 @@ def overview(p):
 
 
 OVERRIDE = {
+    'interior-design': dict(intro='Interior design and 3D visualisation projects from my degree at <strong>Elisava</strong>, School of Design and Engineering in Barcelona.',
+                            images_only=True),
+    'ui-design': dict(intro='Concept UI work and a <strong>video prototype</strong> exploring interaction and motion.',
+                      inject_after=('Video prototype', {'t': 'embed', 'src': 'https://player.vimeo.com/video/325613151', 'sec': 0})),
+    'personal-branding': dict(intro='A personal brand identity: logo, business cards and stationery.'),
     'illustrations': dict(title='European-inspired illustrations',
                           intro='I create <strong>illustrations and watercolour prints</strong> inspired by the places, colours and little details of <strong>European life</strong>, and sell them in my <strong>Etsy shop</strong>. From Casa Batlló and Park Güell in Barcelona to the Alhambra, Valencia, Menorca and Ibiza.',
                           cta=('Visit the Etsy shop', 'https://www.etsy.com/shop/amespunn'),
@@ -914,20 +929,45 @@ def og_for(u, slug):
     return out
 
 
+def clean_items(items, p):
+    banner = {it['sec'] for it in items if BANNER_IMG in (it.get('src') or '') or (it['t'] != 'img' and BANNER.search(txt(it.get('html', ''))))}
+    m = re.search(r'([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|\d{13}-[A-Z0-9]{20})', p['cover'])
+    cover_id = m.group(1) if m else ''
+    out = []
+    for it in items:
+        if it['sec'] in banner:
+            continue
+        if it['t'] == 'img' and cover_id and cover_id in (it.get('src') or ''):
+            continue
+        out.append(it)
+    return out
+
+
 def case_page(key, p, back, back_label, nxt, nxt_href, kind):
-    items = items_of(key)
+    HERO_LINKS.clear()
+    items = clean_items(items_of(key), p)
     title, intro, meta, body = split_hero(items)
+    ov0 = OVERRIDE.get(p['slug'], {})
+    if ov0.get('inject_after'):
+        hname, extra = ov0['inject_after']
+        for n, it in enumerate(body):
+            if it['t'] != 'img' and txt(it.get('html', '')).lower() == hname.lower():
+                body.insert(n + 1, dict(extra, sec=it['sec']))
+                break
     title = title or p['title']
     ov = OVERRIDE.get(p['slug'], {})
     title, intro = ov.get('title', title), ov.get('intro', intro)
     if ov.get('images_only'):
         body = [it for it in body if it['t'] == 'img']
     if ov.get('lead_img'):
-        body = [ov['lead_img']] + body
+        lead_id = ov['lead_img']['src'].split('/')[-1].split('.')[0]
+        body = [ov['lead_img']] + [it for it in body if not (it['t'] == 'img' and lead_id in (it.get('src') or ''))]
     k = ''
     if p.get('kpis') and not p.get('notes'):
         k = '<div class="kpis cs-kpis">' + ''.join(f'<div class="kpi"><strong>{v}</strong>{l}</div>' for v, l in p['kpis']) + '</div>'
     lede = f'<p class="lede">{intro}</p>' if intro else ''
+    if HERO_LINKS:
+        lede += '<p class="cs-links">' + ''.join(f'<a class="btn" href="{h}" target="_blank" rel="noopener">{"Visit website" if re.search(r"web", t, re.I) else t} {EXT}</a>' for t, h in HERO_LINKS) + '</p>'
     if ov.get('cta'):
         lede += f'<p><a class="btn primary" href="{ov["cta"][1]}" target="_blank" rel="noopener">{ov["cta"][0]} {EXT}</a></p>'
     cover = f'<figure class="cs-cover" style="view-transition-name:cover-{p["slug"]}">{pic(p["cover"], p.get("alt", ""), "(max-width: 1200px) 100vw, 1200px", eager=True)}</figure>'
@@ -963,7 +1003,7 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
 
 
 def studio_items():
-    return [dict(slug=slug, title=n, tags=[k], cover=SQ + u, alt=n, role=k) for n, k, slug, u in STUDIO]
+    return [dict(slug=slug, title=n, tags=[k], cover=SQ + u, alt=n, role=k) for n, k, slug, u in STUDIO if slug not in HIDDEN_STUDIO]
 
 
 def localize(html, base):
@@ -1014,6 +1054,9 @@ def redirect(rel, target):
 
 # Old Squarespace addresses keep working
 redirect('designstudio/index.html', 'studio/')
+for slug in HIDDEN_STUDIO:
+    redirect(f'designstudio/{slug}/index.html', 'studio/')
+    redirect(f'studio/{slug}/index.html', 'studio/')
 for p in SI:
     redirect(f'designstudio/{p["slug"]}/index.html', f'studio/{p["slug"]}/')
 redirect('contact/index.html', '#contact')
