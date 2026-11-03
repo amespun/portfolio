@@ -612,3 +612,9 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 .about-hero{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,5vw,72px)}
 .about-hero .collage{max-width:clamp(520px,44vw,680px);justify-self:end}
 @media (max-width:900px){.about-hero{grid-template-columns:1fr}.about-hero .collage{justify-self:center;max-width:560px}}
+
+/* Case-study cover: full content width, sharp 2400px source; small originals are never stretched */
+.cs-cover{aspect-ratio:16/9}
+.cs-cover.small{aspect-ratio:auto;max-width:var(--cw);margin-inline:0}
+.cs-cover.small img{height:auto}
+@media (max-width:900px){.cs-cover{aspect-ratio:4/3}.cs-cover.small{aspect-ratio:auto}}

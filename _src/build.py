@@ -970,7 +970,12 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
         lede += '<p class="cs-links">' + ''.join(f'<a class="btn" href="{h}" target="_blank" rel="noopener">{"Visit website" if re.search(r"web", t, re.I) else t} {EXT}</a>' for t, h in HERO_LINKS) + '</p>'
     if ov.get('cta'):
         lede += f'<p><a class="btn primary" href="{ov["cta"][1]}" target="_blank" rel="noopener">{ov["cta"][0]} {EXT}</a></p>'
-    cover = f'<figure class="cs-cover" style="view-transition-name:cover-{p["slug"]}">{pic(p["cover"], p.get("alt", ""), "(max-width: 1200px) 100vw, 1200px", eager=True)}</figure>'
+    cm = meta_of(p['cover']) or {}
+    small = cm.get('w') and cm['w'] < 2000
+    cover_img = pic(p["cover"], p.get("alt", ""), "(max-width: 1500px) 100vw, 1440px", eager=True)
+    if small:
+        cover_img = f'<img src="@@/{cm["src"]}" width="{cm["w"]}" height="{cm["h"]}" alt="{p.get("alt", "")}" fetchpriority="high">'
+    cover = f'<figure class="cs-cover{" small" if small else ""}" style="view-transition-name:cover-{p["slug"]}{f";--cw:{round(cm[chr(119)] / 1.5)}px" if small else ""}">{cover_img}</figure>'
     nxt_html = (f'<a class="cs-next" href="{nxt_href}">'
                 f'<span class="media">{pic(nxt["cover"], "", "(max-width: 900px) 100vw, 560px")}</span>'
                 f'<span class="t"><small>Next {kind}</small><b>{nxt["title"]}</b><span class="more">Open {ARROW}</span></span></a>')
