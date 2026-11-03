@@ -511,10 +511,6 @@ def about():
     <ul class="langs">{langs}</ul>
   </section>
 
-  <section class="section split">
-    <h2 class="h2">Outside work</h2>
-    <ul class="hobbies">{''.join(f'<li><span class="obj"><img src="../assets/hobbies/{im}.webp" alt="" loading="lazy" decoding="async"></span><b>{t}</b><span>{d}</span></li>' for t, d, im in HOBBIES)}</ul>
-  </section>
 
   <section class="section">
     <div class="section-head"><h2>What people say</h2></div>
