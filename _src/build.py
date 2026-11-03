@@ -327,17 +327,16 @@ def contact(base=''):
               ('GitHub', 'https://github.com/amespun'), ('Dribbble', 'https://dribbble.com/amespun'), ('Medium', 'https://medium.com/@amespun'),
               ('ADPList', 'https://adplist.org/mentors/aida-martinez-espun')]
     li = lambda xs: ''.join(f'<li><a href="{h}">{n}</a></li>' for n, h in xs)
+    others = [x for x in social if x[0] != 'LinkedIn']
+    LI = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z"/></svg>'
     return f'''<footer class="footer" id="contact"><div class="card-dark">
   <p class="greet"><span data-greet>Hola</span>, let’s talk.</p>
   <p class="sub">Spanish, Catalan, English and French at work. Dutch at A2.</p>
-  <button class="mail" type="button" data-copy>amespun@gmail.com <em>{COPY_ICON}{labels("Copy")}</em></button>
-  <div class="cols">
-    <div><h2>Pages</h2><ul>{li(pages)}</ul></div>
-    <div><h2>Selected work</h2><ul>{li(work)}</ul></div>
-    <div><h2>Elsewhere</h2><ul>{li(social)}</ul></div>
-    <div><h2>Based in</h2><ul><li>The Netherlands</li><li>Senior Product Designer at Skydreams</li></ul></div>
+  <div class="reach">
+    <button class="ch" type="button" data-copy aria-label="Copy email address amespun@gmail.com"><span class="ic2">{MAIL_SVG}</span><span class="tx"><small>Email</small><b>amespun@gmail.com</b></span><em>{COPY_ICON}{labels("Copy")}</em></button>
+    <a class="ch li" href="https://www.linkedin.com/in/amespun/"><span class="av"><img src="{AVATAR}" alt="" loading="lazy"><i>{LI}</i></span><span class="tx"><small>Aïda Martínez Espún<span class="long"> · Senior Product Designer at Skydreams</span></small><b>Message me on LinkedIn</b></span><em>Open {EXT}</em></a>
   </div>
-  <div class="colophon"><span>© 2026 Aïda Martínez Espún</span><span>Designed and built by me.</span></div>
+  <div class="foot-row"><ul>{li(others)}</ul><span>Based in the Netherlands · © 2026 Aïda Martínez Espún · Designed and built by me.</span></div>
 </div></footer>
 '''
 

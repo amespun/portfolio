@@ -622,3 +622,26 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 /* No outline on photos and screenshots */
 .card .media img,.small .media img,.about figure img,.more-work .stack img,.cs-cover img,.cs-fig img{outline:none}
 .card .media::after,.small .media::after{content:none}
+
+/* Footer: two equal ways to reach me */
+.footer .reach{margin-top:32px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.footer .ch{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:16px;min-height:104px;padding:22px 24px;border-radius:20px;background:rgba(255,255,255,.07);color:#fff;border:0;font:inherit;text-align:left;cursor:pointer;text-decoration:none;transition:background-color .2s ease,transform .2s var(--ease-out)}
+.footer .ch:active{transform:scale(.99)}
+.footer .ch.li{background:#0a66c2}
+@media (hover:hover) and (pointer:fine){.footer .ch:hover{background:rgba(255,255,255,.11)}.footer .ch.li:hover{background:#0b5cad}}
+.footer .ic2{width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.12);display:grid;place-items:center}
+.footer .ic2 svg{width:22px;height:22px}
+.footer .av{position:relative;width:52px;height:52px}
+.footer .av img{width:52px;height:52px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px #fff}
+.footer .av i{position:absolute;right:-4px;bottom:-4px;width:22px;height:22px;border-radius:6px;background:#fff;color:#0a66c2;display:grid;place-items:center}
+.footer .av i svg{width:14px;height:14px}
+.footer .ch small{display:block;font-size:13px;line-height:1.35;color:rgba(255,255,255,.72)}
+.footer .ch b{display:block;font-family:var(--display);font-size:clamp(1.15rem,1.8vw,1.45rem);font-weight:600;overflow-wrap:anywhere}
+.footer .ch em{font-style:normal;font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.14);display:inline-flex;gap:6px;align-items:center;white-space:nowrap}
+.footer .ch.copied em{background:rgba(47,163,107,.3);color:#bdf0d4}
+.footer .foot-row{margin-top:40px;padding-top:24px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;font-size:14px;color:rgba(255,255,255,.55)}
+.footer .foot-row ul{display:flex;flex-wrap:wrap;gap:4px 22px;margin:0;padding:0;list-style:none}
+.footer .foot-row a{color:rgba(255,255,255,.85);text-decoration:none;font-size:15px;display:inline-block;padding:4px 0}
+@media (hover:hover) and (pointer:fine){.footer .foot-row a:hover{color:#fff;text-decoration:underline}}
+.footer :focus-visible{outline-color:#fff}
+@media (max-width:760px){.footer .reach{grid-template-columns:1fr}.footer .ch{grid-template-columns:auto minmax(0,1fr);min-height:0;padding:18px}.footer .ch em{display:none}.footer .ch .long{display:none}.footer .ch b{font-size:1.15rem}}
