@@ -240,7 +240,7 @@ def nav(base, current):
     <nav class="links" aria-label="Main">{links}</nav>
     <button class="iconbtn" type="button" data-copy aria-label="Copy email address">{COPY_ICON}</button>
   </div></div>
-  <nav class="island" aria-label="Quick navigation"><img src="{AVATAR}" alt="">{island}<button type="button" data-copy>{COPY_ICON}{labels("Copy email")}</button></nav>
+  <nav class="island" aria-label="Quick navigation"><a class="home" href="{base or "./"}" aria-label="Home"><img src="{AVATAR}" alt=""></a>{island}<button type="button" data-copy>{COPY_ICON}{labels("Copy email")}</button></nav>
 </header>
 <nav class="dock" aria-label="Sections">{dock}</nav>
 '''
