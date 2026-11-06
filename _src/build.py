@@ -1067,7 +1067,11 @@ def write(rel, html, base):
     open(path, 'w').write(localize(html, base))
 
 
+B_JS = '\n// Version B: count the stats up once, and the "What I bring" list\n(() => {\n  const still = matchMedia(\'(prefers-reduced-motion: reduce)\').matches;\n  const els = [...document.querySelectorAll(\'[data-count]\')];\n  const run = el => {\n    const raw = el.textContent; const m = raw.match(/[\\d.]+/); if (!m || still) return;\n    const end = parseFloat(m[0]); const dec = (m[0].split(\'.\')[1] || \'\').length; const t0 = performance.now(); const dur = 900;\n    const tick = t => { const p = Math.min(1, (t - t0) / dur); const e = 1 - Math.pow(1 - p, 3);\n      el.textContent = raw.replace(m[0], (end * e).toFixed(dec)); if (p < 1) requestAnimationFrame(tick); else el.textContent = raw; };\n    requestAnimationFrame(tick);\n  };\n  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } }), {threshold: .6});\n  els.forEach(el => { if (!/→/.test(el.textContent)) io.observe(el); });\n  const items = [...document.querySelectorAll(\'.words li\')]; const txt = document.querySelector(\'[data-bring-text]\');\n  const pick = li => { items.forEach(x => x.classList.toggle(\'on\', x === li)); if (txt) txt.textContent = li.dataset.text; };\n  items.forEach(li => { li.addEventListener(\'pointerenter\', () => pick(li)); li.addEventListener(\'click\', () => pick(li)); });\n})();\n'
+B_V = hashlib.md5(open(f'{ROOT}/assets/b.css','rb').read()).hexdigest()[:8]
+exec(open(f'{ROOT}/_src/home_b.py').read())
 write('index.html', home(), '')
+write('b/index.html', home_b(), '../')
 write('work/index.html', work(), '../')
 write('about/index.html', about(), '../')
 write('studio/index.html', studio(), '../')
