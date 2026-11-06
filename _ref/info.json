@@ -1,0 +1,67 @@
+{
+ "fonts": [
+  "\"Times New Roman\"",
+  "sans-serif",
+  "Inter, \"Inter Placeholder\", sans-serif",
+  "\"Bebas Neue\", \"Bebas Neue Placeholder\", sans-serif"
+ ],
+ "h1": {
+  "font": "Inter, \"Inter Placeholder\", sans-serif",
+  "size": "211.623px",
+  "weight": "700",
+  "ls": "-12.6974px",
+  "lh": "253.948px",
+  "color": "rgb(255, 255, 255)",
+  "tt": "none"
+ },
+ "h2": {
+  "font": "Inter, \"Inter Placeholder\", sans-serif",
+  "size": "46px",
+  "weight": "600",
+  "ls": "-3.22px",
+  "lh": "50.6px",
+  "color": "rgb(12, 12, 12)",
+  "tt": "none"
+ },
+ "h3": {
+  "font": "Inter, \"Inter Placeholder\", sans-serif",
+  "size": "21px",
+  "weight": "600",
+  "ls": "-0.84px",
+  "lh": "27.3px",
+  "color": "rgb(12, 12, 12)",
+  "tt": "none"
+ },
+ "p": {
+  "font": "Inter, \"Inter Placeholder\", sans-serif",
+  "size": "14px",
+  "weight": "700",
+  "ls": "-0.7px",
+  "lh": "16.8px",
+  "color": "rgb(255, 255, 255)",
+  "tt": "uppercase"
+ },
+ "bgs": {
+  "rgb(255, 255, 255)": 71,
+  "rgb(12, 12, 12)": 2,
+  "rgba(237, 166, 234, 0)": 1,
+  "rgb(0, 0, 0)": 1,
+  "rgb(86, 5, 2)": 3,
+  "rgba(13, 13, 13, 0)": 1,
+  "rgb(238, 173, 192)": 3,
+  "rgb(245, 245, 245)": 1
+ },
+ "cols": {
+  "rgb(0, 0, 238)": 21,
+  "rgb(255, 255, 255)": 45,
+  "rgb(86, 5, 2)": 14,
+  "rgb(238, 173, 192)": 7,
+  "rgb(12, 12, 12)": 40,
+  "rgba(12, 12, 12, 0.6)": 31,
+  "rgb(11, 11, 12)": 702,
+  "rgba(255, 255, 255, 0.2)": 8,
+  "rgba(255, 255, 255, 0.4)": 4,
+  "rgba(255, 255, 255, 0.6)": 3
+ },
+ "cursor": "auto"
+}
