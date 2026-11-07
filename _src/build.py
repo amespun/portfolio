@@ -299,14 +299,14 @@ def card(p, lead=False):
     if p.get('kpis'):
         k = f'<div class="kpis{" notes" if p.get("notes") else ""}">' + ''.join(
             f'<div class="kpi"><strong>{v}</strong>{l}</div>' for v, l in p['kpis']) + '</div>'
-    who = f' <span class="who">· {p["who"]}</span>' if p.get('who') else ''
+    who = f'<b>{p["who"]}</b> · ' if p.get('who') else ''
     sizes = '(max-width: 900px) 100vw, 720px' if lead else '(max-width: 900px) 100vw, 600px'
     return f'''<a class="card{' lead' if lead else ''}" href="@@/work/{p["slug"]}/">
   <div class="media" style="view-transition-name:cover-{p["slug"]}">{pic(p["cover"], p["alt"], sizes)}</div>
   <div class="body">
     {tags(p["tags"])}
-    <h3>{p["title"]}{who}</h3>
-    <p class="role">{p["role"]}</p>
+    <h3>{p["title"]}</h3>
+    <p class="role">{who}{p["role"]}</p>
     {k}
     <span class="more">Read case study {ARROW}</span>
   </div>
@@ -533,9 +533,12 @@ def home():
 def work():
     return head('Work · Aïda Martínez Espún', 'Product design case studies by Aïda Martínez Espún: EV charging, B2B SaaS, marketplaces and more.', '../') + nav('../', 'Work') + f'''
 <main class="wrap" id="main">
-  <section class="page-head">
-    <h1>Work</h1>
-    <p>All {len(PROJECTS)} projects from my full-time roles, with the problem, my role and what changed. Freelance branding and websites live in the <a href="../studio/">studio</a>.</p>
+  <section class="page-head work-head">
+    <h1>Work<sup>{len(PROJECTS)}</sup></h1>
+    <div>
+      <p>Projects from my full-time roles in <strong>B2B and B2C SaaS, marketplaces and green tech</strong>. Each one shows the problem, my role and <strong>what changed</strong>.</p>
+      <a class="more-link" href="../studio/">Branding and websites are in the studio {ARROW}</a>
+    </div>
   </section>
   <section class="section work-all" style="margin-top:48px" aria-label="All projects">
     <div class="grid">{''.join(card(p) for p in PROJECTS)}</div>
@@ -566,8 +569,9 @@ def about():
       <p class="lede">As a side project, I also create <strong>no-code websites</strong>, help <strong>small businesses scale</strong>, do <strong>branding</strong> and design <strong>European-inspired illustrations</strong> that I sell on <strong>Etsy</strong>, blending tech and creativity in hands-on projects.</p>
       {facts()}
     </div>
-    {collage(big=True)}
+    <figure class="about-portrait">{pic(PHOTOS["portrait"], "Aïda Martínez Espún", "(max-width: 900px) 100vw, 640px", eager=True)}</figure>
   </section>
+  <div class="about-photos" aria-hidden="true">{''.join(f'<span class="ph p{i}">{pic(PHOTOS[k], "", "(max-width: 900px) 50vw, 460px")}</span>' for i, k in enumerate(["hike", "smile", "beach"]))}</div>
 
   <section class="section split">
     <h2 class="h2">Experience</h2>
@@ -595,7 +599,7 @@ def about():
   </section>
 
 
-  <section class="band lav say" aria-labelledby="say-h">
+  <section class="band grey say" aria-labelledby="say-h">
     <div class="in">
       <div class="section-head"><h2 id="say-h">What people say</h2></div>
       <div class="quotes">{''.join(quote_html(q) for q in QUOTES)}</div>
