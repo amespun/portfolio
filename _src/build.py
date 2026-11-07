@@ -133,7 +133,7 @@ EDUCATION = [
 ]
 TOOL_ICON = {'Figma': 'figma', 'Storybook': 'storybook', 'Zeroheight': 'zeroheight', 'Framer': 'framer',
              'Claude + Figma': ('claude', 'figma'), 'Figma AI': 'figma', 'Claude': 'claude', 'ChatGPT': 'chatgpt', 'Midjourney': 'midjourney',
-             'Jira & Confluence': 'atlassian', 'Linear': 'linear', 'Miro': 'miro', 'Mobbin': 'mobbin', 'Dribbble': 'dribbble'}
+             'Jira & Confluence': 'atlassian', 'Linear': 'linear', 'Miro': 'miro', 'Mobbin': 'mobbin', 'Dribbble': 'dribbble', 'Lyssna': 'lyssna', 'Clarity': 'clarity', 'Tableau': 'tableau'}
 def brand(n, base='../'):
     k = TOOL_ICON.get(n)
     if not k: return ''
@@ -146,7 +146,7 @@ TOOLS = [
     ('Design', [('Figma', 'Design and prototyping'), ('Storybook', 'Design systems'), ('Zeroheight', 'Design system documentation'), ('Framer', 'Web design')]),
     ('Designing with AI', [('Claude + Figma', 'Agents, skills and connectors that edit my Figma files and design system'), ('Figma AI', 'AI features inside Figma'), ('Claude', 'Brainstorming, research, and building this site on GitHub'), ('ChatGPT', 'Ideation, UI and brand exploration'), ('Midjourney', 'Brand assets')]),
     ('Product & collaboration', [('Jira & Confluence', 'Planning and documentation'), ('Linear', 'Planning'), ('Miro', 'Workshops and brainstorming')]),
-    ('Research & inspiration', [('Mobbin', 'UI patterns'), ('Dribbble', 'Visual inspiration')]),
+    ('Research & data', [('Lyssna', 'Usability testing'), ('Clarity', 'Heatmaps and session recordings'), ('Tableau', 'Data analysis'), ('Mobbin', 'UI patterns'), ('Dribbble', 'Visual inspiration')]),
 ]
 
 

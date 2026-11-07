@@ -763,3 +763,7 @@ html{overflow-x:clip}
 .studio-group .sg-head p{color:var(--ink-2);font-size:1.05rem;line-height:1.5;max-width:52ch}
 .studio-group .sg-head p strong{color:var(--ink);font-weight:600}
 @media (max-width:900px){.studio-group .sg-head{grid-template-columns:1fr}}
+/* LinkedIn card: same calm surface as the Email card, the small "in" badge keeps it recognisable */
+.footer .ch.li{background:rgba(255,255,255,.07)}
+@media (hover:hover) and (pointer:fine){.footer .ch.li:hover{background:rgba(255,255,255,.11)}}
+.footer .ch.li small{color:rgba(255,255,255,.72)}
