@@ -438,7 +438,7 @@ HOME_BRING = [
     ('UX strategy', 'Aligning <strong>product, engineering and design</strong> on what to build and why. Depending on the company, also <strong>support, customer success, sales, marketing and growth</strong>.'),
     ('Design systems', 'Starting design systems <strong>from scratch</strong>, <strong>scaling</strong> them and helping them grow, with <strong>engineers and every stakeholder</strong> on board, and pushing for <strong>adoption</strong>.'),
     ('Product discovery', '<strong>Qualitative and quantitative interviews</strong>, <strong>prototypes</strong> and usability tests on <strong>Lyssna</strong>, before a single sprint is spent.'),
-    ('Growth & data', 'Everything is <strong>tracked</strong>, so <strong>every decision goes with its data</strong>. I analyse the numbers before and after each change.'),
+    ('Growth & data', 'I make <strong>design decisions based on data</strong>: I <strong>analyse product data</strong> to find what to change, and <strong>measure the impact</strong> once it ships.'),
     ('Leadership', '<strong>Mentoring designers</strong> and <strong>raising UX maturity</strong> across teams.'),
 ]
 HOME_STATS = [('−39.8%', 'Support tickets', 'EV charging dashboard for property managers, EVPassport.'),
