@@ -533,12 +533,10 @@ def home():
 def work():
     return head('Work · Aïda Martínez Espún', 'Product design case studies by Aïda Martínez Espún: EV charging, B2B SaaS, marketplaces and more.', '../') + nav('../', 'Work') + f'''
 <main class="wrap" id="main">
-  <section class="page-head work-head">
-    <h1>Work<sup>{len(PROJECTS)}</sup></h1>
-    <div>
-      <p>Projects from my full-time roles in <strong>B2B and B2C SaaS, marketplaces and green tech</strong>. Each one shows the problem, my role and <strong>what changed</strong>.</p>
-      <a class="more-link" href="../studio/">Branding and websites are in the studio {ARROW}</a>
-    </div>
+  <section class="page-head">
+    <h1>Product design case studies</h1>
+    <p><strong>{len(PROJECTS)} projects</strong> from my full-time roles in <strong>B2B and B2C SaaS, marketplaces and green tech</strong>. Each one shows the problem, my role and <strong>what changed</strong>.</p>
+    <a class="more-link" href="../studio/">Studio work {ARROW}</a>
   </section>
   <section class="section work-all" style="margin-top:48px" aria-label="All projects">
     <div class="grid">{''.join(card(p) for p in PROJECTS)}</div>
@@ -612,23 +610,31 @@ def about():
 ''' + contact('../') + foot()
 
 
+STUDIO_GROUPS = [
+    ('Websites and UI', 'No-code websites and interfaces for small businesses, <strong>from the first sketch to launch</strong>.', ['branding-concierge-luxury', 'outweb-studio', 'ui-design']),
+    ('Branding and print', 'Logos, identities and print, <strong>made to feel personal</strong>.', ['personal-branding', 'hairsalon-branding', 'branding-truffle', 'wedding-etsy', 'editorial-design']),
+    ('Illustration and 3D', 'European illustrations I sell on <strong>Etsy</strong>, and interior visualisation.', ['illustrations', 'interior-design']),
+]
+
+
 def studio():
-    items = ''.join(f'''<a class="small" href="@@/studio/{s}/"><div class="media">{pic(SQ + u, "", "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px", w=1600, h=1000)}</div><b>{n} {ARROW}</b><span>{k}</span></a>''' for n, k, s, u in STUDIO if s not in HIDDEN_STUDIO)
-    return head('Studio · Aïda Martínez Espún', 'ämespun studio: freelance UX/UI, no-code websites, branding and illustration by Aïda Martínez Espún.', '../') + nav('../', 'Studio') + f'''
+    by = {sl: (n, k, u) for n, k, sl, u in STUDIO}
+    def item(sl):
+        n, k, u = by[sl]
+        return f'''<a class="small" href="@@/studio/{sl}/"><div class="media">{pic(SQ + u, "", "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px", w=1600, h=1000)}</div><b>{n} {ARROW}</b><span>{k}</span></a>'''
+    groups = ''.join(f'''
+  <section class="section studio-group" aria-labelledby="sg-{i}">
+    <div class="sg-head"><h2 id="sg-{i}">{t}</h2><p>{d}</p></div>
+    <div class="earlier">{''.join(item(x) for x in xs)}</div>
+  </section>''' for i, (t, d, xs) in enumerate(STUDIO_GROUPS))
+    return head('Studio · Aïda Martínez Espún', 'ämespun studio: freelance websites, branding and illustration by Aïda Martínez Espún.', '../') + nav('../', 'Studio') + f'''
 <main class="wrap" id="main">
   <section class="page-head">
     <h1>ämespun studio</h1>
-    <p>Beyond my full-time work, I take on selected freelance projects: UX/UI design, no-code websites, branding and illustration. It’s where I keep my hands on every part of design, from a logo to a launch.</p>
+    <p>My <strong>freelance and side work</strong>, next to my full-time role as a product designer. <strong>Websites, branding and illustration</strong> for small businesses and people with an idea.</p>
+    <a class="more-link" href="../work/">Case studies {ARROW}</a>
   </section>
-  <section class="section services" style="margin-top:48px">
-    <div><b>UX/UI design</b><p>Product and interface design for startups and small teams, from flows to a ready-to-build UI.</p></div>
-    <div><b>No-code websites</b><p>Fast, polished websites for small businesses, built to be easy to update yourself.</p></div>
-    <div><b>Branding & illustration</b><p>Identities, print and illustration with a hand-made touch.</p></div>
-  </section>
-  <section class="section" style="margin-top:72px">
-    <div class="section-head"><h2>Selected studio work</h2></div>
-    <div class="earlier">{items}</div>
-  </section>
+{groups}
 ''' + contact('../') + foot()
 
 

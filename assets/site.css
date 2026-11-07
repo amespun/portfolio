@@ -751,3 +751,15 @@ html{overflow-x:clip}
 .about-mosaic .hike{grid-column:2;grid-row:3/6}
 @media (max-width:900px){.about-mosaic{justify-self:stretch;max-width:none;grid-template-rows:repeat(5,clamp(72px,22vw,120px))}}
 
+
+/* page heads: bold key words and a quiet cross-link */
+.page-head p strong{color:var(--ink);font-weight:600}
+.page-head .more-link{display:inline-flex;margin-top:20px;font-weight:600;font-size:15px}
+
+/* Studio: work grouped by kind, each group explains itself */
+.studio-group{margin-top:clamp(56px,6vw,88px);padding-top:clamp(28px,3vw,40px);border-top:1px solid var(--line)}
+.studio-group .sg-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:12px clamp(32px,5vw,80px);align-items:baseline;margin-bottom:clamp(24px,3vw,36px)}
+.studio-group h2{font-family:var(--display);font-weight:700;font-size:clamp(1.6rem,2.6vw,2.2rem);letter-spacing:-.03em}
+.studio-group .sg-head p{color:var(--ink-2);font-size:1.05rem;line-height:1.5;max-width:52ch}
+.studio-group .sg-head p strong{color:var(--ink);font-weight:600}
+@media (max-width:900px){.studio-group .sg-head{grid-template-columns:1fr}}
