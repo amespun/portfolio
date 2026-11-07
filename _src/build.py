@@ -569,9 +569,8 @@ def about():
       <p class="lede">As a side project, I also create <strong>no-code websites</strong>, help <strong>small businesses scale</strong>, do <strong>branding</strong> and design <strong>European-inspired illustrations</strong> that I sell on <strong>Etsy</strong>, blending tech and creativity in hands-on projects.</p>
       {facts()}
     </div>
-    <figure class="about-portrait">{pic(PHOTOS["portrait"], "Aïda Martínez Espún", "(max-width: 900px) 100vw, 640px", eager=True)}</figure>
+    <div class="about-mosaic">{''.join(f'<span class="ph {k}">{pic(PHOTOS[k], "Aïda Martínez Espún" if k == "portrait" else "", "(max-width: 900px) 50vw, 340px", eager=True)}</span>' for k in ["portrait", "smile", "beach", "hike"])}</div>
   </section>
-  <div class="about-photos" aria-hidden="true">{''.join(f'<span class="ph p{i}">{pic(PHOTOS[k], "", "(max-width: 900px) 50vw, 460px")}</span>' for i, k in enumerate(["hike", "smile", "beach"]))}</div>
 
   <section class="section split">
     <h2 class="h2">Experience</h2>
