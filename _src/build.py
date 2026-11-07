@@ -439,6 +439,7 @@ HOME_BRING = [
     ('Design systems', 'Starting design systems <strong>from scratch</strong>, <strong>scaling</strong> them and helping them grow, with <strong>engineers and every stakeholder</strong> on board, and pushing for <strong>adoption</strong>.'),
     ('Product discovery', '<strong>Qualitative and quantitative interviews</strong>, <strong>prototypes</strong> and usability tests on <strong>Lyssna</strong>, before a single sprint is spent.'),
     ('Growth & data', 'I make <strong>design decisions based on data</strong>: I <strong>analyse product data</strong> to find what to change, and <strong>measure the impact</strong> once it ships.'),
+    ('UI & brand', 'My <strong>design degree</strong> shows in the craft: <strong>polished, consistent UI</strong>, and <strong>brand alignment</strong> when the product needs it.'),
     ('Leadership', '<strong>Mentoring designers</strong> and <strong>raising UX maturity</strong> across teams.'),
 ]
 HOME_STATS = [('−39.8%', 'Support tickets', 'EV charging dashboard for property managers, EVPassport.'),
