@@ -1072,6 +1072,12 @@ B_V = hashlib.md5(open(f'{ROOT}/assets/b.css','rb').read()).hexdigest()[:8]
 exec(open(f'{ROOT}/_src/home_b.py').read())
 write('index.html', home(), '')
 write('b/index.html', home_b(), '../')
+
+C_JS = B_JS.replace("pick = li => { items.forEach(x => x.classList.toggle('on', x === li));", "pick = li => { items.forEach(x => { x.classList.toggle('on', x === li); const b = x.querySelector('button'); if (b) b.setAttribute('aria-pressed', x === li); });")
+C_V = hashlib.md5(open(f'{ROOT}/assets/c.css','rb').read()).hexdigest()[:8]
+exec(open(f'{ROOT}/_src/home_c.py').read())
+write('c/index.html', home_c(), '../')
+
 write('work/index.html', work(), '../')
 write('about/index.html', about(), '../')
 write('studio/index.html', studio(), '../')
