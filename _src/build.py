@@ -434,16 +434,49 @@ def more_work(base=''):
     </a>'''
 
 
+HOME_BRING = [
+    ('UX strategy', 'Aligning <strong>product, engineering and design</strong> on what to build and why. Depending on the company, also <strong>support, customer success, sales, marketing and growth</strong>.'),
+    ('Design systems', 'Starting design systems <strong>from scratch</strong>, <strong>scaling</strong> them and helping them grow, with <strong>engineers and every stakeholder</strong> on board, and pushing for <strong>adoption</strong>.'),
+    ('Product discovery', '<strong>Qualitative and quantitative interviews</strong>, <strong>prototypes</strong> and usability tests on <strong>Lyssna</strong>, before a single sprint is spent.'),
+    ('Growth & data', 'Everything is <strong>tracked</strong>, so <strong>every decision goes with its data</strong>. I analyse the numbers before and after each change.'),
+    ('Leadership', '<strong>Mentoring designers</strong> and <strong>raising UX maturity</strong> across teams.'),
+]
+HOME_STATS = [('−39.8%', 'Support tickets', 'EV charging dashboard for property managers, EVPassport.'),
+              ('+46.6%', 'Engagement', 'App-free EV charging across iOS, Android and App Clip.'),
+              ('7→3 min', 'Onboarding', 'Teampact retrospectives that teams actually finish, Haufe Group.'),
+              ('10+', 'Years in product', 'Startups and scale-ups, from Barcelona to the Netherlands.')]
+HOME_JS = r"""
+// Home: count the numbers up once, and the "What I bring" list
+(() => {
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const run = el => {
+    const raw = el.textContent; const m = raw.match(/[\d.]+/); if (!m || still) return;
+    const end = parseFloat(m[0]); const dec = (m[0].split('.')[1] || '').length; const t0 = performance.now(); const dur = 900;
+    const tick = t => { const p = Math.min(1, (t - t0) / dur); const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = raw.replace(m[0], (end * e).toFixed(dec)); if (p < 1) requestAnimationFrame(tick); else el.textContent = raw; };
+    requestAnimationFrame(tick);
+  };
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } }), {threshold: .6});
+  document.querySelectorAll('[data-count]').forEach(el => { if (!/→/.test(el.textContent)) io.observe(el); });
+  const items = [...document.querySelectorAll('.h-bring .words li')]; const txt = document.querySelector('[data-bring-text]');
+  const pick = li => { items.forEach(x => { x.classList.toggle('on', x === li); x.querySelector('button').setAttribute('aria-pressed', x === li); }); if (txt) txt.innerHTML = li.querySelector('template').innerHTML; };
+  items.forEach(li => { li.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') pick(li); }); li.querySelector('button').addEventListener('click', () => pick(li)); });
+})();
+"""
+
+
 def home():
     beyond = ''.join(
         f'<li><b>{t}</b><p>{d}</p>' + (f'<a class="ext-link" href="{l[1]}">{l[0]} {EXT if l[1].startswith("http") else ARROW}</a>' if l else '') + '</li>' for t, d, l in BEYOND)
+    stats = ''.join(f'<div><dt data-count>{v}</dt><dd><b>{t}</b><span>{d}</span></dd></div>' for v, t, d in HOME_STATS)
+    words = ''.join(f'<li{" class=on" if i == 0 else ""}><button type="button" aria-pressed="{"true" if i == 0 else "false"}">{w}</button><template>{d}</template></li>' for i, (w, d) in enumerate(HOME_BRING))
     return head('Aïda Martínez Espún · Senior Product Designer',
                 'Senior Product Designer in the Netherlands with 10+ years in product design, across B2B and B2C SaaS, marketplaces and green tech.', '') + nav('', None) + f'''
 <main class="wrap" id="main">
   <section class="hero">
     <div>
       <h1>I design B2B and B2C products people stick with.</h1>
-      <p class="lede">Senior Product Designer with 10+ years in product design across SaaS, marketplaces and green tech, from discovery to measurable results.</p>
+      <p class="lede">Senior Product Designer with <strong>10+ years</strong> in product design across <strong>SaaS, marketplaces and green tech</strong>, from discovery to <strong>measurable results</strong>.</p>
       <div class="hero-actions">
         <a class="btn primary" href="#work">View selected work {ARROW_DOWN}</a>
         <button class="btn secondary" type="button" data-copy>{COPY_ICON}{labels("Copy email")}</button>
@@ -453,17 +486,37 @@ def home():
   </section>
   <div class="worked"><p>Worked with</p><ul class="logos" aria-label="Companies I’ve worked with">{''.join(f'<li class="{k}"><img src="{logo_src(u)}" alt="{n}" loading="lazy" decoding="async"></li>' for n, u, k in LOGOS)}</ul></div>
 
+  <section class="band dark h-stats" aria-labelledby="h-stats-h">
+    <div class="in">
+      <div class="h-stats-head">
+        <h2 class="h2" id="h-stats-h">From complex to simple.</h2>
+        <p>Companies bring me their <strong>most complex products</strong>. I make them simple, and <strong>every number behind it is a design decision</strong>. Here’s what my work changed.</p>
+      </div>
+      <dl>{stats}</dl>
+    </div>
+  </section>
+
   <section class="section" id="work">
     <div class="section-head"><h2>Selected work</h2><a class="more-link" href="work/">All {len(PROJECTS)} projects {ARROW}</a></div>
     <div class="grid featured">{card(FEATURED[0], lead=True)}{card(FEATURED[1], lead=True)}</div>
-    {more_work()}
+  </section>
+
+  <section class="band lav h-bring" aria-labelledby="h-bring-h">
+    <div class="in">
+      <div class="left">
+        <h2 class="h2" id="h-bring-h">What I bring</h2>
+        <p data-bring-text aria-live="polite">{HOME_BRING[0][1]}</p>
+      </div>
+      <ul class="words">{words}</ul>
+    </div>
   </section>
 
   <section class="section about-home" id="about">
     {collage()}
     <div class="about-copy">
       <h2 class="h2">Hi, I’m Aïda.</h2>
-      <p>I spent ten years in Barcelona designing B2B and B2C products for Spanish startups and for US, German and UK companies with teams there. Now I’m in the Netherlands. I like the messy part: aligning product, engineering and sales on what to build, then proving it with research and numbers.</p>
+      <p class="subtitle">Crafting digital experiences that matter.</p>
+      <p>I spent <strong>ten years in Barcelona</strong> designing <strong>B2B and B2C products</strong> for Spanish startups and for US, German and UK companies with teams there. Now I’m in <strong>the Netherlands</strong>. I like the messy part: getting <strong>product, engineering and the business aligned</strong> on what to build, then <strong>proving it with research and numbers</strong>.</p>
       {facts()}
       {quote_html(QUOTES[0])}
       <a class="more-link" href="about/">More about me {ARROW}</a>
@@ -474,7 +527,7 @@ def home():
     <div class="intro"><h2 class="h2">Beyond the day job</h2><p>What I design when nobody asks me to.</p></div>
     <ul>{beyond}</ul>
   </section>
-''' + contact() + foot()
+''' + contact() + foot().replace('</script>', HOME_JS + '</script>', 1)
 
 
 def work():
@@ -542,9 +595,11 @@ def about():
   </section>
 
 
-  <section class="section">
-    <div class="section-head"><h2>What people say</h2></div>
-    <div class="quotes">{''.join(quote_html(q) for q in QUOTES)}</div>
+  <section class="band lav say" aria-labelledby="say-h">
+    <div class="in">
+      <div class="section-head"><h2 id="say-h">What people say</h2></div>
+      <div class="quotes">{''.join(quote_html(q) for q in QUOTES)}</div>
+    </div>
   </section>
 
   <section class="section">
@@ -1067,16 +1122,8 @@ def write(rel, html, base):
     open(path, 'w').write(localize(html, base))
 
 
-B_JS = '\n// Version B: count the stats up once, and the "What I bring" list\n(() => {\n  const still = matchMedia(\'(prefers-reduced-motion: reduce)\').matches;\n  const els = [...document.querySelectorAll(\'[data-count]\')];\n  const run = el => {\n    const raw = el.textContent; const m = raw.match(/[\\d.]+/); if (!m || still) return;\n    const end = parseFloat(m[0]); const dec = (m[0].split(\'.\')[1] || \'\').length; const t0 = performance.now(); const dur = 900;\n    const tick = t => { const p = Math.min(1, (t - t0) / dur); const e = 1 - Math.pow(1 - p, 3);\n      el.textContent = raw.replace(m[0], (end * e).toFixed(dec)); if (p < 1) requestAnimationFrame(tick); else el.textContent = raw; };\n    requestAnimationFrame(tick);\n  };\n  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { run(e.target); io.unobserve(e.target); } }), {threshold: .6});\n  els.forEach(el => { if (!/→/.test(el.textContent)) io.observe(el); });\n  const items = [...document.querySelectorAll(\'.words li\')]; const txt = document.querySelector(\'[data-bring-text]\');\n  const pick = li => { items.forEach(x => x.classList.toggle(\'on\', x === li)); if (txt) txt.textContent = li.dataset.text; };\n  items.forEach(li => { li.addEventListener(\'pointerenter\', () => pick(li)); li.addEventListener(\'click\', () => pick(li)); });\n})();\n'
-B_V = hashlib.md5(open(f'{ROOT}/assets/b.css','rb').read()).hexdigest()[:8]
-exec(open(f'{ROOT}/_src/home_b.py').read())
 write('index.html', home(), '')
-write('b/index.html', home_b(), '../')
 
-C_JS = B_JS.replace("pick = li => { items.forEach(x => x.classList.toggle('on', x === li));", "pick = li => { items.forEach(x => { x.classList.toggle('on', x === li); const b = x.querySelector('button'); if (b) b.setAttribute('aria-pressed', x === li); });")
-C_V = hashlib.md5(open(f'{ROOT}/assets/c.css','rb').read()).hexdigest()[:8]
-exec(open(f'{ROOT}/_src/home_c.py').read())
-write('c/index.html', home_c(), '../')
 
 write('work/index.html', work(), '../')
 write('about/index.html', about(), '../')

@@ -658,3 +658,65 @@ p,li,figcaption,blockquote{text-wrap:pretty}
 .cursor-pill.on{opacity:1}
 @media (hover:hover) and (pointer:fine){.has-pill,.has-pill *{cursor:none}}
 @media (prefers-reduced-motion:reduce){.cursor-pill{transition:none}}
+
+/* Colour bands: full-width breaks in the white page. Home: dark numbers + lavender What I bring. About: lavender quotes. */
+html{overflow-x:clip}
+.band{margin-top:clamp(88px,10vw,140px);margin-inline:calc(50% - 50vw);padding:clamp(56px,7vw,104px) 0}
+.band .in{width:var(--wrap);margin-inline:auto}
+.band.dark{background:var(--night);color:#fff}
+.band.lav{background:var(--accent)}
+.band.dark :focus-visible{outline-color:#fff}
+
+/* home: numbers */
+.h-stats-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:24px clamp(32px,5vw,80px);align-items:end}
+.h-stats-head .h2{font-size:clamp(2.2rem,4.2vw,3.6rem);letter-spacing:-.04em;line-height:1}
+.h-stats-head p{color:rgb(255 255 255 / .72);font-size:1.1rem;line-height:1.55;max-width:52ch}
+.h-stats-head p strong{color:#fff;font-weight:600}
+.h-stats dl{margin:clamp(40px,5vw,72px) 0 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px}
+.h-stats dt{font-family:var(--display);font-weight:700;font-size:clamp(2.4rem,4vw,3.6rem);letter-spacing:-.04em;line-height:1;padding-bottom:18px;border-bottom:1px solid rgb(255 255 255 / .2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.h-stats dd{margin:16px 0 0}
+.h-stats dd b{display:block;font-weight:600}
+.h-stats dd span{display:block;margin-top:4px;color:rgb(255 255 255 / .68);font-size:15px;line-height:1.45;max-width:28ch}
+
+/* home: What I bring */
+.h-bring .in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);gap:32px clamp(32px,5vw,80px);align-items:start}
+.h-bring .left p{margin-top:24px;font-family:var(--display);font-weight:500;font-size:clamp(1.15rem,1.6vw,1.4rem);line-height:1.45;letter-spacing:-.01em;max-width:32ch;min-height:6.5em;text-wrap:pretty;color:rgb(26 26 26 / .82)}
+.h-bring .left p strong{font-weight:700;color:var(--ink)}
+.h-bring .words{border-top:1px solid rgb(61 42 138 / .28)}
+.h-bring .words li{border-bottom:1px solid rgb(61 42 138 / .28)}
+.h-bring .words button{all:unset;box-sizing:border-box;display:block;width:100%;padding:8px 0 12px;cursor:pointer;font-family:var(--display);font-weight:700;font-size:clamp(2rem,4.2vw,3.8rem);line-height:1.05;letter-spacing:-.04em;color:rgb(61 42 138 / .4);transition:color .25s ease}
+.h-bring .words li.on button{color:var(--ink)}
+@media (hover:hover) and (pointer:fine){.h-bring .words button:hover{color:rgb(61 42 138 / .7)}}
+.h-bring .words button:focus-visible{outline:2px solid var(--accent-ink);outline-offset:4px;border-radius:4px}
+
+/* home: about subtitle */
+.about-copy .subtitle{margin-top:8px;font-family:var(--display);font-weight:600;font-size:clamp(1.2rem,1.8vw,1.5rem);letter-spacing:-.02em;color:var(--accent-ink)}
+.about-copy .subtitle + p{margin-top:16px}
+
+/* about: quotes on lavender, cards turn white */
+.say .section-head h2{font-weight:700}
+.say .quotes .q{background:#fff}
+.say .q footer b{color:var(--accent-ink)}
+
+/* footer contact cards, smaller */
+.footer .reach{margin-top:24px;gap:10px}
+.footer .ch{min-height:0;padding:14px 18px;gap:14px;border-radius:16px}
+.footer .ic2{width:40px;height:40px;border-radius:12px}
+.footer .ic2 svg{width:19px;height:19px}
+.footer .av,.footer .av img{width:40px;height:40px}
+.footer .av i{width:18px;height:18px;right:-3px;bottom:-3px;border-radius:5px}
+.footer .av i svg{width:12px;height:12px}
+.footer .ch b{font-size:clamp(1rem,1.3vw,1.15rem)}
+.footer .ch small{font-size:12.5px}
+
+@media (max-width:900px){
+  .h-stats-head,.h-bring .in{grid-template-columns:1fr}
+  .h-stats dl{grid-template-columns:1fr 1fr;row-gap:36px}
+  .h-bring .left p{min-height:0}
+}
+@media (max-width:480px){.h-stats dt{font-size:2.2rem}}
+.lede strong,.about-copy > p strong{color:var(--ink);font-weight:600}
+.dock{box-shadow:0 0 0 1px rgb(255 255 255 / .14),0 10px 30px -10px rgb(0 0 0 / .45)}
+.h-bring .words button{color:rgb(61 42 138 / .62)}
+@media (hover:hover) and (pointer:fine){.h-bring .words button:hover{color:rgb(61 42 138 / .85)}}
+.footer .ch.li small{color:rgb(255 255 255 / .9)}
