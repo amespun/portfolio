@@ -297,16 +297,19 @@ def tags(t):
 def card(p, lead=False):
     k = ''
     if p.get('kpis'):
-        k = f'<div class="kpis{" notes" if p.get("notes") else ""}">' + ''.join(
-            f'<div class="kpi"><strong>{v}</strong>{l}</div>' for v, l in p['kpis']) + '</div>'
-    who = f'<b>{p["who"]}</b> · ' if p.get('who') else ''
+        k = f'<dl class="kpis{" notes" if p.get("notes") else ""}">' + ''.join(
+            f'<div class="kpi"><dt>{l}</dt><dd>{v}</dd></div>' for v, l in p['kpis']) + '</dl>'
+    slug = p.get('who', '').lower().replace(' ', '-')
+    co = f'<span class="co"><img src="@@/assets/logos/marks/{slug}.png" alt="" width="22" height="22" loading="lazy" decoding="async">{p["who"]}</span>' if p.get('who') else ''
+    year = p['tags'][-1]
+    chips = ''.join(f'<span class="r">{x}</span>' for x in p['role'].split(' · ')) + ''.join(f'<span>{x}</span>' for x in p['tags'][:-1])
     sizes = '(max-width: 900px) 100vw, 720px' if lead else '(max-width: 900px) 100vw, 600px'
     return f'''<a class="card{' lead' if lead else ''}" href="@@/work/{p["slug"]}/">
   <div class="media" style="view-transition-name:cover-{p["slug"]}">{pic(p["cover"], p["alt"], sizes)}</div>
   <div class="body">
-    {tags(p["tags"])}
+    <div class="card-top">{co}<span class="yr">{year}</span></div>
     <h3>{p["title"]}</h3>
-    <p class="role">{who}{p["role"]}</p>
+    <div class="chips">{chips}</div>
     {k}
     <span class="more">Read case study {ARROW}</span>
   </div>
@@ -537,7 +540,6 @@ def work():
   <section class="page-head">
     <h1>Product design case studies</h1>
     <p><strong>{len(PROJECTS)} projects</strong> from my full-time roles in <strong>B2B and B2C SaaS, marketplaces and green tech</strong>. Each one shows the problem, my role and <strong>what changed</strong>.</p>
-    <a class="more-link" href="../studio/">Studio work {ARROW}</a>
   </section>
   <section class="section work-all" style="margin-top:48px" aria-label="All projects">
     <div class="grid">{''.join(card(p) for p in PROJECTS)}</div>
@@ -633,7 +635,6 @@ def studio():
   <section class="page-head">
     <h1>ämespun studio</h1>
     <p>My <strong>freelance and side work</strong>, next to my full-time role as a product designer. <strong>Websites, branding and illustration</strong> for small businesses and people with an idea.</p>
-    <a class="more-link" href="../work/">Case studies {ARROW}</a>
   </section>
 {groups}
 ''' + contact('../') + foot()

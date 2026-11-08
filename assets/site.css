@@ -767,3 +767,20 @@ html{overflow-x:clip}
 .footer .ch.li{background:rgba(255,255,255,.07)}
 @media (hover:hover) and (pointer:fine){.footer .ch.li:hover{background:rgba(255,255,255,.11)}}
 .footer .ch.li small{color:rgba(255,255,255,.72)}
+
+/* project cards: company badge with logo, role and type chips, metrics in a ruled row */
+.card-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.card .co{display:inline-flex;align-items:center;gap:8px;padding:4px 12px 4px 4px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:14px;font-weight:600;color:var(--ink);white-space:nowrap}
+.card .co img{width:22px;height:22px;border-radius:999px;object-fit:cover;box-shadow:0 0 0 1px rgb(0 0 0 / .06)}
+.card .yr{font-size:14px;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{font-size:13px;font-weight:600;padding:5px 10px;border-radius:999px;background:var(--tile);color:var(--ink-2);white-space:nowrap}
+.chips span.r{background:var(--accent);color:var(--accent-ink)}
+.card .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:16px;margin:2px 0 0;padding-top:14px;border-top:1px solid var(--line)}
+.card .kpi{display:flex;flex-direction:column-reverse;gap:2px;font-size:13px;color:var(--ink-2)}
+.card .kpi dt{line-height:1.35}
+.card .kpi dd{margin:0;font-family:var(--display);font-weight:700;font-size:1.35rem;letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums;line-height:1.1}
+.card.lead .kpi dd{font-size:1.6rem}
+.card .kpis.notes .kpi dd{font-size:1.05rem}
+.card h3{margin-top:2px}
+.card .co img{border-radius:6px}
