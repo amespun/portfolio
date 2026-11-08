@@ -300,16 +300,15 @@ def card(p, lead=False):
         k = f'<dl class="kpis{" notes" if p.get("notes") else ""}">' + ''.join(
             f'<div class="kpi"><dt>{l}</dt><dd>{v}</dd></div>' for v, l in p['kpis']) + '</dl>'
     slug = p.get('who', '').lower().replace(' ', '-')
-    co = f'<span class="co"><img src="@@/assets/logos/marks/{slug}.png" alt="" width="22" height="22" loading="lazy" decoding="async">{p["who"]}</span>' if p.get('who') else ''
+    co = f'<span class="co"><img src="@@/assets/logos/marks/{slug}.png" alt="" width="22" height="22" loading="lazy" decoding="async">{p["who"]}<em>{p["tags"][-1]}</em></span>' if p.get('who') else ''
     year = p['tags'][-1]
     chips = ''.join(f'<span class="r">{x}</span>' for x in p['role'].split(' · ')) + ''.join(f'<span>{x}</span>' for x in p['tags'][:-1])
     sizes = '(max-width: 900px) 100vw, 720px' if lead else '(max-width: 900px) 100vw, 600px'
     return f'''<a class="card{' lead' if lead else ''}" href="@@/work/{p["slug"]}/">
   <div class="media" style="view-transition-name:cover-{p["slug"]}">{pic(p["cover"], p["alt"], sizes)}</div>
   <div class="body">
-    <div class="card-top">{co}<span class="yr">{year}</span></div>
+    <div class="chips">{co}{chips}</div>
     <h3>{p["title"]}</h3>
-    <div class="chips">{chips}</div>
     {k}
     <span class="more">Read case study {ARROW}</span>
   </div>
