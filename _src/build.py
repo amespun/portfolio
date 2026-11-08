@@ -390,36 +390,6 @@ if (spy.length > 1) {
   spy.forEach(s => io.observe(s));
 }
 
-// "View case study" pill that follows the cursor over project cards (mouse only, respects reduced motion)
-(() => {
-  if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-  const pill = document.createElement('div');
-  pill.className = 'cursor-pill'; pill.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(pill);
-  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let x = 0, y = 0, px = 0, py = 0, raf = 0, on = false;
-  const label = a => {
-    const h = a.getAttribute('href') || '';
-    if (h.includes('work/')) return 'View case study';
-    if (h.includes('studio/')) return 'View project';
-    return 'Read article';
-  };
-  const loop = () => {
-    px += (x - px) * (still ? 1 : 0.22); py += (y - py) * (still ? 1 : 0.22);
-    pill.style.transform = `translate3d(${px}px, ${py}px, 0) translate(-50%, -50%) scale(${on ? 1 : 0.6})`;
-    if (on || Math.abs(x - px) > 0.5 || Math.abs(y - py) > 0.5) raf = requestAnimationFrame(loop); else raf = 0;
-  };
-  document.querySelectorAll('a.card, a.small, a.cs-next').forEach(a => {
-    a.classList.add('has-pill');
-    a.addEventListener('pointerenter', e => {
-      pill.innerHTML = label(a) + ' <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-      x = px = e.clientX; y = py = e.clientY; on = true; pill.classList.add('on');
-      if (!raf) raf = requestAnimationFrame(loop);
-    });
-    a.addEventListener('pointerleave', () => { on = false; pill.classList.remove('on'); if (!raf) raf = requestAnimationFrame(loop); });
-  });
-  addEventListener('pointermove', e => { x = e.clientX; y = e.clientY; if (on && !raf) raf = requestAnimationFrame(loop); }, {passive: true});
-})();
 </script>
 </body>
 </html>
