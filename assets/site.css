@@ -786,3 +786,10 @@ html{overflow-x:clip}
 .chips .co em{font-style:normal;font-weight:500;color:var(--ink-2);margin-left:2px}
 .chips span{padding:5px 9px}
 @media (max-width:1360px){.chips{gap:5px}.chips span{font-size:12px;padding:4px 8px}.chips .co{font-size:12px}.chips .co img{width:18px;height:18px}}
+.card-top{align-items:center}
+.card-top .yr{flex:none}
+.card h3 .go{display:inline-block;white-space:nowrap;transition:transform .2s cubic-bezier(.23,1,.32,1)}
+.card h3 .go svg{width:.8em;height:.8em;vertical-align:-.05em}
+@media (hover:hover) and (pointer:fine){.card:hover h3 .go{transform:translateX(4px)}}
+@media (prefers-reduced-motion:reduce){.card h3 .go{transition:none}}
+.chips{gap:5px}.chips span{font-size:12.5px;padding:4px 8px}.chips .co{font-size:12.5px}
