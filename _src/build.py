@@ -582,15 +582,21 @@ def about():
 
 
 STUDIO_GROUPS = [
+    ('Products I build', 'Apps I design and ship end to end, <strong>with AI as my engineering team</strong>.', ['ronda']),
     ('Websites and UI', 'No-code websites and interfaces for small businesses, <strong>from the first sketch to launch</strong>.', ['branding-concierge-luxury', 'outweb-studio', 'ui-design']),
     ('Branding and print', 'Logos, identities and print, <strong>made to feel personal</strong>.', ['personal-branding', 'hairsalon-branding', 'branding-truffle', 'wedding-etsy', 'editorial-design']),
     ('Illustration and 3D', 'European illustrations I sell on <strong>Etsy</strong>, and interior visualisation.', ['illustrations', 'interior-design']),
 ]
 
 
+RONDA_CARD = f'''<a class="small" href="@@/studio/ronda/"><div class="media"><img src="@@/assets/ronda/cover-800.webp" srcset="@@/assets/ronda/cover-800.webp 800w, @@/assets/ronda/cover-1600.webp 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>Ronda recipe app {ARROW}</b><span>Product design + AI-built PWA</span></a>'''
+
+
 def studio():
     by = {sl: (n, k, u) for n, k, sl, u in STUDIO}
     def item(sl):
+        if sl == 'ronda':
+            return RONDA_CARD
         n, k, u = by[sl]
         return f'''<a class="small" href="@@/studio/{sl}/"><div class="media">{pic(SQ + u, "", "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px", w=1600, h=1000)}</div><b>{n} {ARROW}</b><span>{k}</span></a>'''
     groups = ''.join(f'''
@@ -602,7 +608,7 @@ def studio():
 <main class="wrap" id="main">
   <section class="page-head">
     <h1>ämespun studio</h1>
-    <p>My <strong>freelance and side work</strong>, next to my full-time role as a product designer. <strong>Websites, branding and illustration</strong> for small businesses and people with an idea.</p>
+    <p>My <strong>freelance and side work</strong>, next to my full-time role as a product designer. <strong>Apps, websites, branding and illustration</strong> for small businesses, friends and people with an idea.</p>
   </section>
 {groups}
 ''' + contact('../') + foot()
@@ -1071,6 +1077,95 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
     return page + contact('../../') + foot()
 
 
+
+# ---------- Ronda: a product I design and build (hand-written, not from the Squarespace export) ----------
+RONDA = dict(slug='ronda', title='Ronda', alt='Ronda sign-in screen: “Cook what you save.” on a green gingham tablecloth')
+
+
+def rimg(name, alt, w, h, eager=False):
+    srcset = ', '.join(f'@@/assets/ronda/{name}-{x}.webp {x}w' for x in (800, 1600, 2400) if x <= w)
+    load = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
+    return (f'<img src="@@/assets/ronda/{name}-1600.webp" srcset="{srcset}" sizes="(max-width: 1500px) 100vw, 1440px" '
+            f'width="{w}" height="{h}" alt="{alt}" {load}>')
+
+
+RONDA_CH = [
+    ('the-problem', 'The problem', """
+<p class="cs-statement">We save hundreds of recipes. We cook almost none of them.</p>
+<p>Recipes live in Instagram saves, TikTok bookmarks and screenshots. When it’s time to decide what to eat, they’re impossible to find, and the captions are written for engagement, not for cooking: stories before the ingredients, amounts in slang (“a pinch”, “un chorrito”), whole ingredient lists on one line.</p>
+<p>I use recipe apps every week and none of them fitted how my friends and I actually cook: <strong>the same twenty favourite dishes, on rotation</strong>, with a new one tried now and then.</p>"""),
+    ('the-idea', 'The idea', """
+<p><strong>Ronda</strong> is Spanish for <em>a round</em>, as in one more round of tapas. The product is built around repetition: save a recipe from any link in one tap, see how often you cook each dish, and get nudged towards the ones you haven’t made in a while.</p>
+<ul class="cs-points">
+<li><b>Save from anywhere</b><span>Paste an Instagram, TikTok or web link, or a photo of a cookbook page. The recipe comes out clean.</span></li>
+<li><b>Cook again</b><span>Every recipe counts how many times you’ve made it and how often, so favourites resurface on their own.</span></li>
+<li><b>Plan the week</b><span>A light plan, not a meal-prep spreadsheet, with a shopping list that merges ingredients across recipes.</span></li>
+<li><b>Built for the kitchen</b><span>Bold amounts you can read from a metre away, servings that rescale everything, a step-by-step cooking mode with timers.</span></li>
+</ul>"""),
+    ('decisions', 'Key decisions', """
+<h3>Navigation by frequency, not by data model</h3>
+<p>I first folded Favourites into Recipes as a filter, because technically that’s what it is. Thinking about real use changed my mind: cooking a favourite is the most frequent thing people do in the app, so it got its tab back. The shopping list, used weekly, moved inside Plan with a badge for what’s left to buy. The tab bar now follows how often each moment happens: Recipes, Favourites, Fridge, Plan, Profile.</p>
+<h3>“Fridge”: start from what you have</h3>
+<p>A filter would have been the obvious answer to “what can I cook with this courgette?”. I made it a tab instead: tap what’s in your fridge (your most used ingredients, with counts, so nothing leads to zero results) and get <strong>recipes with everything you have</strong>, then those <strong>missing just one thing</strong>. A strict filter returned almost nothing with three ingredients; ranking by what’s missing always gives you something to cook.</p>
+<h3>An importer that cleans up after social media</h3>
+<p>Every import runs through a repair step: stories and sign-offs move to notes, number words become digits, kitchen slang becomes real amounts in four languages, run-on ingredient lists are split, long methods become short steps. Run on my own collection, it <strong>fixed 110 of 295 recipes</strong>, each change reviewed before it was applied, with an undo.</p>
+<h3>Mobile first, then a real desktop</h3>
+<p>Ronda is a PWA installed on the home screen. On a computer the bottom bar becomes a sidebar, recipes go two-column with the ingredients beside the steps, and every touch gesture has a mouse and keyboard twin: hover to delete instead of swipe, arrow keys in cooking mode.</p>"""),
+    ('identity', 'Identity', """
+<p>The brand comes from the table: <strong>a green gingham tablecloth</strong> that runs from the app icon to the launch screen and the profile. The mark is a single lowercase <em>r</em> drawn in Syne, simple enough to read at 16 px. It took many rounds: literal food icons and hand-drawn letters were rejected for feeling dated or generic.</p>"""),
+    ('ai', 'Designing with AI', """
+<p>I designed and shipped Ronda on my own, working with Claude as my engineering team. I set the direction, the product decisions and the quality bar; the AI wrote the code, generated design options, wrote automated tests and reviewed flows against UX heuristics.</p>
+<ul class="cs-points">
+<li><b>Direction stays human</b><span>Most of my time went into deciding, reviewing and saying no: to logos that felt generic, to a navigation that fought real habits.</span></li>
+<li><b>Real use finds real bugs</b><span>I tested on my phone and with friends. iOS quirks, like fixed bars drifting with the keyboard open, only show up in real use.</span></li>
+<li><b>Guardrails</b><span>89 automated tests cover parsing, scaling and imports, so each fix stays fixed.</span></li>
+<li><b>Faster loops</b><span>An idea in the morning was in my friends’ hands by the evening, which changes how much you can learn from them.</span></li>
+</ul>"""),
+    ('whats-next', 'What’s next', """
+<p>Ronda is used by a small group of friends, in Spanish, English, Dutch and French. Next is <strong>sharing cookbooks</strong>: send a whole cookbook as a link and let a friend save the recipes she wants, without building a social network.</p>"""),
+]
+
+
+def ronda_page(nxt):
+    figs = {
+        'identity': f'<div class="cs-wide"><figure class="cs-fig">{rimg("identity", "Ronda app icon, launch screen and sign-in screen, all on the green gingham tablecloth", 2400, 1500)}</figure></div>',
+    }
+    body = ''.join(
+        f'<section class="cs-ch" id="{cid}"><h2>{h}</h2><div class="cs-text">{t}</div>{figs.get(cid, "")}</section>'
+        for cid, h, t in RONDA_CH)
+    index_html = '<nav class="cs-index" aria-label="In this case study"><p>In this case study</p><ol>' + ''.join(
+        f'<li><a href="#{cid}">{h}</a></li>' for cid, h, _ in RONDA_CH) + '</ol></nav>'
+    meta = [('Role', 'Product design<br>Strategy<br>AI-led development'), ('Platform', 'PWA: iPhone, Android<br>and desktop'),
+            ('Stack', 'Next.js, Supabase,<br>Vercel'), ('Languages', 'Spanish, English,<br>Dutch, French')]
+    kpis = [('295', 'recipes in my collection'), ('110', 'repaired by the importer'), ('4', 'languages'), ('89', 'automated tests')]
+    kpi_html = ''.join(f'<div class="kpi"><strong>{v}</strong>{l}</div>' for v, l in kpis)
+    nxt_html = (f'<a class="cs-next" href="@@/studio/{nxt["slug"]}/">'
+                f'<span class="media">{pic(nxt["cover"], "", "(max-width: 900px) 100vw, 560px")}</span>'
+                f'<span class="t"><small>Next studio project</small><b>{nxt["title"]}</b><span class="more">Open {ARROW}</span></span></a>')
+    page = head('Ronda, a recipe app for cooking what you save · Aïda Martínez Espún',
+                'Ronda: a recipe app I designed and built with AI, to save recipes from any link and cook favourites again.',
+                '../../', 'assets/ronda/cover-1600.webp') + nav('../../', 'Studio')
+    page += f"""
+<main class="wrap cs" id="main">
+  <section class="cs-hero">
+    <a class="back" href="@@/studio/">{BACK} All studio work</a>
+    {tags(['Personal product', 'PWA · iOS · Android · Web', '2026'])}
+    <h1>Ronda: a recipe app for cooking what you save</h1>
+    <p class="lede">A recipe app I designed and built for myself and my friends, <strong>with AI as my engineering team</strong>. Save a recipe from any link in one tap, plan the week, and cook your favourites again.</p>
+    {meta_html(meta)}
+    <div class="kpis cs-kpis">{kpi_html}</div>
+  </section>
+  <figure class="cs-cover" style="view-transition-name:cover-ronda">{rimg('cover', RONDA['alt'], 2880, 1620, eager=True)}</figure>
+  {index_html}
+  <article class="cs-body">{body}</article>
+  <nav class="cs-foot" aria-label="More work">
+    {nxt_html}
+    <a class="btn" href="@@/studio/">All studio work {ARROW}</a>
+  </nav>
+"""
+    return page + contact('../../') + foot()
+
+
 def studio_items():
     return [dict(slug=slug, title=n, tags=[k], cover=SQ + u, alt=n, role=k) for n, k, slug, u in STUDIO if slug not in HIDDEN_STUDIO]
 
@@ -1114,6 +1209,7 @@ SI = studio_items()
 for i, p in enumerate(SI):
     nx = SI[(i + 1) % len(SI)]
     write(f'studio/{p["slug"]}/index.html', case_page('designstudio__' + p['slug'], p, '@@/studio/', 'All studio work', nx, f'@@/studio/{nx["slug"]}/', 'studio project'), '../../')
+write('studio/ronda/index.html', ronda_page(SI[0]), '../../')
 og_for(FEATURED[0]['cover'], 'home')
 
 
@@ -1131,7 +1227,7 @@ for slug in HIDDEN_STUDIO:
 for p in SI:
     redirect(f'designstudio/{p["slug"]}/index.html', f'studio/{p["slug"]}/')
 redirect('contact/index.html', '#contact')
-ALL = ['', 'work/', 'about/', 'studio/'] + [f'work/{p["slug"]}/' for p in PROJECTS] + [f'studio/{p["slug"]}/' for p in SI]
+ALL = ['', 'work/', 'about/', 'studio/'] + [f'work/{p["slug"]}/' for p in PROJECTS] + [f'studio/{p["slug"]}/' for p in SI] + ['studio/ronda/']
 open(f'{ROOT}/sitemap.xml', 'w').write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + ''.join(f'  <url><loc>{SITE_URL}{u}</loc></url>\n' for u in ALL) + '</urlset>\n')
 open(f'{ROOT}/robots.txt', 'w').write(f'User-agent: *\nAllow: /\nDisallow: /_export/\nSitemap: {SITE_URL}sitemap.xml\n')
 # 404: GitHub Pages serves it at any depth, so every link is absolute
