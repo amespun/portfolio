@@ -589,7 +589,7 @@ STUDIO_GROUPS = [
 ]
 
 
-RONDA_CARD = f'''<a class="small" href="@@/studio/ronda/"><div class="media"><img src="@@/assets/ronda/cover-800.webp" srcset="@@/assets/ronda/cover-800.webp 800w, @@/assets/ronda/cover-1600.webp 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>Ronda recipe app {ARROW}</b><span>Product strategy, UX and brand · AI-built PWA</span></a>'''
+RONDA_CARD = f'''<a class="small" href="@@/studio/ronda/"><div class="media"><img src="@@/assets/ronda/cover-800.webp?v=3" srcset="@@/assets/ronda/cover-800.webp?v=3 800w, @@/assets/ronda/cover-1600.webp?v=3 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>Ronda recipe app {ARROW}</b><span>Product strategy, UX and brand · AI-built PWA</span></a>'''
 
 
 def studio():
@@ -1079,13 +1079,15 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
 
 
 # ---------- Ronda: a product I design and build (hand-written, not from the Squarespace export) ----------
+RONDA_V = 3
 RONDA = dict(slug='ronda', title='Ronda', alt='Ronda on a laptop and an iPhone: a lentil stew recipe with its cook count, rating and ingredients')
 
 
 def rimg(name, alt, w, h, eager=False):
-    srcset = ', '.join(f'@@/assets/ronda/{name}-{x}.webp {x}w' for x in (800, 1600, 2400) if x <= w)
+    # ?v= changes whenever the pictures are redone, so browsers don't keep the old ones.
+    srcset = ', '.join(f'@@/assets/ronda/{name}-{x}.webp?v={RONDA_V} {x}w' for x in (800, 1600, 2400) if x <= w)
     load = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
-    return (f'<img src="@@/assets/ronda/{name}-1600.webp" srcset="{srcset}" sizes="(max-width: 1500px) 100vw, 1440px" '
+    return (f'<img src="@@/assets/ronda/{name}-1600.webp?v={RONDA_V}" srcset="{srcset}" sizes="(max-width: 1500px) 100vw, 1440px" '
             f'width="{w}" height="{h}" alt="{alt}" {load}>')
 
 
@@ -1166,6 +1168,7 @@ def ronda_page(nxt):
     figs = {
         'strategy': fig('screens-core', 'Ronda on iPhone: the recipe library, a recipe with cook count and rating, and the step-by-step cooking mode'),
         'decisions': fig('screens-fridge', 'The Fridge tab: chosen ingredients, most-used ingredients with counts, and recipes that use everything selected'),
+        'features': fig('mockup-profile', 'Ronda on two iPhones: the profile with cooking stats and favourite dishes, and Fridge results for chocolate, flour and egg'),
         'growth': fig('screens-plan', 'The weekly plan with the shopping list button, and the profile with cooking stats and the dishes cooked most'),
         'desktop': fig('screens-desktop', 'Ronda on desktop: sidebar navigation, recipe photo beside the title, ingredients beside the method'),
         'identity': fig('identity', 'Ronda app icon, launch screen and sign-in screen, all on the green gingham tablecloth'),
