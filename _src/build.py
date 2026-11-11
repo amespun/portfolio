@@ -1079,7 +1079,7 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
 
 
 # ---------- Ronda: a product I design and build (hand-written, not from the Squarespace export) ----------
-RONDA = dict(slug='ronda', title='Ronda', alt='Ronda sign-in screen: “Cook what you save.” on a green gingham tablecloth')
+RONDA = dict(slug='ronda', title='Ronda', alt='Ronda on a laptop and an iPhone: a lentil stew recipe with its cook count, rating and ingredients')
 
 
 def rimg(name, alt, w, h, eager=False):
@@ -1172,7 +1172,7 @@ def ronda_page(nxt):
     {meta_html(meta)}
     <div class="kpis cs-kpis">{kpi_html}</div>
   </section>
-  <figure class="cs-cover" style="view-transition-name:cover-ronda">{rimg('cover', RONDA['alt'], 2880, 1620, eager=True)}</figure>
+  <figure class="cs-cover" style="view-transition-name:cover-ronda">{rimg('cover', RONDA['alt'], 2400, 1350, eager=True)}</figure>
   {index_html}
   <article class="cs-body">{body}</article>
   <nav class="cs-foot" aria-label="More work">
