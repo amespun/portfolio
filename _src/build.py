@@ -589,7 +589,7 @@ STUDIO_GROUPS = [
 ]
 
 
-RONDA_CARD = f'''<a class="small" href="@@/studio/ronda/"><div class="media"><img src="@@/assets/ronda/cover-800.webp?v=4" srcset="@@/assets/ronda/cover-800.webp?v=4 800w, @@/assets/ronda/cover-1600.webp?v=4 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>Ronda recipe app {ARROW}</b><span>Designed and built solo, entirely with AI</span></a>'''
+RONDA_CARD = f'''<a class="small" href="@@/studio/ronda/"><div class="media"><img src="@@/assets/ronda/cover-800.webp?v=5" srcset="@@/assets/ronda/cover-800.webp?v=5 800w, @@/assets/ronda/cover-1600.webp?v=5 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>Ronda recipe app {ARROW}</b><span>Designed and built solo, entirely with AI</span></a>'''
 
 
 def studio():
@@ -1079,8 +1079,8 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
 
 
 # ---------- Ronda: a product I design and build (hand-written, not from the Squarespace export) ----------
-RONDA_V = 4
-RONDA = dict(slug='ronda', title='Ronda', alt='Ronda on a laptop showing a lentil stew recipe, and on an iPhone showing the profile with cooking stats')
+RONDA_V = 5
+RONDA = dict(slug='ronda', title='Ronda', alt='Ronda in a kitchen: a brownie recipe on a laptop on the counter, and on an iPhone beside it')
 
 
 def rimg(name, alt, w, h, eager=False):
@@ -1092,73 +1092,62 @@ def rimg(name, alt, w, h, eager=False):
 
 
 RONDA_CH = [
-    ('context', 'Context and opportunity', """
+    ('opportunity', 'The opportunity', """
 <p class="cs-statement">People save hundreds of recipes. They cook almost none of them.</p>
-<p>Saving has become effortless: a tap on Instagram or TikTok. Cooking from those saves hasn’t. Recipes end up scattered across bookmarks and screenshots, and social captions are written for engagement rather than for use: a story first, amounts in slang (“a pinch”, “un chorrito”), whole ingredient lists on a single line.</p>
-<p>Talking to friends and auditing my own collection, one behaviour stood out: <strong>most weeknight meals are repeats</strong>. People rotate twenty or so trusted dishes and try something new now and then. Existing recipe apps are optimised for discovery. The underserved job is the opposite one.</p>
-<blockquote><strong>Job to be done.</strong> When I’m deciding what to cook tonight, I want to find a dish I know works, with what I already have, so I can start cooking without thinking about it.</blockquote>"""),
+<p>Saving takes one tap; cooking from those saves doesn’t. And most weeknight meals are repeats: people rotate around twenty trusted dishes. Recipe apps optimise for discovery. <strong>The underserved job is cooking again.</strong></p>
+<blockquote><strong>Job to be done:</strong> when I’m deciding what to cook tonight, I want a dish I know works, with what I have, so I can start without thinking.</blockquote>"""),
+    ('journey', 'User journey', """
+<p>I mapped the path from a saved post to a dish on repeat. Drop-off happens at three points: <strong>capture</strong> (messy captions), <strong>decide</strong> (decision fatigue) and <strong>repeat</strong> (favourites forgotten). Ronda is designed around those moments.</p>"""),
     ('strategy', 'Product strategy', """
-<p>I positioned Ronda as a <strong>retention product, not a discovery product</strong>. <em>Ronda</em> is Spanish for <em>a round</em>, as in one more round of tapas, and the whole experience is built around one loop: save, plan, cook, log, resurface.</p>
+<p>A <strong>retention product, not a discovery one</strong>. <em>Ronda</em> means <em>a round</em> in Spanish, and the product is one loop:</p>
 <ul class="cs-points">
-<li><b>Save</b><span>Import from any link or a photo of a cookbook page, cleaned into a usable recipe in seconds.</span></li>
-<li><b>Plan</b><span>A light weekly plan instead of a meal-prep spreadsheet, with one merged shopping list.</span></li>
-<li><b>Cook and log</b><span>A hands-free cooking mode; “I made it today” records each time a dish is cooked.</span></li>
-<li><b>Resurface</b><span>Cook counts and rhythm (“every 3 weeks”) bring favourites back before they’re forgotten.</span></li>
+<li><b>Save</b><span>Any link or a photo, cleaned into a usable recipe.</span></li>
+<li><b>Plan</b><span>A light weekly plan and one merged shopping list.</span></li>
+<li><b>Cook and log</b><span>Hands-free cooking mode; “I made it today”.</span></li>
+<li><b>Resurface</b><span>Cook counts and rhythm bring favourites back.</span></li>
 </ul>
-<p>The metric that best captures value is <strong>recipes cooked per active user per week</strong>. Saves are a vanity metric here: a saved recipe that is never cooked is a failure of the product, not a success.</p>"""),
-    ('decisions', 'Key product decisions', """
-<h3>Information architecture led by frequency of use</h3>
-<p>I initially folded Favourites into Recipes as a filter, since that’s what it is in the data model. Mapping how often each moment happens reversed that call: cooking a known favourite is the most frequent task in the product, so it earned a permanent tab. The shopping list, used weekly, moved inside Plan with a badge for what’s left to buy. The navigation now mirrors usage, not the database: Recipes, Favourites, Fridge, Plan, Profile.</p>
-<h3>“Fridge”: start from what you have</h3>
-<p>“What can I make with this courgette?” is a daily question, so it got a dedicated entry point rather than a hidden filter. Users tap the ingredients they have, chosen from their own most-used ingredients with result counts, so a tap never leads to an empty state. Results are ranked into <strong>everything you have</strong> and <strong>just one thing missing</strong>: a strict AND filter returned almost nothing with three ingredients, while partial matching always gives the user a next step.</p>
+<p>North-star metric: <strong>recipes cooked per active user per week</strong>. Saves alone are a vanity metric.</p>"""),
+    ('decisions', 'Key decisions', """
+<h3>Navigation by frequency of use</h3>
+<p>Cooking a favourite is the most frequent task, so Favourites got a tab; the weekly shopping list moved inside Plan.</p>
+<h3>Fridge: start from what you have</h3>
+<p>Pick ingredients, see recipes with <strong>everything you have</strong>, then those <strong>missing one thing</strong>. A strict filter returned almost nothing; partial matches always give a next step.</p>
 <h3>Activation depends on import quality</h3>
-<p>The first imported recipe is the activation moment. If it arrives broken, trust is lost before the user cooks anything. Every import now runs through a repair pipeline: stories and sign-offs move to notes, number words become digits, kitchen slang becomes real quantities in four languages, run-on lists are split and long methods become short steps. Run against a real collection, it <strong>repaired 110 of 295 recipes</strong>, with every change reviewable and reversible.</p>
-<h3>Designed for the kitchen</h3>
-<p>Quantities in bold and readable from a distance, servings that rescale every amount, ingredient icons for quick scanning, and a step-by-step cooking mode with timers and the ingredients each step needs.</p>"""),
-    ('growth', 'Growth and retention levers', """
+<p>The first imported recipe is the activation moment. A repair pipeline cleans every import and <strong>fixed 110 of 295</strong> recipes in a real collection.</p>"""),
+    ('growth', 'Growth and retention', """
 <ul class="cs-points">
-<li><b>No empty first run</b><span>New accounts start with example recipes already rated and cooked, so the value of logging is visible before users add anything.</span></li>
-<li><b>Re-engagement</b><span>A weekly planning reminder at a time each user chooses, morning or evening, plus a gentle “fancy something new?” nudge on the home screen.</span></li>
-<li><b>Built-in distribution</b><span>Every recipe can be shared as a link that opens without an account and invites the recipient to save it, turning sharing into acquisition.</span></li>
-<li><b>Low-friction access</b><span>A PWA: no app store, installs from the browser, works on iPhone, Android and desktop, in Spanish, English, Dutch and French.</span></li>
+<li><b>No empty first run</b><span>New accounts start with example recipes, already rated and cooked.</span></li>
+<li><b>Re-engagement</b><span>A weekly planning reminder at the time each user picks.</span></li>
+<li><b>Built-in distribution</b><span>Shared recipe links open without an account and invite a save.</span></li>
+<li><b>Low friction</b><span>A PWA: no app store, four languages, phone and desktop.</span></li>
 </ul>
-<p>Ronda is in a closed beta with a small group of users. Next on the roadmap is instrumenting the funnel: <strong>activation</strong> (first imported recipe cooked), <strong>retention</strong> (weekly cooking) and <strong>referral</strong> (shared links that convert to accounts).</p>"""),
-    ('features', 'What’s in the product', """
-<p>A complete product rather than a prototype: every flow below is live and in daily use.</p>
+<p>Next: instrument activation, weekly retention and referral conversion.</p>"""),
+    ('product', 'The product', """
 <ul class="cs-points">
-<li><b>Capture</b><span>Import from Instagram, TikTok, YouTube and recipe websites; scan a cookbook page from a photo; dictate; paste text; or write from scratch.</span></li>
-<li><b>Organise</b><span>Cookbooks with photo collages, tags, favourites, archive and a 30-day bin. Multi-select to move, tag or delete in bulk.</span></li>
-<li><b>Cook</b><span>Servings that rescale every quantity, ingredient icons, bold amounts, a step-by-step cooking mode with timers, ratings and a cooking log.</span></li>
-<li><b>Fridge</b><span>Find recipes by the ingredients you have, ranked by what’s missing, with a “quick” filter for 30 minutes or less.</span></li>
-<li><b>Plan and shop</b><span>A weekly plan with ideas to try and dishes due again; a shopping list merged across recipes and grouped by aisle, shareable with a link.</span></li>
-<li><b>Profile</b><span>Personal stats, what you cook most, a monthly cooking history and a customisable cover.</span></li>
-<li><b>Platform</b><span>Installable PWA, weekly push reminders, four languages with automatic translation of recipes, and a full desktop layout.</span></li>
-<li><b>Trust</b><span>Undo on destructive actions, every import repair reviewable, photos optimised for storage, data export.</span></li>
+<li><b>Capture</b><span>Instagram, TikTok, YouTube and web imports, photo scan, dictation.</span></li>
+<li><b>Organise</b><span>Cookbooks, tags, favourites, bulk actions, 30-day bin.</span></li>
+<li><b>Cook</b><span>Scaled bold amounts, ingredient icons, cooking mode with timers.</span></li>
+<li><b>Plan and shop</b><span>Weekly plan, ideas due again, list grouped by aisle.</span></li>
+<li><b>Profile</b><span>Cooking stats, what you cook most, monthly history.</span></li>
+<li><b>Platform</b><span>Push reminders, auto-translated recipes, full desktop layout.</span></li>
 </ul>"""),
-    ('desktop', 'Mobile first, desktop as a real product', """
-<p>Planning happens on the sofa, cooking happens in the kitchen, often with a laptop on the counter. On larger screens the tab bar becomes a sidebar, recipes go two-column with the ingredients beside the method, and every touch gesture has a mouse and keyboard equivalent: hover actions instead of swipes, arrow keys in cooking mode, “/” to search.</p>"""),
-    ('identity', 'Brand identity', """
-<p>The identity comes from the table: <strong>a green gingham tablecloth</strong> that carries from the app icon to the launch screen and the profile. The mark is a single lowercase <em>r</em> set in Syne, legible at 16 px. Literal food icons and hand-drawn letters were explored and rejected as generic or dated.</p>"""),
-    ('ai', 'Designing and shipping with AI', """
-<p>I owned Ronda end to end, from discovery and strategy to design and release, working with Claude as my engineering team. I set the direction, the product decisions and the quality bar; the AI implemented features, generated design options, wrote automated tests and reviewed flows against usability heuristics.</p>
-<ul class="cs-points">
-<li><b>Judgement stays human</b><span>Most of my time went into prioritising, reviewing and saying no: to generic logo routes, to an architecture that fought real habits.</span></li>
-<li><b>Real use finds real issues</b><span>Testing on devices with real users surfaced what simulations miss, such as fixed bars drifting with the iOS keyboard open.</span></li>
-<li><b>Quality guardrails</b><span>89 automated tests cover parsing, scaling and imports, so every fix stays fixed.</span></li>
-<li><b>Shorter learning loops</b><span>Feedback in the morning, a fix in users’ hands by the evening. Iteration speed becomes a product advantage.</span></li>
-</ul>
-<h3>The toolkit</h3>
-<p>I worked with Claude through <strong>skills</strong>: reusable instructions that turn a general model into a specialist for one kind of work. Each phase used the right one.</p>
+    ('desktop', 'Desktop', """
+<p>Planning often happens on a laptop. On large screens the tab bar becomes a sidebar, ingredients sit beside the method, and every gesture has a mouse and keyboard twin.</p>"""),
+    ('identity', 'Brand', """
+<p><strong>A green gingham tablecloth</strong> from icon to launch screen, and a single lowercase <em>r</em> in Syne, legible at 16 px.</p>"""),
+    ('ai', 'Built solo with AI', """
+<p class="cs-statement">One designer, no engineers. 100% of the code written by AI.</p>
+<p>I owned strategy, UX, brand and every product decision; Claude did the engineering. I worked through <strong>skills</strong>, specialist instructions for each phase:</p>
 <ul>
-<li><strong>Discovery and UX:</strong> a UX design reviewer skill for heuristic critiques of flows and screens, and a UX copywriting skill for microcopy across four languages.</li>
-<li><strong>Brand:</strong> logo design and graphic design skills to explore concept routes, test the mark at small sizes and produce the icon set.</li>
-<li><strong>Interface:</strong> frontend design and UI quality skills for layout, typography and the responsive adaptation to desktop; mobile-native guidance for iOS PWA behaviour.</li>
-<li><strong>Engineering:</strong> Next.js and Vercel best-practice skills for the app architecture and deployment; Supabase for data, auth and storage.</li>
-<li><strong>QA:</strong> an in-app browser to test real screens at phone and desktop sizes, plus automated tests run before every release.</li>
+<li><strong>UX:</strong> UX design reviewer and UX copywriter</li>
+<li><strong>Brand:</strong> logo design and graphic design</li>
+<li><strong>Interface:</strong> frontend design, UI quality and mobile-native PWA guidance</li>
+<li><strong>Engineering:</strong> Next.js and Vercel best practices, Supabase</li>
+<li><strong>QA:</strong> in-app browser testing at phone and desktop sizes, 89 automated tests</li>
 </ul>
-<p>The workflow stayed the same for every feature: <strong>brief, options, critique, build, test on device, ship</strong>, with continuous deployment so each change was live within minutes.</p>"""),
+<p>Every feature followed the same loop: <strong>brief, options, critique, build, test on device, ship</strong>, live within minutes. My time went into judgement: prioritising, reviewing and saying no.</p>"""),
     ('next', 'What’s next', """
-<p>The next bet is <strong>shared cookbooks</strong>: send a whole cookbook as a link and let a friend save the recipes she wants. It extends the existing sharing loop into a stronger acquisition channel without the cost of building a social network. Alongside it, funnel analytics to validate the north-star metric before exploring monetisation.</p>"""),
+<p><strong>Shared cookbooks</strong>: send a whole cookbook as a link, turning the sharing loop into an acquisition channel, then validate the north-star metric before monetisation.</p>"""),
 ]
 
 
@@ -1166,10 +1155,10 @@ def ronda_page(nxt):
     def fig(name, alt):
         return f'<div class="cs-wide"><figure class="cs-fig">{rimg(name, alt, 2400, 1500)}</figure></div>'
     figs = {
-        'strategy': fig('screens-core', 'Ronda on iPhone: the recipe library, a recipe with cook count and rating, and the step-by-step cooking mode'),
+        'journey': f'<div class="cs-wide"><figure class="cs-fig">{rimg("journey", "User journey map with seven stages, from discovering a recipe to cooking it again, showing pains before Ronda and the Ronda moment at each stage", 2400, 1300)}</figure></div>',
+        'strategy': fig('screens-core', 'Ronda on iPhone: the recipe library, a brownie recipe with cook count and rating, and the step-by-step cooking mode'),
         'decisions': fig('screens-fridge', 'The Fridge tab: chosen ingredients, most-used ingredients with counts, and recipes that use everything selected'),
-        'features': fig('mockup-profile', 'Ronda on two iPhones: the profile with cooking stats and favourite dishes, and Fridge results for chocolate, flour and egg'),
-        'growth': fig('screens-plan', 'The weekly plan with the shopping list button, and the profile with cooking stats and the dishes cooked most'),
+        'product': fig('mockup-profile', 'Ronda on two iPhones: the profile with cooking stats and favourite dishes, and Fridge results'),
         'desktop': fig('screens-desktop', 'Ronda on desktop: sidebar navigation, recipe photo beside the title, ingredients beside the method'),
         'identity': fig('identity', 'Ronda app icon, launch screen and sign-in screen, all on the green gingham tablecloth'),
     }
@@ -1194,7 +1183,7 @@ def ronda_page(nxt):
     <a class="back" href="@@/studio/">{BACK} All studio work</a>
     {tags(['Built solo with AI', 'PWA · iOS · Android · Web', '2026'])}
     <h1>Ronda: turning saved recipes into meals cooked again</h1>
-    <p class="lede">A recipe product I took from insight to launch <strong>on my own, built entirely with AI</strong>: no engineers, no agency. I led the product strategy, UX and brand; AI wrote every line of code. It closes the gap between saving a recipe on social media and actually cooking it, again and again.</p>
+    <p class="lede">A recipe product I took from insight to launch <strong>on my own, built entirely with AI</strong>. It closes the gap between saving a recipe on social media and cooking it, again and again.</p>
     {meta_html(meta)}
     <div class="kpis cs-kpis">{kpi_html}</div>
   </section>
