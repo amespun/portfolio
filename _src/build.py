@@ -1121,6 +1121,18 @@ RONDA_CH = [
 <li><b>Low-friction access</b><span>A PWA: no app store, installs from the browser, works on iPhone, Android and desktop, in Spanish, English, Dutch and French.</span></li>
 </ul>
 <p>Ronda is in a closed beta with a small group of users. Next on the roadmap is instrumenting the funnel: <strong>activation</strong> (first imported recipe cooked), <strong>retention</strong> (weekly cooking) and <strong>referral</strong> (shared links that convert to accounts).</p>"""),
+    ('features', 'What’s in the product', """
+<p>A complete product rather than a prototype: every flow below is live and in daily use.</p>
+<ul class="cs-points">
+<li><b>Capture</b><span>Import from Instagram, TikTok, YouTube and recipe websites; scan a cookbook page from a photo; dictate; paste text; or write from scratch.</span></li>
+<li><b>Organise</b><span>Cookbooks with photo collages, tags, favourites, archive and a 30-day bin. Multi-select to move, tag or delete in bulk.</span></li>
+<li><b>Cook</b><span>Servings that rescale every quantity, ingredient icons, bold amounts, a step-by-step cooking mode with timers, ratings and a cooking log.</span></li>
+<li><b>Fridge</b><span>Find recipes by the ingredients you have, ranked by what’s missing, with a “quick” filter for 30 minutes or less.</span></li>
+<li><b>Plan and shop</b><span>A weekly plan with ideas to try and dishes due again; a shopping list merged across recipes and grouped by aisle, shareable with a link.</span></li>
+<li><b>Profile</b><span>Personal stats, what you cook most, a monthly cooking history and a customisable cover.</span></li>
+<li><b>Platform</b><span>Installable PWA, weekly push reminders, four languages with automatic translation of recipes, and a full desktop layout.</span></li>
+<li><b>Trust</b><span>Undo on destructive actions, every import repair reviewable, photos optimised for storage, data export.</span></li>
+</ul>"""),
     ('desktop', 'Mobile first, desktop as a real product', """
 <p>Planning happens on the sofa, cooking happens in the kitchen, often with a laptop on the counter. On larger screens the tab bar becomes a sidebar, recipes go two-column with the ingredients beside the method, and every touch gesture has a mouse and keyboard equivalent: hover actions instead of swipes, arrow keys in cooking mode, “/” to search.</p>"""),
     ('identity', 'Brand identity', """
@@ -1132,7 +1144,17 @@ RONDA_CH = [
 <li><b>Real use finds real issues</b><span>Testing on devices with real users surfaced what simulations miss, such as fixed bars drifting with the iOS keyboard open.</span></li>
 <li><b>Quality guardrails</b><span>89 automated tests cover parsing, scaling and imports, so every fix stays fixed.</span></li>
 <li><b>Shorter learning loops</b><span>Feedback in the morning, a fix in users’ hands by the evening. Iteration speed becomes a product advantage.</span></li>
-</ul>"""),
+</ul>
+<h3>The toolkit</h3>
+<p>I worked with Claude through <strong>skills</strong>: reusable instructions that turn a general model into a specialist for one kind of work. Each phase used the right one.</p>
+<ul>
+<li><strong>Discovery and UX:</strong> a UX design reviewer skill for heuristic critiques of flows and screens, and a UX copywriting skill for microcopy across four languages.</li>
+<li><strong>Brand:</strong> logo design and graphic design skills to explore concept routes, test the mark at small sizes and produce the icon set.</li>
+<li><strong>Interface:</strong> frontend design and UI quality skills for layout, typography and the responsive adaptation to desktop; mobile-native guidance for iOS PWA behaviour.</li>
+<li><strong>Engineering:</strong> Next.js and Vercel best-practice skills for the app architecture and deployment; Supabase for data, auth and storage.</li>
+<li><strong>QA:</strong> an in-app browser to test real screens at phone and desktop sizes, plus automated tests run before every release.</li>
+</ul>
+<p>The workflow stayed the same for every feature: <strong>brief, options, critique, build, test on device, ship</strong>, with continuous deployment so each change was live within minutes.</p>"""),
     ('next', 'What’s next', """
 <p>The next bet is <strong>shared cookbooks</strong>: send a whole cookbook as a link and let a friend save the recipes she wants. It extends the existing sharing loop into a stronger acquisition channel without the cost of building a social network. Alongside it, funnel analytics to validate the north-star metric before exploring monetisation.</p>"""),
 ]
@@ -1142,8 +1164,9 @@ def ronda_page(nxt):
     def fig(name, alt):
         return f'<div class="cs-wide"><figure class="cs-fig">{rimg(name, alt, 2400, 1500)}</figure></div>'
     figs = {
-        'strategy': fig('screens-core', 'Ronda on iPhone: the recipe library, a recipe with cook count and rating, and ingredients with bold quantities'),
-        'decisions': fig('screens-fridge', 'The Fridge tab: chosen ingredients, most-used ingredients with counts, and recipes that use everything selected') + fig('screens-plan', 'The weekly plan with the shopping list button, and the step-by-step cooking mode'),
+        'strategy': fig('screens-core', 'Ronda on iPhone: the recipe library, a recipe with cook count and rating, and the step-by-step cooking mode'),
+        'decisions': fig('screens-fridge', 'The Fridge tab: chosen ingredients, most-used ingredients with counts, and recipes that use everything selected'),
+        'growth': fig('screens-plan', 'The weekly plan with the shopping list button, and the profile with cooking stats and the dishes cooked most'),
         'desktop': fig('screens-desktop', 'Ronda on desktop: sidebar navigation, recipe photo beside the title, ingredients beside the method'),
         'identity': fig('identity', 'Ronda app icon, launch screen and sign-in screen, all on the green gingham tablecloth'),
     }
