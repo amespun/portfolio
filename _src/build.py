@@ -589,7 +589,7 @@ STUDIO_GROUPS = [
 ]
 
 
-RONDA_CARD = f'''<a class="small" href="@@/studio/ronda/"><div class="media"><img src="@@/assets/ronda/cover-800.webp?v=3" srcset="@@/assets/ronda/cover-800.webp?v=3 800w, @@/assets/ronda/cover-1600.webp?v=3 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>Ronda recipe app {ARROW}</b><span>Product strategy, UX and brand · AI-built PWA</span></a>'''
+RONDA_CARD = f'''<a class="small" href="@@/studio/ronda/"><div class="media"><img src="@@/assets/ronda/cover-800.webp?v=4" srcset="@@/assets/ronda/cover-800.webp?v=4 800w, @@/assets/ronda/cover-1600.webp?v=4 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>Ronda recipe app {ARROW}</b><span>Designed and built solo, entirely with AI</span></a>'''
 
 
 def studio():
@@ -1079,8 +1079,8 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
 
 
 # ---------- Ronda: a product I design and build (hand-written, not from the Squarespace export) ----------
-RONDA_V = 3
-RONDA = dict(slug='ronda', title='Ronda', alt='Ronda on a laptop and an iPhone: a lentil stew recipe with its cook count, rating and ingredients')
+RONDA_V = 4
+RONDA = dict(slug='ronda', title='Ronda', alt='Ronda on a laptop showing a lentil stew recipe, and on an iPhone showing the profile with cooking stats')
 
 
 def rimg(name, alt, w, h, eager=False):
@@ -1178,9 +1178,9 @@ def ronda_page(nxt):
         for cid, h, t in RONDA_CH)
     index_html = '<nav class="cs-index" aria-label="In this case study"><p>In this case study</p><ol>' + ''.join(
         f'<li><a href="#{cid}">{h}</a></li>' for cid, h, _ in RONDA_CH) + '</ol></nav>'
-    meta = [('Role', 'Founder and product designer<br>Strategy, UX, brand'), ('Scope', 'Discovery to launch<br>AI-assisted development'),
+    meta = [('Role', 'Founder and product designer<br>Strategy, UX, brand'), ('Built with', 'AI only: Claude and<br>specialist skills'),
             ('Platform', 'PWA: iPhone, Android<br>and desktop'), ('Stage', 'Closed beta<br>4 languages')]
-    kpis = [('110 / 295', 'imported recipes auto-repaired'), ('89', 'automated tests'), ('1', 'designer, end to end')]
+    kpis = [('1', 'designer, 0 engineers'), ('100%', 'of the code written by AI'), ('110 / 295', 'imported recipes auto-repaired')]
     kpi_html = ''.join(f'<div class="kpi"><strong>{v}</strong>{l}</div>' for v, l in kpis)
     nxt_html = (f'<a class="cs-next" href="@@/studio/{nxt["slug"]}/">'
                 f'<span class="media">{pic(nxt["cover"], "", "(max-width: 900px) 100vw, 560px")}</span>'
@@ -1192,9 +1192,9 @@ def ronda_page(nxt):
 <main class="wrap cs" id="main">
   <section class="cs-hero">
     <a class="back" href="@@/studio/">{BACK} All studio work</a>
-    {tags(['Personal product', 'PWA · iOS · Android · Web', '2026'])}
+    {tags(['Built solo with AI', 'PWA · iOS · Android · Web', '2026'])}
     <h1>Ronda: turning saved recipes into meals cooked again</h1>
-    <p class="lede">A recipe product I took from insight to launch on my own: <strong>product strategy, UX and brand</strong>, shipped with AI as my engineering team. It closes the gap between saving a recipe on social media and actually cooking it, again and again.</p>
+    <p class="lede">A recipe product I took from insight to launch <strong>on my own, built entirely with AI</strong>: no engineers, no agency. I led the product strategy, UX and brand; AI wrote every line of code. It closes the gap between saving a recipe on social media and actually cooking it, again and again.</p>
     {meta_html(meta)}
     <div class="kpis cs-kpis">{kpi_html}</div>
   </section>
