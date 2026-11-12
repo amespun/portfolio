@@ -582,7 +582,7 @@ def about():
 
 
 STUDIO_GROUPS = [
-    ('Products I build', 'Apps I design and ship end to end, <strong>with AI as my engineering team</strong>.', ['ronda']),
+    ('Products I build with AI', 'Live, working apps I take from idea to launch <strong>on my own</strong>: strategy, UX and brand by me, every line of code written with AI. Not concepts, shipped products.', ['ronda']),
     ('Websites and UI', 'No-code websites and interfaces for small businesses, <strong>from the first sketch to launch</strong>.', ['branding-concierge-luxury', 'outweb-studio', 'ui-design']),
     ('Branding and print', 'Logos, identities and print, <strong>made to feel personal</strong>.', ['personal-branding', 'hairsalon-branding', 'branding-truffle', 'wedding-etsy', 'editorial-design']),
     ('Illustration and 3D', 'European illustrations I sell on <strong>Etsy</strong>, and interior visualisation.', ['illustrations', 'interior-design']),
