@@ -589,7 +589,7 @@ STUDIO_GROUPS = [
 ]
 
 
-RONDA_CARD = f'''<a class="small" href="@@/studio/ronda/"><div class="media"><img src="@@/assets/ronda/cover-800.webp?v=5" srcset="@@/assets/ronda/cover-800.webp?v=5 800w, @@/assets/ronda/cover-1600.webp?v=5 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>Ronda recipe app {ARROW}</b><span>Designed and built solo, entirely with AI</span></a>'''
+RONDA_CARD = f'''<a class="small" href="@@/studio/ronda/"><div class="media"><img src="@@/assets/ronda/cover-800.webp?v=6" srcset="@@/assets/ronda/cover-800.webp?v=6 800w, @@/assets/ronda/cover-1600.webp?v=6 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>Ronda recipe app {ARROW}</b><span>Designed and built solo, entirely with AI</span></a>'''
 
 
 def studio():
@@ -1079,8 +1079,8 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
 
 
 # ---------- Ronda: a product I design and build (hand-written, not from the Squarespace export) ----------
-RONDA_V = 5
-RONDA = dict(slug='ronda', title='Ronda', alt='Ronda in a kitchen: a brownie recipe on a laptop on the counter, and on an iPhone beside it')
+RONDA_V = 6
+RONDA = dict(slug='ronda', title='Ronda', alt='Ronda on two iPhones: the profile with cooking stats and favourite dishes, and Fridge results for chocolate, flour and egg')
 
 
 def rimg(name, alt, w, h, eager=False):
@@ -1158,7 +1158,7 @@ def ronda_page(nxt):
         'journey': f'<div class="cs-wide"><figure class="cs-fig">{rimg("journey", "User journey map with seven stages, from discovering a recipe to cooking it again, showing pains before Ronda and the Ronda moment at each stage", 2400, 1300)}</figure></div>',
         'strategy': fig('screens-core', 'Ronda on iPhone: the recipe library, a brownie recipe with cook count and rating, and the step-by-step cooking mode'),
         'decisions': fig('screens-fridge', 'The Fridge tab: chosen ingredients, most-used ingredients with counts, and recipes that use everything selected'),
-        'product': fig('mockup-profile', 'Ronda on two iPhones: the profile with cooking stats and favourite dishes, and Fridge results'),
+        'product': fig('mockup-cook', 'Ronda on two iPhones: a brownie recipe with its rating and cook count, and the step-by-step cooking mode'),
         'desktop': fig('screens-desktop', 'Ronda on desktop: sidebar navigation, recipe photo beside the title, ingredients beside the method'),
         'identity': fig('identity', 'Ronda app icon, launch screen and sign-in screen, all on the green gingham tablecloth'),
     }
