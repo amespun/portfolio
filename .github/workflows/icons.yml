@@ -11,19 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: |
-          mkdir -p _leo
-          dl() { curl -sSL -A "Mozilla/5.0" "$2" -o "_leo/$1"; }
-          dl photo.jpg "https://media.licdn.com/dms/image/v2/D4D03AQGrv-4NR-rjAw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1724670813507?e=1796256000&v=beta&t=aAq_uVbPKW5kXvLJiT3zCV-ErZGyYx-isvofOSfl0B8"
-          dl jzg.jpg "https://media.licdn.com/dms/image/v2/C560BAQHKfPR_LoewJw/company-logo_200_200/company-logo_200_200/0/1630654212684/jan_zandbergen_world_wide_quality_in_meat_logo?e=1796256000&v=beta&t=dNicgWwWakOxfCMV8HcvVmwV9IxiDkMvvJHiwzqLhEk"
-          dl jzg100.jpg "https://media.licdn.com/dms/image/v2/C560BAQHKfPR_LoewJw/company-logo_100_100/company-logo_100_100/0/1630654212684/jan_zandbergen_world_wide_quality_in_meat_logo?e=1796256000&v=beta&t=dNicgWwWakOxfCMV8HcvVmwV9IxiDkMvvJHiwzqLhEk"
-          dl amadeus.jpg "https://media.licdn.com/dms/image/v2/D4D0BAQG4fET5G1jx8w/company-logo_100_100/company-logo_100_100/0/1698053556150/amadeus_logo?e=1796256000&v=beta&t=EfXieVlFd3OmigPXZPlpuyLUFTax26uz2aLDGtY7aX8"
-          dl safeguard.img "https://media.licdn.com/dms/image/v2/D560BAQHFobYJkyahrg/company-logo_100_100/company-logo_100_100/0/1720722366811/safeguard_globl_logo?e=1796256000&v=beta&t=KBXT-nstqtbWxXPclCrP6dWZWpx6JpI2iC_mLhsIQsU"
-          dl ptc.jpg "https://media.licdn.com/dms/image/v2/D4E0BAQEpBSyxBzIEhw/company-logo_100_100/company-logo_100_100/0/1719854960782/ptcinc_logo?e=1796256000&v=beta&t=Oc3FslpCALGECTPRGLwTq48nudTYToxtj0dfbiK8rsY"
-          dl esendex.jpg "https://media.licdn.com/dms/image/v2/D4E0BAQFXfk99mKUktQ/company-logo_100_100/B4EZ6R2gvfHsAI-/0/1780563447480/esendex_logo?e=1796256000&v=beta&t=C5qH7zeFKSB4XisoGmFoZqIbbtlrChtVht47aJLmMwM"
-          dl bridgestone.jpg "https://media.licdn.com/dms/image/v2/C560BAQGSpqXBktdOFQ/company-logo_100_100/company-logo_100_100/0/1631330556083?e=1796256000&v=beta&t=bZPy8BpMu2LrCH0ICqamUX-zv8cEScmrxOAjGsIRzAc"
-          dl degustabox.jpg "https://media.licdn.com/dms/image/v2/C4D0BAQFrdBBMER0vTw/company-logo_100_100/company-logo_100_100/0/1630525868183/degustabox_logo?e=1796256000&v=beta&t=Wq3Eozi4qLz7BbRXheTb3wOY8XBODcYCPvlAQ8S8CU4"
-          dl ultima.jpg "https://media.licdn.com/dms/image/v2/D4E0BAQF4dAQ54UHQOg/company-logo_100_100/B4EaEcBRBNH4AI-/0/1791471456756/ultima_displays_france_logo?e=1796256000&v=beta&t=ucnouyyg61wlcuv-PEFvWnM6IB5PpciH5mY_FP0RtsY"
-          dl evernex.jpg "https://media.licdn.com/dms/image/v2/C560BAQEYqVkiVP-1yg/company-logo_100_100/company-logo_100_100/0/1631392959354?e=1796256000&v=beta&t=dyS2d0Rq6X2Zoati1A69fObVZCcjraLGUCbHMiLwEis"
-          file _leo/*
+          python3 .github/scripts/logos.py
+          ls -la _leo/logos
           git config user.name "github-actions"; git config user.email "actions@github.com"
-          git add _leo && git commit -m "Fetched profile assets" && git push
+          git add _leo && git commit -m "Fetched wordmark logos" && git push
