@@ -589,7 +589,7 @@ STUDIO_GROUPS = [
 ]
 
 
-RONDA_CARD = f'''<a class="small" href="@@/studio/ronda/"><div class="media"><img src="@@/assets/ronda/cover-800.webp?v=9" srcset="@@/assets/ronda/cover-800.webp?v=9 800w, @@/assets/ronda/cover-1600.webp?v=9 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>Ronda recipe app {ARROW}</b><span>Designed and built solo, entirely with AI</span></a>'''
+RONDA_CARD = f'''<a class="small" href="@@/studio/ronda/"><div class="media"><img src="@@/assets/ronda/card-800.webp?v=10" srcset="@@/assets/ronda/card-800.webp?v=10 800w, @@/assets/ronda/card-1600.webp?v=10 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>Ronda recipe app {ARROW}</b><span>Designed and built solo, entirely with AI</span></a>'''
 
 
 def studio():
@@ -1079,8 +1079,8 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
 
 
 # ---------- Ronda: a product I design and build (hand-written, not from the Squarespace export) ----------
-RONDA_V = 9
-RONDA = dict(slug='ronda', title='Ronda', alt='Ronda on two iPhones: the profile with cooking stats and favourite dishes, and Fridge results for chocolate, flour and egg')
+RONDA_V = 10
+RONDA = dict(slug='ronda', title='Ronda', alt='Ronda on an iPhone standing on a kitchen counter, showing the recipe library with cookbooks')
 
 
 def rimg(name, alt, w, h, eager=False):
@@ -1180,7 +1180,7 @@ def ronda_page(nxt):
     {meta_html(meta)}
     <div class="kpis cs-kpis">{kpi_html}</div>
   </section>
-  <figure class="cs-cover" style="view-transition-name:cover-ronda">{rimg('cover', RONDA['alt'], 2400, 1350, eager=True)}</figure>
+  <figure class="cs-cover" style="view-transition-name:cover-ronda;aspect-ratio:3/2">{rimg('cover', RONDA['alt'], 2400, 1600, eager=True)}</figure>
   {index_html}
   <article class="cs-body">{body}</article>
   <nav class="cs-foot" aria-label="More work">
