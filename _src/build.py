@@ -589,7 +589,7 @@ STUDIO_GROUPS = [
 ]
 
 
-RONDA_CARD = f'''<a class="small" href="@@/studio/ronda/"><div class="media"><img src="@@/assets/ronda/cover-800.webp?v=7" srcset="@@/assets/ronda/cover-800.webp?v=7 800w, @@/assets/ronda/cover-1600.webp?v=7 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>Ronda recipe app {ARROW}</b><span>Designed and built solo, entirely with AI</span></a>'''
+RONDA_CARD = f'''<a class="small" href="@@/studio/ronda/"><div class="media"><img src="@@/assets/ronda/cover-800.webp?v=8" srcset="@@/assets/ronda/cover-800.webp?v=8 800w, @@/assets/ronda/cover-1600.webp?v=8 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>Ronda recipe app {ARROW}</b><span>Designed and built solo, entirely with AI</span></a>'''
 
 
 def studio():
@@ -1079,7 +1079,7 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
 
 
 # ---------- Ronda: a product I design and build (hand-written, not from the Squarespace export) ----------
-RONDA_V = 7
+RONDA_V = 8
 RONDA = dict(slug='ronda', title='Ronda', alt='Ronda on two iPhones: the profile with cooking stats and favourite dishes, and Fridge results for chocolate, flour and egg')
 
 
@@ -1113,7 +1113,7 @@ RONDA_CH = [
 <h3>Fridge: start from what you have</h3>
 <p>Pick ingredients, see recipes with <strong>everything you have</strong>, then those <strong>missing one thing</strong>. A strict filter returned almost nothing; partial matches always give a next step.</p>
 <h3>Activation depends on import quality</h3>
-<p>The first imported recipe is the activation moment. A repair pipeline cleans every import and <strong>fixed 110 of 295</strong> recipes in a real collection.</p>"""),
+<p>The first imported recipe is the activation moment. Users add a recipe from a link, a photo, their voice or pasted text, and <strong>Ronda recognises the title, ingredients, quantities, servings and steps automatically</strong>: nothing to type out. A repair pipeline then fixes what social captions get wrong; it <strong>cleaned 110 of 295</strong> recipes in a real collection.</p>"""),
     ('growth', 'Growth and retention', """
 <ul class="cs-points">
 <li><b>No empty first run</b><span>New accounts start with example recipes, already rated and cooked.</span></li>
@@ -1157,7 +1157,7 @@ def ronda_page(nxt):
     figs = {
         'journey': f'<div class="cs-wide"><figure class="cs-fig">{rimg("journey", "User journey map with seven stages, from discovering a recipe to cooking it again, showing pains before Ronda and the Ronda moment at each stage", 2400, 1300)}</figure></div>',
         'strategy': fig('screens-core', 'Ronda on iPhone: the recipe library, a brownie recipe with cook count and rating, and the step-by-step cooking mode'),
-        'decisions': fig('screens-fridge', 'The Fridge tab: chosen ingredients, most-used ingredients with counts, and recipes that use everything selected') + f'<div class="cs-wide"><figure class="cs-fig">{rimg("import", "Import flow: a messy Instagram caption with the title after a promo and fourteen ingredients on one line, turned by Ronda into a clean recipe with the right title, servings and one ingredient per line", 2400, 1400)}</figure></div>',
+        'decisions': fig('screens-fridge', 'The Fridge tab: chosen ingredients, most-used ingredients with counts, and recipes that use everything selected') + f'<div class="cs-wide"><figure class="cs-fig">{rimg("import", "Adding a recipe: four ways in (link, photo, dictation, pasted text), then a messy Instagram caption that Ronda reads automatically into a clean recipe with the right title, servings and one ingredient per line", 2400, 1800)}</figure></div>',
         'product': fig('mockup-cook', 'Ronda on two iPhones: a brownie recipe with its rating and cook count, and the step-by-step cooking mode'),
         'desktop': fig('screens-desktop', 'Ronda on desktop: sidebar navigation, recipe photo beside the title, ingredients beside the method'),
         'identity': fig('identity', 'Ronda app icon, launch screen and sign-in screen, all on the green gingham tablecloth'),
