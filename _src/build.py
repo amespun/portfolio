@@ -473,6 +473,19 @@ def home():
     <div class="grid featured">{card(FEATURED[0], lead=True)}{card(FEATURED[1], lead=True)}</div>
   </section>
 
+  <section class="section ai-build" aria-labelledby="ai-build-h">
+    <a class="ai-build__card" href="studio/ronda/">
+      <div class="ai-build__text">
+        <span class="ai-build__tag">Side project · built solo with AI</span>
+        <h2 class="h2" id="ai-build-h">Products I build with AI</h2>
+        <p><strong>Ronda</strong>, a recipe app I took from idea to launch on my own: strategy, UX and brand by me, every line of code written with AI. Live and in use.</p>
+        <ul class="ai-build__stats"><li><b>1</b>designer, 0 engineers</li><li><b>4</b>languages</li><li><b>110/295</b>recipes auto-repaired</li></ul>
+        <span class="more-link">Read the case study {ARROW}</span>
+      </div>
+      <div class="ai-build__media"><img src="assets/ronda/card-1600.webp?v=10" srcset="assets/ronda/card-800.webp?v=10 800w, assets/ronda/card-1600.webp?v=10 1600w" sizes="(max-width: 900px) 100vw, 640px" width="1600" height="1000" alt="Ronda on an iPhone on a kitchen counter, showing the recipe library" loading="lazy" decoding="async"></div>
+    </a>
+  </section>
+
   <section class="band lav h-bring" aria-labelledby="h-bring-h">
     <div class="in">
       <div class="left">

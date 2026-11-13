@@ -793,3 +793,15 @@ html{overflow-x:clip}
 @media (hover:hover) and (pointer:fine){.card:hover h3 .go{transform:translateX(4px)}}
 @media (prefers-reduced-motion:reduce){.card h3 .go{transition:none}}
 .chips{gap:5px}.chips span{font-size:12.5px;padding:4px 8px}.chips .co{font-size:12.5px}
+
+/* Home: products I build with AI */
+.ai-build__card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(28px,4vw,56px);align-items:center;padding:clamp(24px,4vw,40px);border-radius:24px;background:#e8f2ec;color:inherit;text-decoration:none;transition:transform .5s var(--ease-out)}
+.ai-build__tag{display:inline-block;font-size:13px;font-weight:600;color:#0f6a47;background:#fff;border-radius:999px;padding:6px 12px;margin-bottom:18px}
+.ai-build__text p{color:var(--ink-2);line-height:1.55;margin-top:14px;max-width:46ch}
+.ai-build__stats{list-style:none;padding:0;margin:22px 0 24px;display:flex;flex-wrap:wrap;gap:10px 28px}
+.ai-build__stats li{font-size:14.5px;color:var(--ink-2)}
+.ai-build__stats b{display:block;font-family:var(--display);font-size:1.6rem;font-weight:700;color:var(--ink);letter-spacing:-.02em}
+.ai-build__media{border-radius:16px;overflow:hidden;aspect-ratio:16/10}
+.ai-build__media img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-out)}
+@media (hover:hover){.ai-build__card:hover .ai-build__media img{transform:scale(1.03)}}
+@media (max-width:900px){.ai-build__card{grid-template-columns:1fr}.ai-build__media{order:-1}}
