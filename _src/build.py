@@ -589,7 +589,7 @@ STUDIO_GROUPS = [
 ]
 
 
-RONDA_CARD = f'''<a class="small" href="@@/studio/ronda/"><div class="media"><img src="@@/assets/ronda/cover-800.webp?v=8" srcset="@@/assets/ronda/cover-800.webp?v=8 800w, @@/assets/ronda/cover-1600.webp?v=8 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>Ronda recipe app {ARROW}</b><span>Designed and built solo, entirely with AI</span></a>'''
+RONDA_CARD = f'''<a class="small" href="@@/studio/ronda/"><div class="media"><img src="@@/assets/ronda/cover-800.webp?v=9" srcset="@@/assets/ronda/cover-800.webp?v=9 800w, @@/assets/ronda/cover-1600.webp?v=9 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>Ronda recipe app {ARROW}</b><span>Designed and built solo, entirely with AI</span></a>'''
 
 
 def studio():
@@ -1079,7 +1079,7 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
 
 
 # ---------- Ronda: a product I design and build (hand-written, not from the Squarespace export) ----------
-RONDA_V = 8
+RONDA_V = 9
 RONDA = dict(slug='ronda', title='Ronda', alt='Ronda on two iPhones: the profile with cooking stats and favourite dishes, and Fridge results for chocolate, flour and egg')
 
 
@@ -1123,14 +1123,7 @@ RONDA_CH = [
 </ul>
 <p>Next: instrument activation, weekly retention and referral conversion.</p>"""),
     ('product', 'The product', """
-<ul class="cs-points">
-<li><b>Capture</b><span>Instagram, TikTok, YouTube and web imports, photo scan, dictation.</span></li>
-<li><b>Organise</b><span>Cookbooks, tags, favourites, bulk actions, 30-day bin.</span></li>
-<li><b>Cook</b><span>Scaled bold amounts, ingredient icons, cooking mode with timers.</span></li>
-<li><b>Plan and shop</b><span>Weekly plan, ideas due again, list grouped by aisle.</span></li>
-<li><b>Profile</b><span>Cooking stats, what you cook most, monthly history.</span></li>
-<li><b>Platform</b><span>Push reminders, auto-translated recipes, full desktop layout.</span></li>
-</ul>"""),
+<p>Seven flows on one board: <strong>save, plan, cook and repeat</strong> as a loop, plus the ways to decide, organise and set it up.</p>"""),
     ('desktop', 'Desktop', """
 <p>Planning often happens on a laptop. On large screens the tab bar becomes a sidebar, ingredients sit beside the method, and every gesture has a mouse and keyboard twin.</p>"""),
     ('identity', 'Brand', """
@@ -1158,7 +1151,7 @@ def ronda_page(nxt):
         'journey': f'<div class="cs-wide"><figure class="cs-fig">{rimg("journey", "User journey map with seven stages, from discovering a recipe to cooking it again, showing pains before Ronda and the Ronda moment at each stage", 2400, 1300)}</figure></div>',
         'strategy': fig('screens-core', 'Ronda on iPhone: the recipe library, a brownie recipe with cook count and rating, and the step-by-step cooking mode'),
         'decisions': fig('screens-fridge', 'The Fridge tab: chosen ingredients, most-used ingredients with counts, and recipes that use everything selected') + f'<div class="cs-wide"><figure class="cs-fig">{rimg("import", "Adding a recipe: four ways in (link, photo, dictation, pasted text), then a messy Instagram caption that Ronda reads automatically into a clean recipe with the right title, servings and one ingredient per line", 2400, 1800)}</figure></div>',
-        'product': fig('mockup-cook', 'Ronda on two iPhones: a brownie recipe with its rating and cook count, and the step-by-step cooking mode'),
+        'product': f'<div class="cs-wide"><figure class="cs-fig">{rimg("flows", "Sticky-note board of everything you can do in Ronda: save a recipe, decide what to cook, plan and shop, cook, repeat, organise and settings, each with its steps", 2400, 1579)}</figure></div>' + fig('mockup-cook', 'Ronda on two iPhones: a brownie recipe with its rating and cook count, and the step-by-step cooking mode') + fig('mockup-settings', 'Ronda on two iPhones: the Favourites tab with cook counts and ratings, and the Settings screen'),
         'desktop': fig('screens-desktop', 'Ronda on desktop: sidebar navigation, recipe photo beside the title, ingredients beside the method'),
         'identity': fig('identity', 'Ronda app icon, launch screen and sign-in screen, all on the green gingham tablecloth'),
     }
