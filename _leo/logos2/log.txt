@@ -1,0 +1,8 @@
+ok bridgestone-a
+ERR bridgestone-b HTTP Error 404: Not Found
+ERR webfleet HTTP Error 404: Not Found
+https://www.esendex.com/ :: 
+https://www.esendex.co.uk/ :: /wp-content/themes/esendex/assets/img/logo.svg | https://www.esendex.co.uk/wp-content/uploads/cropped-Esendex-Logo-Icon-Only-RASTER-scaled-1-32x32.png | https://www.esendex.co.uk/wp-content/uploads/cropped-Esendex-Logo-Icon-Only-RASTER-scaled-1-192x192.png | https://www.esendex.co.uk/wp-content/uploads/cropped-Esendex-Logo-Icon-Only-RASTER-scaled-1-180x180.png | https://www.esendex.co.uk/wp-content/themes/esendex/assets/img/logo.svg | https://www.esendex.co.uk/wp-content/themes/esendex/assets/img/logo-white.svg
+https://www.esendex.fr/ :: /wp-content/themes/esendex/assets/img/logo.svg | https://www.esendex.fr/wp-content/themes/esendex/assets/img/logo.svg | https://www.esendex.fr/wp-content/themes/esendex/assets/img/logo-white.svg
+https://www.bridgestone.eu/ :: 
+https://www.bridgestone.com/ :: 
