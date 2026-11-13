@@ -611,6 +611,8 @@ def studio():
         if sl == 'ronda':
             return RONDA_CARD
         n, k, u = by[sl]
+        if sl == 'hairsalon-branding':
+            return f'''<a class="small" href="@@/studio/{sl}/"><div class="media"><img src="@@/assets/studio/hairsalon-card-800.webp" srcset="@@/assets/studio/hairsalon-card-800.webp 800w, @@/assets/studio/hairsalon-card-1600.webp 1600w" sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px" width="1600" height="1000" alt="" loading="lazy" decoding="async"></div><b>{n} {ARROW}</b><span>{k}</span></a>'''
         return f'''<a class="small" href="@@/studio/{sl}/"><div class="media">{pic(SQ + u, "", "(max-width: 600px) 100vw, (max-width: 900px) 50vw, 380px", w=1600, h=1000)}</div><b>{n} {ARROW}</b><span>{k}</span></a>'''
     groups = ''.join(f'''
   <section class="section studio-group" aria-labelledby="sg-{i}">
