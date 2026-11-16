@@ -58,7 +58,8 @@ EARLIER = [
     dict(slug='ai-fleet-manager', who='Papaya Dash', short='AI fleet copilot', title='An AI copilot for EV and fleet operators',
          tags=['B2B SaaS', 'Web · AI', '2025'], role='Senior product designer · 6-month discovery',
          cover=img('b6360d8e-ed74-455e-b96f-69a1f3dede55/amespun_Close-up_photorealistic_MacBook_Pro_mockup_screen_filli_22854080-d1da-4904-8233-ccfdfb577dc2.jpg', 1000),
-         alt='AI fleet manager dashboard on a laptop'),
+         alt='AI fleet manager dashboard on a laptop',
+         kpis=[('Waiting list', 'of fleets, before any code'), ('Research → MVP', 'in a 6-month discovery')], notes=True),
     dict(slug='design-system', who='Badi', short='Habitat design system', title='Habitat: the first design system at Badi',
          tags=['B2C marketplace', 'Design system', '2020'], role='Product designer',
          cover=img('1728240600202-H45QN2VOYDR7WRLR74MV/Screenshot+2024-10-06+at+20.49.23.png', 1000), alt='Habitat design system components'),
@@ -74,7 +75,7 @@ EARLIER = [
 PROJECTS = [EARLIER[0], FEATURED[0], FEATURED[1], FEATURED[2], FEATURED[3], EARLIER[1], EARLIER[2], EARLIER[3]]
 BEYOND = [
     ('Illustration', 'European-inspired illustrations and watercolour prints that I design and sell on Etsy.', ('Visit the Etsy shop', 'https://www.etsy.com/shop/amespunn')),
-    ('ämespun studio', 'Branding and fast no-code websites for small businesses, in four languages.', ('See studio work', 'studio/')),
+    ('ämespun studio', 'Branding, and websites and apps built with AI, for small businesses and my own products, in four languages.', ('See studio work', 'studio/')),
     ('Mentoring', 'Mentor on ADPList for designers at every stage.', ('Book a session', 'https://adplist.org/mentors/aida-martinez-espun')),
     ('Writing', 'Case studies and process notes on Medium and Prototypr.', ('Read on Medium', 'https://medium.com/@amespun')),
 ]
@@ -548,10 +549,10 @@ def about():
       <h1>Senior Product Designer, specialised in Business UX Strategy, B2B2C SaaS</h1>
       <p class="lede"><strong>10+ years</strong> of experience in <strong>startups</strong> and <strong>scale-ups</strong>, and <strong>15+ years</strong> in the <strong>design</strong> field. I specialise in <strong>UX strategy</strong>, <strong>design systems</strong>, and aligning user experience with <strong>business impact</strong>, particularly in <strong>B2B2C SaaS</strong>.</p>
       <p class="lede">I thrive on solving <strong>complex problems</strong>, <strong>strategic thinking</strong>, <strong>scaling</strong> design processes, and <strong>collaborating</strong> across <strong>product</strong>, <strong>engineering</strong> and <strong>leadership</strong> teams. I’ve also been a <strong>mentor</strong> on <strong>ADPList</strong>, supporting the next generation of designers. I’m a <strong>people person</strong>: I do my best work <strong>face to face</strong>, so I enjoy going to the office and working side by side with my team, not 100% remote.</p>
-      <p class="lede">As a side project, I also create <strong>no-code websites</strong>, help <strong>small businesses scale</strong>, do <strong>branding</strong> and design <strong>European-inspired illustrations</strong> that I sell on <strong>Etsy</strong>, blending tech and creativity in hands-on projects.</p>
+      <p class="lede">As a side project, I do <strong>branding</strong> and build <strong>websites and apps with AI</strong> for <strong>small businesses</strong> and my own products, and I design <strong>European-inspired illustrations</strong> that I sell on <strong>Etsy</strong>, blending tech and creativity in hands-on projects.</p>
       {facts()}
     </div>
-    <div class="about-mosaic">{''.join(f'<span class="ph {k}">{pic(PHOTOS[k], "Aïda Martínez Espún" if k == "portrait" else "", "(max-width: 900px) 50vw, 340px", eager=True)}</span>' for k in ["portrait", "smile", "beach", "hike"])}</div>
+    <div class="about-mosaic"><span class="ph portrait"><img src="@@/assets/img/793587e8-8abb-42ed-bd6b-bdae4ff21f79-800.webp" srcset="@@/assets/img/793587e8-8abb-42ed-bd6b-bdae4ff21f79-800.webp 800w, @@/assets/img/793587e8-8abb-42ed-bd6b-bdae4ff21f79-1280.webp 1280w" sizes="(max-width: 900px) 62vw, 430px" width="1280" height="1280" alt="Aïda Martínez Espún" fetchpriority="high"></span>{''.join(f'<span class="ph {k}">{pic(PHOTOS[k], "", "(max-width: 900px) 36vw, 240px", eager=True)}</span>' for k in ["smile", "hike", "beach"])}</div>
   </section>
 
   <section class="section split">
@@ -644,7 +645,7 @@ SUMMARY = {
                               'Onboarding from <strong>7 to 3 minutes</strong>, survey completion from <strong>60% to 80%</strong>, NPS from <strong>45 to 60</strong>, <strong>+20%</strong> retention and <strong>+15%</strong> subscriptions.'),
     'ai-fleet-manager': ('Fleet operators lose uptime and money because mechanical issues go undetected until something fails.',
                          '<strong>Senior product designer</strong> in a small team: UX strategy, experimenting with AI and designing the platform from scratch.',
-                         'A <strong>6-month discovery</strong>: market and user research, the first MVP designs and a landing page.'),
+                         'A <strong>long waiting list</strong> of fleet operators keen to sign up, before any production code: research, MVP designs and a landing page in a <strong>6-month discovery</strong>.'),
     'marketplace-growth': ('Make renting a room in a big city simple, and keep people coming back to the app, by understanding tenants’ and landlords’ pain points.',
                            '<strong>Product designer on the growth team</strong>, with two PMs and two development teams: interviews, UX and visual decisions, fast iteration and data analysis.',
                            'Growth experiments shaped by <strong>interviews, prototypes and data</strong>, shipped in fast iterations.'),
@@ -929,7 +930,7 @@ def chapters(body):
     for ch in chs:
         rows, run, kind = [], [], None
         for it in ch['items'] + [None]:
-            k = None if it is None else ('img' if it['t'] == 'img' else 'txt')
+            k = None if it is None else (('img' + (str(id(it)) if it.get('solo') else '')) if it['t'] == 'img' else 'txt')
             if k != kind and run:
                 rows.append((kind, run))
                 run = []
@@ -939,7 +940,7 @@ def chapters(body):
         inner = ''
         metric = bool(ch['h'] and METRIC_CH.search(ch['h']))
         for k, r in rows:
-            if k == 'img':
+            if k.startswith('img'):
                 inner += f'<div class="cs-wide">{figure(r)}</div>'
             else:
                 inner += f'<div class="cs-text">{textrun(r, metric, ch["h"] or "")}</div>'
@@ -989,6 +990,9 @@ def overview(p):
 
 
 OVERRIDE = {
+    'ai-fleet-manager': dict(title='AI Fleet Manager: predicting breakdowns before they happen',
+                             intro='An AI copilot for large fleets of trucks and vans, electric and combustion. It predicts which vehicles are about to fail, what it will cost and what to fix first. A <strong>six-month discovery</strong> at Papaya Dash, from research to the first MVP.',
+                             body=lambda b: fleet_body(b)),
     'interior-design': dict(intro='Interior design and 3D visualisation projects from my degree at <strong>Elisava</strong>, School of Design and Engineering in Barcelona.',
                             images_only=True),
     'ui-design': dict(intro='Concept UI work and a <strong>video prototype</strong> exploring interaction and motion.',
@@ -1000,6 +1004,70 @@ OVERRIDE = {
                           images_only=True,
                           lead_img={'t': 'img', 'src': 'assets/sq/a819001b-0dba-4886-a263-fb5b0d07d95a.jpeg', 'alt': 'My illustrations framed and displayed at a market stall', 'w': 0, 'h': 0, 'sec': 99}),
 }
+
+
+def fleet_body(body):
+    """AI fleet manager: the Squarespace page was mostly images, so the story is rewritten here around the same pictures."""
+    imgs = {it['src'].split('/')[-1].split('.')[0][:8]: it for it in body if it['t'] == 'img'}
+    def I(k, alt, solo=True):
+        return dict(imgs[k], alt=alt, solo=solo)
+    def H(t):
+        return {'t': 'h1', 'html': t, 'sec': 0}
+    def P(h):
+        return {'t': 'p', 'html': h, 'sec': 0}
+    return [
+        H('The problem'),
+        P('Large fleets run on <strong>reactive maintenance</strong>: a van breaks down, then it gets fixed. By then the damage is done. The vehicle is off the road, deliveries slip and the repair costs far more than catching it early.'),
+        P('Fleet managers already have the data, spread across telematics, spreadsheets and workshop logs, but no time to read it. <strong>They can’t see which vehicles are about to fail, what it will cost, or what to fix first.</strong>'),
+        H('Business goals'),
+        P('<strong>Increase uptime</strong> – keep more vehicles on the road by predicting failures before they happen.'),
+        P('<strong>Reduce total cost of ownership</strong> – replace emergency repairs with planned, cheaper ones.'),
+        P('<strong>Plug into existing tools</strong> – a smart assistant on top of the telematics fleets already use, not another system to learn.'),
+        P('<strong>Grow into a bigger market</strong> – start with large logistics fleets in Europe, then expand.'),
+        H('Who it’s for'),
+        P('Fleet managers, heads of fleet and operations, and CEOs of <strong>logistics and transport companies in Europe</strong> with large owned or leased fleets of trucks and vans, both electric and combustion.'),
+        I('efc6771f', 'Persona: Carlos Martín, fleet manager at a logistics operator with 500 delivery vans, with his goals, pain points, behaviours, tool expectations and the metrics he tracks'),
+        {'t': 'callout', 'html': '“Don’t just show me data. Tell me what’s about to break, what it’ll cost me, and what I should fix first.”', 'cap': 'Carlos, fleet manager persona, built from customer interviews', 'sec': 0},
+        H('The vision'),
+        P('<strong>Move fleets from reactive to proactive.</strong> An AI copilot that reads real-time vehicle data, predicts which parts will fail and when, explains why, and turns each prediction into the next action: a ticket, a workshop appointment or a report for management.'),
+        H('Success metrics'),
+        P('The metrics we designed the product to move, taken from what fleet managers already track:'),
+        P('<strong>Fleet health</strong> – share of vehicles in good condition.'),
+        P('<strong>Early warning</strong> – vehicles predicted to fail in the next 30 days.'),
+        P('<strong>Downtime avoided</strong> – hours saved through early servicing.'),
+        P('<strong>Maintenance cost</strong> – cost per vehicle and per kilometre.'),
+        P('<strong>Workshop load</strong> – task backlog per service centre.'),
+        H('Full process'),
+        H('Mapping the market'),
+        P('Before designing, I mapped the fleet-management ecosystem: telematics providers, asset and maintenance management, compliance, routing, fuel and EV charging. <strong>Predictive maintenance</strong> was the clearest gap, and the place where AI could add the most value on top of data fleets already collect.'),
+        I('8e96ab95', 'Fleet management ecosystem map: telematics providers, asset management, predictive maintenance, compliance, logistics, financial management, sustainability, EV charging and service provider management'),
+        H('From interviews to wireframes'),
+        P('Customer insights became low-fidelity flows: a prioritised list of issues across the fleet, a vehicle page that summarises its condition in plain language with the cost of waiting, and an activity log so teams can see who snoozed, dismissed or resolved each alert.'),
+        I('c0ed1e6e', solo=False, alt='Wireframe of the home screen: a list of vehicle issues by risk level with cost estimate, downtime, first seen and status'),
+        I('15fdba2e', solo=False, alt='Wireframe of a vehicle’s issues: condition summary, risk timeline, issues list and the detail of one issue with recommendations, risk, safety hazard and cost'),
+        I('4067e296', solo=False, alt='Wireframe of the activity log of a vehicle: resolved, dismissed and snoozed alerts with who did it and when'),
+        H('Key design decisions'),
+        P('<strong>Money and time first</strong> – every alert shows estimated cost and downtime next to the risk level, because that’s how managers decide what to fix first.'),
+        P('<strong>Explainable AI</strong> – each prediction comes with a confidence level, a plain-language “why this matters” and a thumbs up or down, so trust grows and the model learns.'),
+        P('<strong>Actions, not just alerts</strong> – create a ticket, assign a mechanic or book a workshop slot straight from the issue.'),
+        P('<strong>Predicted next to real</strong> – uptime and cost show today’s value and the prediction for the month, so the cost of doing nothing is visible.'),
+        P('<strong>Ask Papaya</strong> – a copilot panel that lists recommended actions, writes the follow-up email or explains a vehicle’s condition in more detail.'),
+        H('First MVP designs'),
+        P('The MVP covered the core loop: <strong>see the fleet’s health, open the riskiest vehicle, understand the problem, and schedule the fix</strong>. I prototyped flows quickly with AI tools such as Lovable and Base44 to test ideas with the team before polishing them in Figma.'),
+        I('4955471d', 'Dashboard: fleet health today, uptime with prediction, total maintenance cost with prediction, and maintenance alerts with risk, cost, downtime and assignee'),
+        I('2376468d', 'Vehicle details with the Ask Papaya copilot: condition summary, estimated cost and downtime, issues by risk and confidence, why it matters and was our prediction accurate'),
+        I('8bc34550', 'Schedule maintenance: a day calendar of mechanics with their jobs and an appointment form with date, assignee, location, cost, downtime and the issue'),
+        I('6a87537b', 'Maintenance alerts list with filters by risk level and a dark sidebar navigation'),
+        I('6871275f', 'Papaya sign-in screen'),
+        H('Landing page'),
+        P('For marketing, I designed the landing page that explained the product and recruited fleets for a <strong>Design Partner Program</strong>, so early customers could shape the product with their own data.'),
+        I('82611404', 'Papaya predictive maintenance landing page: move from reactive to proactive, why predictive, features powered by AI and real-time fleet data, and the design partner program'),
+        H('Outcome'),
+        P('A short, exploratory project: brainstorming the flows and validating the idea <strong>before writing any production code</strong>. Lovable and Base44 prototypes and the landing page were enough to show the value to real fleets.'),
+        P('<strong>Real demand before a single line of code</strong> – the Design Partner Program brought in a long list of fleet operators who wanted to know more and were keen to sign up.'),
+        P('<strong>Research to MVP in six months</strong> – market map, persona, wireframes, MVP designs and a landing page.'),
+        P('<strong>Higher product maturity</strong> – research-backed decisions, user stories and priorities agreed with engineering, and a shared design foundation.'),
+    ]
 
 
 def og_for(u, slug):
@@ -1044,6 +1112,8 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
     title, intro = ov.get('title', title), ov.get('intro', intro)
     if ov.get('images_only'):
         body = [it for it in body if it['t'] == 'img']
+    if ov.get('body'):
+        body = ov['body'](body)
     if ov.get('lead_img'):
         lead_id = ov['lead_img']['src'].split('/')[-1].split('.')[0]
         body = [ov['lead_img']] + [it for it in body if not (it['t'] == 'img' and lead_id in (it.get('src') or ''))]
@@ -1094,7 +1164,7 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
 
 
 # ---------- Ronda: a product I design and build (hand-written, not from the Squarespace export) ----------
-RONDA_V = 11
+RONDA_V = 12
 RONDA = dict(slug='ronda', title='Ronda', alt='Ronda on an iPhone standing on a kitchen counter, showing the recipe library with cookbooks')
 
 
@@ -1143,7 +1213,7 @@ RONDA_CH = [
 <p>Planning often happens on a laptop. On large screens the tab bar becomes a sidebar, ingredients sit beside the method, and every gesture has a mouse and keyboard twin.</p>"""),
     ('identity', 'Brand', """
 <p>The first idea was literal: <em>Ronda</em> means <em>a round</em>, so a ring with an egg yolk inside. I pushed it through four rounds, from rosemary to a fresher <strong>Albahaca</strong> palette, then a glossy 3D version and a flat one. The colours worked; the ring didn’t. Small, it read as a loading spinner or a letter C, and it said <strong>tech, not home cooking</strong>.</p>
-<p>So I started again from the feeling: Sunday lunch at a family table. <strong>A green gingham tablecloth</strong> from icon to launch screen, and a single lowercase <em>r</em> in Syne that stays legible at 16 px. The guidelines keep it consistent: one mark, the Albahaca palette, Bricolage Grotesque for titles, the system font for everything you read while cooking, and a warm, short voice in four languages.</p>"""),
+<p>So I started again from the feeling: going back to the origins, Sunday lunch at a family table. <strong>A green gingham tablecloth</strong> from icon to launch screen makes Ronda feel human and homemade, and while most apps on your phone are flat colour, the pattern makes it easy to spot. On top, a single lowercase <em>r</em> in Syne that stays legible at 16 px. The guidelines keep it consistent: one mark, the Albahaca palette, Bricolage Grotesque for titles, the system font for everything you read while cooking, and a warm, short voice in four languages.</p>"""),
     ('ai', 'Built solo with AI', """
 <p class="cs-statement">One designer, no engineers. 100% of the code written by AI.</p>
 <p>I owned strategy, UX, brand and every product decision; Claude did the engineering. I worked through <strong>skills</strong>, specialist instructions for each phase:</p>
@@ -1170,7 +1240,7 @@ def ronda_page(nxt):
         'product': f'<div class="cs-wide"><figure class="cs-fig">{rimg("flows", "Sticky-note board of everything you can do in Ronda: save a recipe, decide what to cook, plan and shop, cook, repeat, organise and settings, each with its steps", 2400, 1579)}</figure></div>' + fig('mockup-cook', 'Ronda on two iPhones: a brownie recipe with its rating and cook count, and the step-by-step cooking mode') + fig('mockup-settings', 'Ronda on two iPhones: the Favourites tab with cook counts and ratings, and the Settings screen'),
         'desktop': fig('screens-desktop', 'Ronda on desktop: sidebar navigation, recipe photo beside the title, ingredients beside the method'),
         'identity': f'<div class="cs-wide"><figure class="cs-fig">{rimg("brand-explore", "Logo exploration in five steps: a ring with an egg yolk in rosemary green, the fresher Albahaca palette, a glossy 3D version and a flat ring, all discarded, then the chosen lowercase r on a green gingham tablecloth", 2400, 1120)}</figure></div>'
-                    + f'<div class="cs-wide"><figure class="cs-fig">{rimg("brand-guide", "Ronda brand guidelines: the r mark and ronda wordmark on white and green, the icon at five sizes down to 16 px, the Albahaca colour palette with hex codes, Syne, Bricolage Grotesque and the system font, the green gingham pattern, and the voice with example lines in Spanish and English", 2400, 1738)}</figure></div>'
+                    + f'<div class="cs-wide"><figure class="cs-fig">{rimg("brand-guide", "Ronda brand guidelines: the r mark and ronda wordmark on white and green, the icon at five sizes down to 16 px, the Albahaca colour palette with hex codes, Syne, Bricolage Grotesque and the system font, the gingham icon standing out among flat-colour app icons on a home screen, and the voice with example lines in Spanish and English", 2400, 1808)}</figure></div>'
                     + fig('identity', 'Ronda app icon, launch screen and sign-in screen, all on the green gingham tablecloth'),
     }
     body = ''.join(

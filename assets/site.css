@@ -805,3 +805,18 @@ html{overflow-x:clip}
 .ai-build__media img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease-out)}
 @media (hover:hover){.ai-build__card:hover .ai-build__media img{transform:scale(1.03)}}
 @media (max-width:900px){.ai-build__card{grid-template-columns:1fr}.ai-build__media{order:-1}}
+
+/* Work cards: role chips as calm ink outlines instead of lavender */
+.chips span.r{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px rgba(17,17,17,.55)}
+
+/* About: the newest portrait leads, three smaller photos beside it */
+.about-mosaic{grid-template-columns:minmax(0,1.65fr) minmax(0,1fr);grid-template-rows:repeat(3,clamp(120px,10.5vw,172px));max-width:700px}
+.about-mosaic .portrait{grid-column:1;grid-row:1/4}
+.about-mosaic .portrait img{object-position:50% 30%}
+.about-mosaic .smile{grid-column:2;grid-row:1}
+.about-mosaic .smile img{object-position:60% 25%}
+.about-mosaic .hike{grid-column:2;grid-row:2}
+.about-mosaic .hike img{object-position:50% 60%}
+.about-mosaic .beach{grid-column:2;grid-row:3}
+.about-mosaic .beach img{object-position:70% 60%}
+@media (max-width:900px){.about-mosaic{grid-template-rows:repeat(3,clamp(96px,28vw,160px))}}
