@@ -23,10 +23,10 @@ def logo_src(u):
 
 LOGOS = [
     ('Skydreams', 'assets/logos/skydreams.svg', 'wide'),
-    ('EVPassport', '1738611996757-K1F3IY26948QJ2HIKGT3/evpassport-logo.jpg', 'square'),
+    ('EVPassport', 'assets/logos/evpassport.png', 'wide xwide'),
     ('Haufe Group', '402bd146-9ffe-46b2-bf9f-a40b8e4dcc89/images.png', 'wide'),
     ('Badi', '1738685973446-Y3FZC2U0FR4BDMH98OIJ/Screenshot%252B2025-02-04%252Bat%252B17.17.43.jpg', 'square'),
-    ('Papaya Dash', 'dc0cfa25-22fd-4946-8e2a-1ba00c336203/9a161780-a02c-9947-ac23-563a862f1016.png', 'wide'),
+    ('Papaya Dash', 'assets/logos/papaya.png', 'wide'),
     ('Fluendo', '1738611978055-CYA6FSJHOEU3G3I2OTYU/Fluendo_LogoPositive.jpg', 'wide'),
     ('Tekman Education', '35bab9af-58d6-4daa-aed8-30acc6288c11/logo_tekman_noclaim.png', 'wide'),
     ('Airflye', '1738612017208-JNTLSEGB9ZMPW8MO73IJ/asasxax_logo.jpg', 'square'),
@@ -552,7 +552,7 @@ def about():
     logo_of = {n: (u, k) for n, u, k in LOGOS}
     def mark(c):
         u, k = logo_of.get(c, (None, ''))
-        z = {'EVPassport': 2.0, 'Badi': 1.75, 'Airflye': 1.2}.get(c)
+        z = {'Badi': 1.75, 'Airflye': 1.2}.get(c)
         st = f' style="--z:{z}"' if z else ''
         return f'<span class="logo {k}" aria-hidden="true"><img src="{logo_src(u)}" alt="" loading="lazy" decoding="async"{st}></span>' if u else '<span class="logo" aria-hidden="true"></span>'
     def row(c, cc, k, r, y):
