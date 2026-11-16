@@ -857,3 +857,4 @@ html{overflow-x:clip}
 .timeline .logo.xwide img{max-width:88px}
 @media (max-width:900px){.logos li.xwide{height:16px}}
 @media (min-width:901px){.logos{justify-content:space-between;gap:20px 28px}.logos li{height:30px}.logos li.square{height:40px}.logos img{max-width:128px}.logos li.xwide{height:18px}.logos li.xwide img{max-width:160px}}
+.facts strong span,.lede span[data-since],[data-count] span{font-size:inherit;color:inherit}
