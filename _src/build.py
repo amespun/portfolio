@@ -468,7 +468,7 @@ def home():
   <section class="hero">
     <div>
       <h1>I design B2B and B2C products people stick with.</h1>
-      <p class="lede">Senior Product Designer with <strong>10+ years</strong> in product design across <strong>SaaS, marketplaces and green tech</strong>, from discovery to <strong>measurable results</strong>.</p>
+      <p class="lede">Senior Product Designer with <strong>10+ years</strong> across <strong>SaaS, marketplaces, green tech and AI products</strong>, from discovery to <strong>measurable results</strong>, with <strong>AI in my everyday workflow</strong>.</p>
       <div class="hero-actions">
         <a class="btn primary" href="#work">View selected work {ARROW_DOWN}</a>
         <button class="btn secondary" type="button" data-copy>{COPY_ICON}{labels("Copy email")}</button>
