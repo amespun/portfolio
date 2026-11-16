@@ -839,3 +839,6 @@ html{overflow-x:clip}
 .about-mosaic .tag-loc{position:absolute;left:18px;top:18px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.88);backdrop-filter:blur(8px);font-size:13px;font-weight:600;color:var(--ink);box-shadow:0 4px 14px rgba(17,17,17,.12)}
 @media (prefers-reduced-motion:reduce){.about-mosaic .ph{transition:none}}
 @media (max-width:900px){.about-mosaic{justify-self:stretch;max-width:none;margin:8px 0 28px 0}.about-mosaic .smile{right:0}.about-mosaic .tag-loc{font-size:12px;padding:7px 11px;left:12px;top:12px}.about-mosaic .smile,.about-mosaic .hike,.about-mosaic .beach{padding:5px}}
+
+/* Experience: freelance roles get their own purple tag */
+.timeline b em.fl{background:var(--accent);color:var(--accent-ink)}
