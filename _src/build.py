@@ -574,7 +574,7 @@ def about():
       <p class="lede">As a side project, I do <strong>branding</strong> and build <strong>websites and apps with AI</strong> for <strong>small businesses</strong> and my own products, and I design <strong>European-inspired illustrations</strong> that I sell on <strong>Etsy</strong>, blending tech and creativity in hands-on projects.</p>
       {facts()}
     </div>
-    <div class="about-mosaic"><span class="ph portrait"><img src="@@/assets/img/793587e8-8abb-42ed-bd6b-bdae4ff21f79-800.webp" srcset="@@/assets/img/793587e8-8abb-42ed-bd6b-bdae4ff21f79-800.webp 800w, @@/assets/img/793587e8-8abb-42ed-bd6b-bdae4ff21f79-1280.webp 1280w" sizes="(max-width: 900px) 62vw, 430px" width="1280" height="1280" alt="Aïda Martínez Espún" fetchpriority="high"><span class="tag-loc">Barcelona <span aria-hidden="true">→</span> the Netherlands</span></span>{''.join(f'<span class="ph {k}">{pic(PHOTOS[k], "", "(max-width: 900px) 36vw, 240px", eager=True)}</span>' for k in ["smile", "hike", "beach"])}</div>
+    <div class="about-mosaic"><span class="ph portrait"><img src="@@/assets/img/793587e8-8abb-42ed-bd6b-bdae4ff21f79-800.webp" srcset="@@/assets/img/793587e8-8abb-42ed-bd6b-bdae4ff21f79-800.webp 800w, @@/assets/img/793587e8-8abb-42ed-bd6b-bdae4ff21f79-1280.webp 1280w" sizes="(max-width: 900px) 62vw, 430px" width="1280" height="1280" alt="Aïda Martínez Espún" fetchpriority="high"><span class="tag-loc">Barcelona <span aria-hidden="true">→</span> Utrecht area</span></span>{''.join(f'<span class="ph {k}">{pic(PHOTOS[k], "", "(max-width: 900px) 36vw, 240px", eager=True)}</span>' for k in ["smile", "hike", "beach"])}</div>
   </section>
 
   <section class="section split">
