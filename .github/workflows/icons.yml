@@ -14,5 +14,7 @@ jobs:
           python3 .github/scripts/logos.py
           ls -la _leo/logos
           git config user.name "github-actions"; git config user.email "actions@github.com"
-          git add _leo && git commit -m "Fetched wordmark logos" && git push
+          git add _misc && git commit -m "Fetched RedPNi logo" && git push
 # run 1794584193
+
+# run redpni
