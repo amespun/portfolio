@@ -96,11 +96,11 @@ FACTS = [('10+', 'years in product design'), ('15+', 'years in design'), ('4', '
 EXPERIENCE = [
     ('Skydreams', '', 'B2B2C marketplace', 'Senior Product Designer', '2026 – now', 'nl'),
     ('Papaya Dash', 'UK company', 'B2B2C SaaS · Green tech', 'Senior Product Designer', '2025', 'bcn'),
-    ('RedPNi', 'Freelance', 'B2B SaaS · Health', 'Senior Product Designer, end-to-end SaaS for therapists and doctors', 'Mar – Dec 2025', 'bcn'),
+    ('RedPNi', 'Freelance, alongside my full-time job', 'B2B SaaS · Health', 'Senior Product Designer', 'Mar – Dec 2025', 'bcn'),
     ('EVPassport', 'US company', 'B2B2C IaaS · EV green tech', 'Staff Product Designer', '2024 – 2025', 'bcn'),
     ('Haufe Group', 'German company', 'B2B SaaS · IT services', 'Senior Product Designer', '2021 – 2024', 'bcn'),
     ('Badi', '', 'B2C marketplace', 'Product Designer, Growth & Design Systems', '2020 – 2021', 'bcn'),
-    ('Airflye', 'US company|Freelance', 'B2C travel', 'Product Designer', '2019 – 2020', 'bcn'),
+    ('Airflye', 'US company|Freelance, alongside my full-time job', 'B2C travel', 'Product Designer', '2019 – 2020', 'bcn'),
     ('Fluendo', '', 'B2C gaming social network', 'Product Designer', '2019', 'bcn'),
     ('Tekman Education', '', 'B2B2C education', 'Product Designer', '2015 – 2018', 'bcn'),
 ]
@@ -231,8 +231,8 @@ MAIL_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-wi
 
 
 def nav(base, current):
-    items = [('Work', f'{base}work/', 'work'), ('About', f'{base}about/', 'about'),
-             ('Studio', f'{base}studio/', 'beyond'), ('Contact', '#contact', 'contact')]
+    items = [('Work', f'{base}work/', 'work'), ('Studio', f'{base}studio/', 'beyond'),
+             ('About', f'{base}about/', 'about'), ('Contact', '#contact', 'contact')]
     cur = lambda n: ' aria-current="page"' if n == current else ''
     links = ''.join(f'<a href="{h}"{cur(n)}>{n}</a>' for n, h, _ in items)
     island = ''.join(f'<a href="{h}">{n}</a>' for n, h, _ in items[:3])
@@ -325,7 +325,7 @@ def small(e):
 
 
 def contact(base=''):
-    pages = [('Work', f'{base}work/'), ('About', f'{base}about/'), ('Studio', f'{base}studio/')]
+    pages = [('Work', f'{base}work/'), ('Studio', f'{base}studio/'), ('About', f'{base}about/')]
     work = [(p['short'], f'{base}work/' + p['slug'] + '/') for p in FEATURED]
     social = [('LinkedIn', 'https://www.linkedin.com/in/amespun/'), ('Behance', 'https://www.behance.net/amespun'),
               ('GitHub', 'https://github.com/amespun'), ('Dribbble', 'https://dribbble.com/amespun'), ('Medium', 'https://medium.com/@amespun'),
@@ -539,7 +539,7 @@ def about():
         st = f' style="--z:{z}"' if z else ''
         return f'<span class="logo {k}" aria-hidden="true"><img src="{logo_src(u)}" alt="" loading="lazy" decoding="async"{st}></span>' if u else '<span class="logo" aria-hidden="true"></span>'
     def row(c, cc, k, r, y):
-        tag = ''.join(f' <em class="{"fl" if t == "Freelance" else ""}">{t}</em>' for t in cc.split('|')) if cc else ''
+        tag = ''.join(f' <em class="{"fl" if t.startswith("Freelance") else ""}">{t}</em>' for t in cc.split('|')) if cc else ''
         return f'''<li>{mark(c)}<div><b><a class="co" href="{SITES[c]}" target="_blank" rel="noopener">{c}<span class="sr"> (opens in a new tab)</span><i class="ext" aria-hidden="true">{EXT}</i></a>{tag}</b><span>{r}</span></div><div class="meta">{f'<span class="yr">{y}</span>' if y else ''}<span class="kind">{k}</span></div></li>'''
     exp = ''.join(f'''<div class="place"><p class="where"><b>{name}</b><span>{note}</span></p><ol class="timeline">{''.join(row(*e[:5]) for e in EXPERIENCE if e[5] == key)}</ol></div>''' for key, name, note in PLACES)
     langs = ''.join(f'<li><span class="hi">{flag(LANGCODE[n])}<span lang="{LANGCODE[n]}">{g}</span></span><b>{n}</b><span>{l}</span></li>' for g, n, l in LANGUAGES)
