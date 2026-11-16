@@ -219,7 +219,7 @@ STUDIO = [
 def collage(big=False):
     return f'''<div class="collage{' big' if big else ''}" aria-hidden="true">
       <span class="ph a">{pic(PHOTOS["portrait" if big else "smile"], "", "320px")}</span>
-      <span class="ph b">{pic(PHOTOS["hike" if big else "beach"], "", "260px")}</span>
+      <span class="ph b">{pic(PHOTOS["hike"], "", "260px") if big else '<img src="@@/assets/about/sea-600.webp" srcset="@@/assets/about/sea-600.webp 600w, @@/assets/about/sea-1200.webp 1200w" sizes="260px" width="600" height="800" alt="" loading="lazy" decoding="async">'}</span>
     </div>'''
 
 
@@ -605,7 +605,7 @@ def about():
       <p class="lede">As a side project, I do <strong>branding</strong> and build <strong>websites and apps with AI</strong> for <strong>small businesses</strong> and my own products, and I design <strong>European-inspired illustrations</strong> that I sell on <strong>Etsy</strong>, blending tech and creativity in hands-on projects.</p>
       {facts()}
     </div>
-    <div class="about-mosaic"><span class="ph portrait"><img src="@@/assets/img/793587e8-8abb-42ed-bd6b-bdae4ff21f79-800.webp" srcset="@@/assets/img/793587e8-8abb-42ed-bd6b-bdae4ff21f79-800.webp 800w, @@/assets/img/793587e8-8abb-42ed-bd6b-bdae4ff21f79-1280.webp 1280w" sizes="(max-width: 900px) 62vw, 430px" width="1280" height="1280" alt="Aïda Martínez Espún" fetchpriority="high"><span class="tag-loc">Barcelona <span aria-hidden="true">→</span> Utrecht area</span></span>{''.join(f'<span class="ph {k}">{pic(PHOTOS[k], "", "(max-width: 900px) 36vw, 240px", eager=True)}</span>' for k in ["smile", "hike", "beach"])}</div>
+    <div class="about-mosaic solo"><span class="ph portrait"><img src="@@/assets/img/793587e8-8abb-42ed-bd6b-bdae4ff21f79-800.webp" srcset="@@/assets/img/793587e8-8abb-42ed-bd6b-bdae4ff21f79-800.webp 800w, @@/assets/img/793587e8-8abb-42ed-bd6b-bdae4ff21f79-1280.webp 1280w" sizes="(max-width: 900px) 62vw, 430px" width="1280" height="1280" alt="Aïda Martínez Espún" fetchpriority="high"><span class="tag-loc">Barcelona <span aria-hidden="true">→</span> Utrecht area</span></span></div>
   </section>
 
   <section class="section split">
@@ -645,7 +645,25 @@ def about():
     <div class="section-head"><h2>Writing</h2><a class="more-link" href="https://medium.com/@amespun">All articles {EXT}</a></div>
     <div class="earlier">{arts}</div>
   </section>
-''' + contact('../') + foot()
+''' + outside_work() + contact('../') + foot()
+
+
+def outside_work():
+    def ph(src, srcset, alt, cap, pos='50% 50%'):
+        return f'<figure><div class="ow-img"><img src="{src}" srcset="{srcset}" sizes="(max-width: 900px) 50vw, 300px" alt="{alt}" loading="lazy" decoding="async" style="object-position:{pos}"></div><figcaption>{cap}</figcaption></figure>'
+    a = lambda k: (f'@@/assets/about/{k}-600.webp', f'@@/assets/about/{k}-600.webp 600w, @@/assets/about/{k}-1200.webp 1200w')
+    h = '@@/assets/img/2a2f48c6-6e38-4c9f-9a1f-aba8a4749d2a'
+    items = [
+        ph(*a('bread'), 'A home-baked sourdough loaf cooling on a rack', 'Baking sourdough', '50% 55%'),
+        ph(*a('bike'), 'Aïda smiling in a selfie on an autumn bike path', 'Cycling Dutch roads', '0% 40%'),
+        ph(f'{h}-800.webp', f'{h}-800.webp 800w, {h}-1600.webp 1600w', 'Aïda hiking in the mountains, seen from behind', 'Hiking'),
+        ph(*a('sea'), 'Rowing a small boat in a clear turquoise cove in Menorca', 'By the Mediterranean', '50% 55%'),
+    ]
+    return f'''
+  <section class="section outside">
+    <div class="section-head"><h2>Outside work</h2></div>
+    <div class="ow-grid">{''.join(items)}</div>
+  </section>'''
 
 
 STUDIO_GROUPS = [
