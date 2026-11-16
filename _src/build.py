@@ -565,8 +565,8 @@ def about():
 <main class="wrap" id="main">
   <section class="about-hero">
     <div>
-      <h1>Senior Product Designer, specialised in Business UX Strategy, B2B2C SaaS</h1>
-      <p class="lede"><strong>10+ years</strong> of experience in <strong>startups</strong> and <strong>scale-ups</strong>, and <strong>15+ years</strong> in the <strong>design</strong> field. I specialise in <strong>UX strategy</strong>, <strong>design systems</strong>, and aligning user experience with <strong>business impact</strong>, particularly in <strong>B2B2C SaaS</strong>.</p>
+      <h1>Specialised in Business UX Strategy, B2B2C SaaS and AI products</h1>
+      <p class="lede"><strong>10+ years</strong> of experience in <strong>startups</strong> and <strong>scale-ups</strong>, and <strong>15+ years</strong> in the <strong>design</strong> field. I specialise in <strong>UX strategy</strong>, <strong>design systems</strong>, and aligning user experience with <strong>business impact</strong>, particularly in <strong>B2B2C SaaS</strong>. I design <strong>AI products</strong> and use <strong>AI in my daily workflow</strong>, from research and prototyping to shipping, to move faster without losing quality.</p>
       <p class="lede">I thrive on solving <strong>complex problems</strong>, <strong>strategic thinking</strong>, <strong>scaling</strong> design processes, and <strong>collaborating</strong> across <strong>product</strong>, <strong>engineering</strong> and <strong>leadership</strong> teams. I’ve also been a <strong>mentor</strong> on <strong>ADPList</strong>, supporting the next generation of designers. I’m a <strong>people person</strong>: I do my best work <strong>face to face</strong>, so I enjoy going to the office and working side by side with my team, not 100% remote.</p>
       <p class="lede">As a side project, I do <strong>branding</strong> and build <strong>websites and apps with AI</strong> for <strong>small businesses</strong> and my own products, and I design <strong>European-inspired illustrations</strong> that I sell on <strong>Etsy</strong>, blending tech and creativity in hands-on projects.</p>
       {facts()}
