@@ -95,7 +95,23 @@ PHOTOS = dict(
     hike=img('2a2f48c6-6e38-4c9f-9a1f-aba8a4749d2a/IMG_2681.jpeg', 1000),
     beach=img('04701f9a-d4c3-4908-8bf6-2297f7e1483e/IMG_0186.jpg', 1000),
 )
-FACTS = [('10+', 'years in product design'), ('15+', 'years in design'), ('4', 'languages, Dutch at A2'), ('BCN → NL', 'from Barcelona to the Utrecht area')]
+PRODUCT_SINCE, DESIGN_SINCE = (2016, 10), (2011, 10)  # product role at Tekman; design incl. university. Both tick up every October.
+
+
+def yrs_since(ym):
+    import datetime
+    t = datetime.date.today()
+    return t.year - ym[0] - (1 if t.month < ym[1] else 0)
+
+
+def yrs(ym):
+    """Years as text at build time; a tiny script in the page keeps it current between rebuilds."""
+    return f'<span data-since="{ym[0]}-{ym[1]:02d}">{yrs_since(ym)}</span>'
+
+
+P_YRS, D_YRS = yrs(PRODUCT_SINCE), yrs(DESIGN_SINCE)
+
+FACTS = [(P_YRS + '+', 'years in product design'), (D_YRS + '+', 'years in design'), ('5', 'languages, currently learning Dutch'), ('BCN → NL', 'from Barcelona to the Utrecht area')]
 EXPERIENCE = [
     ('Skydreams', '', 'B2B2C marketplace', 'Senior Product Designer', '2026-01|now', 'nl'),
     ('Papaya Dash', 'UK company', 'B2B2C SaaS · Green tech', 'Senior Product Designer', '2025-05|2025-11', 'bcn'),
@@ -360,7 +376,7 @@ def contact(base=''):
     <button class="ch" type="button" data-copy aria-label="Copy email address amespun@gmail.com"><span class="ic2">{MAIL_SVG}</span><span class="tx"><small>Email</small><b>amespun@gmail.com</b></span><em>{COPY_ICON}{labels("Copy")}</em></button>
     <a class="ch li" href="https://www.linkedin.com/in/amespun/"><span class="av"><img src="{AVATAR}" alt="" loading="lazy"><i>{LI}</i></span><span class="tx"><small>Aïda Martínez Espún<span class="long"> · Senior Product Designer at Skydreams</span></small><b>Message me on LinkedIn</b></span><em>Open {EXT}</em></a>
   </div>
-  <div class="foot-row"><ul>{li(others)}</ul><span>Based in the Netherlands · © 2026 Aïda Martínez Espún · Designed and built by me.</span></div>
+  <div class="foot-row"><ul>{li(others)}</ul><span>Based in the Netherlands · © <span data-year>{__import__('datetime').date.today().year}</span> Aïda Martínez Espún · Designed and built by me.</span></div>
 </div></footer>
 '''
 
@@ -390,6 +406,21 @@ document.querySelectorAll('[data-copy]').forEach(b => b.addEventListener('click'
 const bar = document.querySelector('[data-island]');
 const onScroll = () => bar.classList.toggle('scrolled', window.scrollY > 120);
 window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+// Keep years of experience and time in my current role current between rebuilds
+(() => {
+  const now = new Date(), Y = now.getFullYear(), M = now.getMonth() + 1;
+  document.querySelectorAll('[data-since]').forEach(el => {
+    const [y, m] = el.dataset.since.split('-').map(Number);
+    el.textContent = Y - y - (M < m ? 1 : 0);
+  });
+  document.querySelectorAll('[data-year]').forEach(el => { el.textContent = Y; });
+  document.querySelectorAll('[data-from]').forEach(el => {
+    const [y, m] = el.dataset.from.split('-').map(Number);
+    const n = (Y - y) * 12 + (M - m) + 1, yr = Math.floor(n / 12), mo = n % 12;
+    el.textContent = [yr ? yr + (yr > 1 ? ' yrs' : ' yr') : '', mo ? mo + (mo > 1 ? ' mos' : ' mo') : ''].filter(Boolean).join(' ');
+  });
+})();
 
 // Greeting in my languages
 const words = ['Hola', 'Bon dia', 'Hello', 'Bonjour', 'Hallo'];
@@ -439,7 +470,7 @@ HOME_BRING = [
 HOME_STATS = [('−39.8%', 'Support tickets', 'EV charging dashboard for property managers, EVPassport.'),
               ('+46.6%', 'Engagement', 'App-free EV charging across iOS, Android and App Clip.'),
               ('7→3 min', 'Onboarding', 'Teampact retrospectives that teams actually finish, Haufe Group.'),
-              ('10+', 'Years in product', 'Startups and scale-ups, from Barcelona to the Netherlands.')]
+              (P_YRS + '+', 'Years in product', 'Startups and scale-ups, from Barcelona to the Netherlands.')]
 HOME_JS = r"""
 // Home: count the numbers up once, and the "What I bring" list
 (() => {
@@ -466,12 +497,12 @@ def home():
     stats = ''.join(f'<div><dt data-count>{v}</dt><dd><b>{t}</b><span>{d}</span></dd></div>' for v, t, d in HOME_STATS)
     words = ''.join(f'<li{" class=on" if i == 0 else ""}><button type="button" aria-pressed="{"true" if i == 0 else "false"}">{w}</button><template>{d}</template></li>' for i, (w, d) in enumerate(HOME_BRING))
     return head('Aïda Martínez Espún · Senior Product Designer',
-                'Senior Product Designer in the Netherlands with 10+ years in product design, across B2B and B2C SaaS, marketplaces and green tech.', '') + nav('', None) + f'''
+                f'Senior Product Designer in the Netherlands with {yrs_since(PRODUCT_SINCE)}+ years in product design, across B2B and B2C SaaS, marketplaces and green tech.', '') + nav('', None) + f'''
 <main class="wrap" id="main">
   <section class="hero">
     <div>
       <h1>I design B2B and B2C products people stick with.</h1>
-      <p class="lede">Senior Product Designer with <strong>10+ years</strong> across <strong>SaaS, marketplaces, green tech and AI products</strong>, from discovery to <strong>measurable results</strong>, with <strong>AI in my everyday workflow</strong>.</p>
+      <p class="lede">Senior Product Designer with <strong>{P_YRS}+ years</strong> across <strong>SaaS, marketplaces, green tech and AI products</strong>, from discovery to <strong>measurable results</strong>, with <strong>AI in my everyday workflow</strong>.</p>
       <div class="hero-actions">
         <a class="btn primary" href="#work">View selected work {ARROW_DOWN}</a>
         <button class="btn secondary" type="button" data-copy>{COPY_ICON}{labels("Copy email")}</button>
@@ -560,7 +591,7 @@ def about():
         return f'<span class="logo {k}" aria-hidden="true"><img src="{logo_src(u)}" alt="" loading="lazy" decoding="async"{st}></span>' if u else '<span class="logo" aria-hidden="true"></span>'
     def row(c, cc, k, r, y):
         tag = ''.join(f' <em class="{"fl" if t.startswith("Freelance") else ""}">{t}</em>' for t in cc.split('|')) if cc else ''
-        return f'''<li>{mark(c)}<div><b><a class="co" href="{SITES[c]}" target="_blank" rel="noopener">{c}<span class="sr"> (opens in a new tab)</span><i class="ext" aria-hidden="true">{EXT}</i></a>{tag}</b><span>{r}</span></div><div class="meta"><span class="yr">{span(y)[0]}</span><span class="kind"><span class="dur">{span(y)[1]}</span><span class="dot" aria-hidden="true"> · </span>{k}</span></div></li>'''
+        return f'''<li>{mark(c)}<div><b><a class="co" href="{SITES[c]}" target="_blank" rel="noopener">{c}<span class="sr"> (opens in a new tab)</span><i class="ext" aria-hidden="true">{EXT}</i></a>{tag}</b><span>{r}</span></div><div class="meta"><span class="yr">{span(y)[0]}</span><span class="kind"><span class="dur"{f' data-from="{y.split("|")[0]}"' if y.endswith('|now') else ''}>{span(y)[1]}</span><span class="dot" aria-hidden="true"> · </span>{k}</span></div></li>'''
     exp = ''.join(f'''<div class="place"><p class="where"><b>{name}</b><span>{note}</span></p><ol class="timeline">{''.join(row(*e[:5]) for e in EXPERIENCE if e[5] == key)}</ol></div>''' for key, name, note in PLACES)
     langs = ''.join(f'<li><span class="hi">{flag(LANGCODE[n])}<span lang="{LANGCODE[n]}">{g}</span></span><b>{n}</b><span>{l}</span></li>' for g, n, l in LANGUAGES)
     arts = ''.join(f'''<a class="small" href="{u}"><div class="media">{pic(im, "", "(max-width: 600px) 100vw, 380px", w=1600, h=1000)}</div><b>{tt} {EXT}</b><span>Prototypr · Medium</span></a>''' for tt, u, im in ARTICLES)
@@ -569,7 +600,7 @@ def about():
   <section class="about-hero">
     <div>
       <h1>Specialised in Business UX Strategy, B2B2C SaaS and AI products</h1>
-      <p class="lede"><strong>10+ years</strong> of experience in <strong>startups</strong> and <strong>scale-ups</strong>, and <strong>15+ years</strong> in the <strong>design</strong> field. I specialise in <strong>UX strategy</strong>, <strong>design systems</strong>, and aligning user experience with <strong>business impact</strong>, particularly in <strong>B2B2C SaaS</strong>. I design <strong>AI products</strong> and use <strong>AI in my daily workflow</strong>, from research and prototyping to shipping, to move faster without losing quality.</p>
+      <p class="lede"><strong>{P_YRS}+ years</strong> of experience in <strong>startups</strong> and <strong>scale-ups</strong>, and <strong>{D_YRS}+ years</strong> in the <strong>design</strong> field. I specialise in <strong>UX strategy</strong>, <strong>design systems</strong>, and aligning user experience with <strong>business impact</strong>, particularly in <strong>B2B2C SaaS</strong>. I design <strong>AI products</strong> and use <strong>AI in my daily workflow</strong>, from research and prototyping to shipping, to move faster without losing quality.</p>
       <p class="lede">I thrive on solving <strong>complex problems</strong>, <strong>strategic thinking</strong>, <strong>scaling</strong> design processes, and <strong>collaborating</strong> across <strong>product</strong>, <strong>engineering</strong> and <strong>leadership</strong> teams. I’ve also been a <strong>mentor</strong> on <strong>ADPList</strong>, supporting the next generation of designers. I’m a <strong>people person</strong>: I do my best work <strong>face to face</strong>, so I enjoy going to the office and working side by side with my team, not 100% remote.</p>
       <p class="lede">As a side project, I do <strong>branding</strong> and build <strong>websites and apps with AI</strong> for <strong>small businesses</strong> and my own products, and I design <strong>European-inspired illustrations</strong> that I sell on <strong>Etsy</strong>, blending tech and creativity in hands-on projects.</p>
       {facts()}
