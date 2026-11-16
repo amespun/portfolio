@@ -95,7 +95,7 @@ PHOTOS = dict(
     hike=img('2a2f48c6-6e38-4c9f-9a1f-aba8a4749d2a/IMG_2681.jpeg', 1000),
     beach=img('04701f9a-d4c3-4908-8bf6-2297f7e1483e/IMG_0186.jpg', 1000),
 )
-FACTS = [('10+', 'years in product design'), ('15+', 'years in design'), ('4', 'languages, Dutch at A2'), ('BCN → NL', 'from Barcelona to the Netherlands')]
+FACTS = [('10+', 'years in product design'), ('15+', 'years in design'), ('4', 'languages, Dutch at A2'), ('BCN → NL', 'from Barcelona to the Utrecht area')]
 EXPERIENCE = [
     ('Skydreams', '', 'B2B2C marketplace', 'Senior Product Designer', '2026-01|now', 'nl'),
     ('Papaya Dash', 'UK company', 'B2B2C SaaS · Green tech', 'Senior Product Designer', '2025-05|2025-11', 'bcn'),
