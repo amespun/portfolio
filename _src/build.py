@@ -98,7 +98,7 @@ EXPERIENCE = [
     ('EVPassport', 'US company', 'B2B2C IaaS · EV green tech', 'Staff Product Designer', '2024 – 2025', 'bcn'),
     ('Haufe Group', 'German company', 'B2B SaaS · IT services', 'Senior Product Designer', '2021 – 2024', 'bcn'),
     ('Badi', '', 'B2C marketplace', 'Product Designer, Growth & Design Systems', '2020 – 2021', 'bcn'),
-    ('Airflye', 'US company', 'B2C travel', 'Product Designer', '2019 – 2020', 'bcn'),
+    ('Airflye', 'US company', 'B2C travel', 'Freelance Product Designer, alongside my full-time role', '2019 – 2020', 'bcn'),
     ('Fluendo', '', 'B2C gaming social network', 'Product Designer', '2019', 'bcn'),
     ('Tekman Education', '', 'B2B2C education', 'Product Designer', '2015 – 2018', 'bcn'),
 ]
@@ -107,7 +107,7 @@ SITES = {'Skydreams': 'https://www.skydreams.com/', 'Papaya Dash': 'https://papa
          'Fluendo': 'https://fluendo.com/', 'Tekman Education': 'https://www.tekmaneducation.com/'}
 PLACES = [
     ('nl', 'The Netherlands', 'Since 2026, in-house at a Dutch scale-up.'),
-    ('bcn', 'Barcelona, Spain', 'Spanish startups and international companies from the US, Germany and the UK, working from their Barcelona teams.'),
+    ('bcn', 'Barcelona, Spain', 'One of Europe’s most competitive tech hubs: Spanish startups and international companies from the US, Germany and the UK, working from their Barcelona teams.'),
 ]
 EXPERTISE = ['Product vision & roadmapping', 'UX strategy', 'Design systems & style guides', 'End-to-end product design',
              'Growth metric analysis', 'Stakeholder alignment', 'Cross-functional leadership', 'Design operations',
