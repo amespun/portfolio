@@ -842,3 +842,11 @@ html{overflow-x:clip}
 
 /* Experience: freelance roles get their own purple tag */
 .timeline b em.fl{background:var(--accent);color:var(--accent-ink)}
+
+/* Experience: exact months plus time in role, so nobody has to count */
+.timeline .meta .yr{display:block}
+.timeline .meta .kind{display:block;margin-top:3px}
+.timeline .meta .dur{display:inline-block;padding:1px 7px;border-radius:6px;background:var(--tile);color:var(--ink);font-size:12.5px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.timeline .meta .dot{display:none}
+.timeline .meta .kind .dur{margin-right:8px}
+@media (max-width:900px){.timeline .meta{align-items:center}.timeline .meta .yr,.timeline .meta .kind{display:inline-flex;align-items:center;margin:0}}

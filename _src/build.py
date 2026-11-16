@@ -94,16 +94,33 @@ PHOTOS = dict(
 )
 FACTS = [('10+', 'years in product design'), ('15+', 'years in design'), ('4', 'languages, Dutch at A2'), ('BCN → NL', 'from Barcelona to the Netherlands')]
 EXPERIENCE = [
-    ('Skydreams', '', 'B2B2C marketplace', 'Senior Product Designer', '2026 – now', 'nl'),
-    ('Papaya Dash', 'UK company', 'B2B2C SaaS · Green tech', 'Senior Product Designer', '2025', 'bcn'),
-    ('RedPNi', 'Freelance, alongside my full-time job', 'B2B SaaS · Health', 'Senior Product Designer', 'Mar – Dec 2025', 'bcn'),
-    ('EVPassport', 'US company', 'B2B2C IaaS · EV green tech', 'Staff Product Designer', '2024 – 2025', 'bcn'),
-    ('Haufe Group', 'German company', 'B2B SaaS · IT services', 'Senior Product Designer', '2021 – 2024', 'bcn'),
-    ('Badi', '', 'B2C marketplace', 'Product Designer, Growth & Design Systems', '2020 – 2021', 'bcn'),
-    ('Airflye', 'US company|Freelance, alongside my full-time job', 'B2C travel', 'Product Designer', '2019 – 2020', 'bcn'),
-    ('Fluendo', '', 'B2C gaming social network', 'Product Designer', '2019', 'bcn'),
-    ('Tekman Education', '', 'B2B2C education', 'Product Designer', '2015 – 2018', 'bcn'),
+    ('Skydreams', '', 'B2B2C marketplace', 'Senior Product Designer', '2026-01|now', 'nl'),
+    ('Papaya Dash', 'UK company', 'B2B2C SaaS · Green tech', 'Senior Product Designer', '2025-05|2025-11', 'bcn'),
+    ('RedPNi', 'Freelance, alongside my full-time job', 'B2B SaaS · Health', 'Senior Product Designer', '2025-03|2025-12', 'bcn'),
+    ('EVPassport', 'US company', 'B2B2C IaaS · EV green tech', 'Staff Product Designer', '2024-01|2025-04', 'bcn'),
+    ('Haufe Group', 'German company', 'B2B SaaS · IT services', 'Senior Product Designer', '2021-03|2024-01', 'bcn'),
+    ('Badi', '', 'B2C marketplace', 'Product Designer, Growth & Design Systems', '2020-01|2021-03', 'bcn'),
+    ('Airflye', 'US company|Freelance, alongside my full-time job', 'B2C travel', 'Product Designer', '2019-11|2020-02', 'bcn'),
+    ('Fluendo', '', 'B2C gaming social network', 'Product Designer', '2019-05|2019-12', 'bcn'),
+    ('Tekman Education', '', 'B2B2C education', 'Product Designer', '2015-09|2018-12', 'bcn'),
 ]
+MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+
+def span(rng):
+    """'2021-03|2024-01' -> ('Mar 2021 – Jan 2024', '2 yrs 11 mos'), counting both end months like LinkedIn."""
+    import datetime
+    a, b = rng.split('|')
+    y1, m1 = map(int, a.split('-'))
+    if b == 'now':
+        t = datetime.date.today(); y2, m2, end = t.year, t.month, 'Now'
+    else:
+        y2, m2 = map(int, b.split('-')); end = f'{MON[m2 - 1]} {y2}'
+    n = (y2 - y1) * 12 + (m2 - m1) + 1
+    yrs, mos = divmod(n, 12)
+    dur = ' '.join(x for x in (f'{yrs} yr{"s" if yrs > 1 else ""}' if yrs else '', f'{mos} mo{"s" if mos > 1 else ""}' if mos else '') if x)
+    return f'{MON[m1 - 1]} {y1} – {end}', dur
+
 SITES = {'Skydreams': 'https://www.skydreams.com/', 'Papaya Dash': 'https://papayadash.com/', 'EVPassport': 'https://www.evpassport.com/',
          'Haufe Group': 'https://www.haufegroup.com/en', 'Badi': 'https://badi.com/', 'Airflye': 'https://airflye.com/',
          'Fluendo': 'https://fluendo.com/', 'Tekman Education': 'https://www.tekmaneducation.com/', 'RedPNi': 'https://redpni.com/'}
@@ -540,7 +557,7 @@ def about():
         return f'<span class="logo {k}" aria-hidden="true"><img src="{logo_src(u)}" alt="" loading="lazy" decoding="async"{st}></span>' if u else '<span class="logo" aria-hidden="true"></span>'
     def row(c, cc, k, r, y):
         tag = ''.join(f' <em class="{"fl" if t.startswith("Freelance") else ""}">{t}</em>' for t in cc.split('|')) if cc else ''
-        return f'''<li>{mark(c)}<div><b><a class="co" href="{SITES[c]}" target="_blank" rel="noopener">{c}<span class="sr"> (opens in a new tab)</span><i class="ext" aria-hidden="true">{EXT}</i></a>{tag}</b><span>{r}</span></div><div class="meta">{f'<span class="yr">{y}</span>' if y else ''}<span class="kind">{k}</span></div></li>'''
+        return f'''<li>{mark(c)}<div><b><a class="co" href="{SITES[c]}" target="_blank" rel="noopener">{c}<span class="sr"> (opens in a new tab)</span><i class="ext" aria-hidden="true">{EXT}</i></a>{tag}</b><span>{r}</span></div><div class="meta"><span class="yr">{span(y)[0]}</span><span class="kind"><span class="dur">{span(y)[1]}</span><span class="dot" aria-hidden="true"> · </span>{k}</span></div></li>'''
     exp = ''.join(f'''<div class="place"><p class="where"><b>{name}</b><span>{note}</span></p><ol class="timeline">{''.join(row(*e[:5]) for e in EXPERIENCE if e[5] == key)}</ol></div>''' for key, name, note in PLACES)
     langs = ''.join(f'<li><span class="hi">{flag(LANGCODE[n])}<span lang="{LANGCODE[n]}">{g}</span></span><b>{n}</b><span>{l}</span></li>' for g, n, l in LANGUAGES)
     arts = ''.join(f'''<a class="small" href="{u}"><div class="media">{pic(im, "", "(max-width: 600px) 100vw, 380px", w=1600, h=1000)}</div><b>{tt} {EXT}</b><span>Prototypr · Medium</span></a>''' for tt, u, im in ARTICLES)
