@@ -17,8 +17,11 @@ AVATAR = img('c452157e-0501-4f67-b013-13ce41e854d4/Ellipse+26_.png', 300)
 PORTRAIT = img('414dfdcf-4e3c-4d4b-b59a-3cc3c60f750d/IMG_5346.jpeg', 1000)
 DEVICES = img('3df60a90-7ab0-4d16-8395-9a4751061c20/Group+112596.png')
 COMPANIES = ['EVPassport', 'Haufe Group', 'Badi', 'Papaya Dash', 'Fluendo', 'Tekman Education']
+LOGO_V = '2'
+
+
 def logo_src(u):
-    return '@@/' + u if u.startswith('assets/') else f'{SQ}{u}?format=300w'
+    return f'@@/{u}?v={LOGO_V}' if u.startswith('assets/') else f'{SQ}{u}?format=300w'
 
 
 LOGOS = [
@@ -320,7 +323,7 @@ def card(p, lead=False):
         k = f'<dl class="kpis{" notes" if p.get("notes") else ""}">' + ''.join(
             f'<div class="kpi"><dt>{l}</dt><dd>{v}</dd></div>' for v, l in p['kpis']) + '</dl>'
     slug = p.get('who', '').lower().replace(' ', '-')
-    co = f'<span class="co"><img src="@@/assets/logos/marks/{slug}.png" alt="" width="22" height="22" loading="lazy" decoding="async">{p["who"]}</span>' if p.get('who') else ''
+    co = f'<span class="co"><img src="@@/assets/logos/marks/{slug}.png?v={LOGO_V}" alt="" width="22" height="22" loading="lazy" decoding="async">{p["who"]}</span>' if p.get('who') else ''
     year = p['tags'][-1]
     chips = ''.join(f'<span class="r">{x}</span>' for x in p['role'].split(' · ')) + ''.join(f'<span>{x}</span>' for x in p['tags'][:-1])
     sizes = '(max-width: 900px) 100vw, 720px' if lead else '(max-width: 900px) 100vw, 600px'
