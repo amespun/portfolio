@@ -1094,7 +1094,7 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
 
 
 # ---------- Ronda: a product I design and build (hand-written, not from the Squarespace export) ----------
-RONDA_V = 10
+RONDA_V = 11
 RONDA = dict(slug='ronda', title='Ronda', alt='Ronda on an iPhone standing on a kitchen counter, showing the recipe library with cookbooks')
 
 
@@ -1142,7 +1142,8 @@ RONDA_CH = [
     ('desktop', 'Desktop', """
 <p>Planning often happens on a laptop. On large screens the tab bar becomes a sidebar, ingredients sit beside the method, and every gesture has a mouse and keyboard twin.</p>"""),
     ('identity', 'Brand', """
-<p><strong>A green gingham tablecloth</strong> from icon to launch screen, and a single lowercase <em>r</em> in Syne, legible at 16 px.</p>"""),
+<p>The first idea was literal: <em>Ronda</em> means <em>a round</em>, so a ring with an egg yolk inside. I pushed it through four rounds, from rosemary to a fresher <strong>Albahaca</strong> palette, then a glossy 3D version and a flat one. The colours worked; the ring didn’t. Small, it read as a loading spinner or a letter C, and it said <strong>tech, not home cooking</strong>.</p>
+<p>So I started again from the feeling: Sunday lunch at a family table. <strong>A green gingham tablecloth</strong> from icon to launch screen, and a single lowercase <em>r</em> in Syne that stays legible at 16 px. The guidelines keep it consistent: one mark, the Albahaca palette, Bricolage Grotesque for titles, the system font for everything you read while cooking, and a warm, short voice in four languages.</p>"""),
     ('ai', 'Built solo with AI', """
 <p class="cs-statement">One designer, no engineers. 100% of the code written by AI.</p>
 <p>I owned strategy, UX, brand and every product decision; Claude did the engineering. I worked through <strong>skills</strong>, specialist instructions for each phase:</p>
@@ -1168,7 +1169,9 @@ def ronda_page(nxt):
         'decisions': fig('screens-fridge', 'The Fridge tab: chosen ingredients, most-used ingredients with counts, and recipes that use everything selected') + f'<div class="cs-wide"><figure class="cs-fig">{rimg("import", "Adding a recipe: four ways in (link, photo, dictation, pasted text), then a messy Instagram caption that Ronda reads automatically into a clean recipe with the right title, servings and one ingredient per line", 2400, 1800)}</figure></div>',
         'product': f'<div class="cs-wide"><figure class="cs-fig">{rimg("flows", "Sticky-note board of everything you can do in Ronda: save a recipe, decide what to cook, plan and shop, cook, repeat, organise and settings, each with its steps", 2400, 1579)}</figure></div>' + fig('mockup-cook', 'Ronda on two iPhones: a brownie recipe with its rating and cook count, and the step-by-step cooking mode') + fig('mockup-settings', 'Ronda on two iPhones: the Favourites tab with cook counts and ratings, and the Settings screen'),
         'desktop': fig('screens-desktop', 'Ronda on desktop: sidebar navigation, recipe photo beside the title, ingredients beside the method'),
-        'identity': fig('identity', 'Ronda app icon, launch screen and sign-in screen, all on the green gingham tablecloth'),
+        'identity': f'<div class="cs-wide"><figure class="cs-fig">{rimg("brand-explore", "Logo exploration in five steps: a ring with an egg yolk in rosemary green, the fresher Albahaca palette, a glossy 3D version and a flat ring, all discarded, then the chosen lowercase r on a green gingham tablecloth", 2400, 1120)}</figure></div>'
+                    + f'<div class="cs-wide"><figure class="cs-fig">{rimg("brand-guide", "Ronda brand guidelines: the r mark and ronda wordmark on white and green, the icon at five sizes down to 16 px, the Albahaca colour palette with hex codes, Syne, Bricolage Grotesque and the system font, the green gingham pattern, and the voice with example lines in Spanish and English", 2400, 1738)}</figure></div>'
+                    + fig('identity', 'Ronda app icon, launch screen and sign-in screen, all on the green gingham tablecloth'),
     }
     body = ''.join(
         f'<section class="cs-ch" id="{cid}"><h2>{h}</h2><div class="cs-text">{t}</div>{figs.get(cid, "")}</section>'
