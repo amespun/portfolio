@@ -956,6 +956,9 @@ def chapters(body):
     seen_div = False
     for ch in chs:
         rows, run, kind = [], [], None
+        cid0 = re.sub(r'[^a-z0-9]+', '-', (ch['h'] or '').lower()).strip('-')
+        if cid0 in SOLO_CH:
+            ch['items'] = [dict(it, solo=True) if it['t'] == 'img' else it for it in ch['items']]
         for it in ch['items'] + [None]:
             k = None if it is None else (('img' + (str(id(it)) if it.get('solo') else '')) if it['t'] == 'img' else 'txt')
             if k != kind and run:
@@ -993,6 +996,7 @@ def chapters(body):
 
 
 CHAPTERS = []
+SOLO_CH = set()  # chapter ids whose images go full width, one per row
 
 
 def meta_html(meta):
@@ -1017,8 +1021,8 @@ def overview(p):
 
 
 OVERRIDE = {
-    'b2c-ev-charging': dict(solo_imgs=True),
-    'b2b-saas-ev-charging': dict(solo_imgs=True),
+    'b2c-ev-charging': dict(solo_ch={'flows-analysis-happy-path-edge-cases', 'new-flows-screens-created', 'solution-execution', 'integrations-extension-marketplace'}),
+    'b2b-saas-ev-charging': dict(solo_ch={'flows-analysis-happy-path-edge-cases', 'new-flows-screens-created', 'solution-execution', 'integrations-extension-marketplace'}),
     'ai-fleet-manager': dict(title='AI Fleet Manager: predicting breakdowns before they happen',
                              intro='An AI copilot for large fleets of trucks and vans, electric and combustion. It predicts which vehicles are about to fail, what it will cost and what to fix first. A <strong>six-month discovery</strong> at Papaya Dash, from research to the first MVP.',
                              body=lambda b: fleet_body(b)),
@@ -1143,8 +1147,8 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
         body = [it for it in body if it['t'] == 'img']
     if ov.get('body'):
         body = ov['body'](body)
-    if ov.get('solo_imgs'):
-        body = [dict(it, solo=True) if it['t'] == 'img' else it for it in body]
+    SOLO_CH.clear()
+    SOLO_CH.update(ov.get('solo_ch', ()))
     if ov.get('lead_img'):
         lead_id = ov['lead_img']['src'].split('/')[-1].split('.')[0]
         body = [ov['lead_img']] + [it for it in body if not (it['t'] == 'img' and lead_id in (it.get('src') or ''))]
