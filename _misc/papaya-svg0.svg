@@ -1,0 +1,23 @@
+<svg class=&quot;fx&quot; id=&quot;fx&quot; viewBox=&quot;0 0 480 580&quot; aria-hidden=&quot;true&quot;>
+      <defs>
+        <filter id=&quot;goo&quot; x=&quot;-20%&quot; y=&quot;-20%&quot; width=&quot;140%&quot; height=&quot;140%&quot;>
+          <feGaussianBlur in=&quot;SourceGraphic&quot; stdDeviation=&quot;5&quot; result=&quot;b&quot;/>
+          <feColorMatrix in=&quot;b&quot; mode=&quot;matrix&quot; values=&quot;1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8&quot; result=&quot;g&quot;/>
+          <feGaussianBlur in=&quot;g&quot; stdDeviation=&quot;1.2&quot;/>
+        </filter>
+        <filter id=&quot;soft&quot; x=&quot;-50%&quot; y=&quot;-50%&quot; width=&quot;200%&quot; height=&quot;200%&quot;><feGaussianBlur stdDeviation=&quot;16&quot;/></filter>
+        <radialGradient id=&quot;dot&quot;><stop offset=&quot;0&quot; stop-color=&quot;#fff&quot;/><stop offset=&quot;.35&quot; stop-color=&quot;#FF7A6A&quot;/><stop offset=&quot;1&quot; stop-color=&quot;#FF5E5E&quot; stop-opacity=&quot;0&quot;/></radialGradient>
+      </defs>
+      <ellipse class=&quot;fog&quot; cx=&quot;240&quot; cy=&quot;146&quot; rx=&quot;128&quot; ry=&quot;88&quot; fill=&quot;#FF8676&quot; opacity=&quot;.2&quot; filter=&quot;url(#soft)&quot;/>
+      <g id=&quot;blobs&quot; filter=&quot;url(#goo)&quot; opacity=&quot;.8&quot;></g>
+      <g id=&quot;conns&quot;>
+        <path class=&quot;conn&quot; id=&quot;p0&quot; d=&quot;M104 74 C74 150 88 230 176 278&quot;/>
+        <path class=&quot;conn&quot; id=&quot;p1&quot; d=&quot;M376 74 C406 150 392 230 304 278&quot;/>
+        <path class=&quot;conn&quot; id=&quot;p2&quot; d=&quot;M96 232 C96 258 134 282 180 296&quot;/>
+        <path class=&quot;conn&quot; id=&quot;p3&quot; d=&quot;M384 232 C384 258 346 282 300 296&quot;/>
+        <path class=&quot;conn out&quot; id=&quot;o0&quot; pathLength=&quot;1&quot; d=&quot;M240 365 V412 Q240 420 232 420 H104 Q96 420 96 428 V433&quot;/>
+        <path class=&quot;conn out&quot; id=&quot;o1&quot; pathLength=&quot;1&quot; d=&quot;M240 365 V473&quot;/>
+        <path class=&quot;conn out&quot; id=&quot;o2&quot; pathLength=&quot;1&quot; d=&quot;M240 365 V412 Q240 420 248 420 H376 Q384 420 384 428 V433&quot;/>
+      </g>
+      <g id=&quot;parts&quot;></g>
+    </svg>
