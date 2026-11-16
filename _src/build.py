@@ -757,6 +757,11 @@ def figure(run):
     def one(it):
         w, h = int(it.get('w') or 0), int(it.get('h') or 0)
         tall = ' tall' if w and h and h / w > 1.6 else ''
+        if it.get('solo'):
+            m = meta_of(it['src']) or {}
+            nw = int(m.get('w') or w or 0)
+            cap = f' style="max-width:{nw}px;margin-inline:auto"' if nw and nw < 1300 else ''
+            return f'<figure class="cs-fig solo"{cap}>{pic(it["src"], it.get("alt") or "", "(max-width: 900px) 100vw, 1320px")}</figure>'
         return f'<figure class="cs-fig{tall}">{pic(it["src"], it.get("alt") or "", "(max-width: 900px) 100vw, 1120px")}</figure>'
     if len(run) == 1:
         return one(run[0])
@@ -1012,6 +1017,8 @@ def overview(p):
 
 
 OVERRIDE = {
+    'b2c-ev-charging': dict(solo_imgs=True),
+    'b2b-saas-ev-charging': dict(solo_imgs=True),
     'ai-fleet-manager': dict(title='AI Fleet Manager: predicting breakdowns before they happen',
                              intro='An AI copilot for large fleets of trucks and vans, electric and combustion. It predicts which vehicles are about to fail, what it will cost and what to fix first. A <strong>six-month discovery</strong> at Papaya Dash, from research to the first MVP.',
                              body=lambda b: fleet_body(b)),
@@ -1136,6 +1143,8 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
         body = [it for it in body if it['t'] == 'img']
     if ov.get('body'):
         body = ov['body'](body)
+    if ov.get('solo_imgs'):
+        body = [dict(it, solo=True) if it['t'] == 'img' else it for it in body]
     if ov.get('lead_img'):
         lead_id = ov['lead_img']['src'].split('/')[-1].split('.')[0]
         body = [ov['lead_img']] + [it for it in body if not (it['t'] == 'img' and lead_id in (it.get('src') or ''))]
