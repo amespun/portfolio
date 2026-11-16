@@ -654,9 +654,10 @@ def outside_work():
     a = lambda k: (f'@@/assets/about/{k}-600.webp', f'@@/assets/about/{k}-600.webp 600w, @@/assets/about/{k}-1200.webp 1200w')
     h = '@@/assets/img/2a2f48c6-6e38-4c9f-9a1f-aba8a4749d2a'
     items = [
+        ph(*a('events'), 'At the Enterprise UX conference by Amsterdam UX, coffee in hand', 'Design events', '50% 45%'),
         ph(*a('bread'), 'A home-baked sourdough loaf cooling on a rack', 'Baking sourdough', '50% 55%'),
-        ph(*a('bike'), 'Aïda smiling in a selfie on an autumn bike path', 'Cycling Dutch roads', '0% 40%'),
         ph(f'{h}-800.webp', f'{h}-800.webp 800w, {h}-1600.webp 1600w', 'Aïda hiking in the mountains, seen from behind', 'Hiking'),
+        ph(*a('travel'), 'Aïda walking down a sunny street with bunting in a Dutch town', 'Travelling', '50% 60%'),
         ph(*a('sea'), 'Rowing a small boat in a clear turquoise cove in Menorca', 'By the Mediterranean', '50% 55%'),
     ]
     return f'''

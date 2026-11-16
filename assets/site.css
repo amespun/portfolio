@@ -882,3 +882,6 @@ html{overflow-x:clip}
 @media (hover:hover){.ow-grid figure:hover{transform:rotate(0) scale(1.06);box-shadow:0 30px 60px -20px rgba(17,17,17,.4);position:relative;z-index:2}.ow-grid figure:hover .ow-img img{transform:none}}
 @media (prefers-reduced-motion:reduce){.ow-grid figure{transition:none}}
 @media (max-width:900px){.ow-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 18px;padding:8px 6px}}
+.ow-grid{grid-template-columns:repeat(5,minmax(0,210px));gap:26px}
+.ow-grid figure:nth-child(5){transform:rotate(-2deg)}
+@media (max-width:900px){.ow-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.ow-grid figure:nth-child(5){grid-column:1/-1;justify-self:center;width:calc(50% - 9px)}}
