@@ -1212,7 +1212,7 @@ def case_page(key, p, back, back_label, nxt, nxt_href, kind):
         lede += f'<p><a class="btn primary" href="{ov["cta"][1]}" target="_blank" rel="noopener">{ov["cta"][0]} {EXT}</a></p>'
     cm = meta_of(p['cover']) or {}
     small = cm.get('w') and cm['w'] < 2000
-    cover_img = pic(p["cover"], p.get("alt", ""), "(max-width: 1500px) 100vw, 1440px", eager=True)
+    cover_img = pic(p["cover"], p.get("alt", ""), "(max-width: 1300px) 100vw, 1200px", eager=True)
     if small:
         cover_img = f'<img src="@@/{cm["src"]}" width="{cm["w"]}" height="{cm["h"]}" alt="{p.get("alt", "")}" fetchpriority="high">'
     cover = f'<figure class="cs-cover{" small" if small else ""}" style="view-transition-name:cover-{p["slug"]}{f";--cw:{round(cm[chr(119)] / 1.5)}px" if small else ""}">{cover_img}</figure>'
@@ -1257,7 +1257,7 @@ def rimg(name, alt, w, h, eager=False):
     # ?v= changes whenever the pictures are redone, so browsers don't keep the old ones.
     srcset = ', '.join(f'@@/assets/ronda/{name}-{x}.webp?v={RONDA_V} {x}w' for x in (800, 1600, 2400) if x <= w)
     load = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
-    return (f'<img src="@@/assets/ronda/{name}-1600.webp?v={RONDA_V}" srcset="{srcset}" sizes="(max-width: 1500px) 100vw, 1440px" '
+    return (f'<img src="@@/assets/ronda/{name}-1600.webp?v={RONDA_V}" srcset="{srcset}" sizes="(max-width: 1300px) 100vw, 1200px" '
             f'width="{w}" height="{h}" alt="{alt}" {load}>')
 
 

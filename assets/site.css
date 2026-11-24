@@ -11,8 +11,8 @@
   --display:"Bricolage Grotesque",system-ui,-apple-system,"Segoe UI",sans-serif;
   --body:"Hanken Grotesk",system-ui,-apple-system,"Segoe UI",sans-serif;
   --ease-out:cubic-bezier(.23,1,.32,1);
-  /* frame grows with the screen: 1440px max, side margins scale from 24px to 80px */
-  --wrap:min(1440px,100% - clamp(48px,8vw,160px));
+  /* frame: 1200px max, side margins scale from 24px to 80px */
+  --wrap:min(1200px,100% - clamp(48px,8vw,160px));
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;scroll-behavior:smooth;scroll-padding-top:96px}
